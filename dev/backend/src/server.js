@@ -1,11 +1,17 @@
 const express = require('express');
 
+
+const connectDb = require("./config/db");
+
 const app = express();
 
-app.use(express.json());
+connectDb();
 
-app.get('/', (req, res) => {
-  res.send('Hello World with Express')
-});
+
+const routes = require("./routes/index");
+
+
+app.use('/api',routes);
+
 
 app.listen(process.env.PORT || 5000, () => console.log('Up and running 🚀'));
