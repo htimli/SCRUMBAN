@@ -22,9 +22,6 @@ module.exports.getAllUsers = async function() {
 
 
 module.exports.addUser = async function(){
-
-   
-
     try{
         const user  = new User({userName : 'tati', password: 'rrkr'  });
         
@@ -34,7 +31,7 @@ module.exports.addUser = async function(){
 
         return {
             success: true,
-            data: user
+            data: user,
             
         }
 
@@ -44,4 +41,42 @@ module.exports.addUser = async function(){
     }
 
 }
+module.exports.updateUser = async function() {
+    try {
+        
+        await User.updateOne({_id: '618cf9a4bdbd06f5bb3523d6'},{userName: "soso"})
+        .then(doc => {})
+        .catch(err => {});
+        
+        return {
+            success: true,     
+        }
+
+    }catch(err){
+        return { success:false , message: "cannot update user "+err };
+    }
+}
+
+module.exports.removeUser = async function() {
+    try {
+        
+        await User.deleteOne({ _id :'618cf9a0bdbd06f5bb3523d4'})
+        .then(doc => {})
+        .catch(err => {});
+
+        return {
+            success: true,     
+        }
+
+    }catch(err){
+        return { success:false , message: "cannot remove user "+err };
+    }
+}
+
+
+
+
+
+
+
 
