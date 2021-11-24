@@ -1,0 +1,11 @@
+
+$ npm install @angular/cli^C
+
+//add this line on package.json 
+"scripts": {
+"ng": "ng"
+}
+ 
+$ npm run-script ng new my-app
+
+$ npm run-script ng serve --open 
