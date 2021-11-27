@@ -6,7 +6,8 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
 
-import  {RouterModule, Routes} from '@angular/router' ;
+import  {RouterModule, Routes} from '@angular/router';
+import { RegistrationPageComponent } from './registration-page/registration-page.component' ;
 
 
 const appRoutes : Routes = [
@@ -17,7 +18,8 @@ const appRoutes : Routes = [
   declarations: [
     AppComponent,
     HomePageComponent,
-    SignInPageComponent
+    SignInPageComponent,
+    RegistrationPageComponent
   ],
   imports: [
     BrowserModule,
