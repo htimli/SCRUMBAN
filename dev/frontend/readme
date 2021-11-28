@@ -5,6 +5,8 @@ $ npm install @angular/cli^C
 "scripts": {
 "ng": "ng"
 }
+
+$ export PATH=/opt/users/bin:$PATH
  
 $ npm run-script ng new my-app
 

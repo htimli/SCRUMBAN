@@ -6,7 +6,7 @@
 * Temps en heure
 * Sprint : Numéro du sprint
 * Planning Poker
-* Durée de travail hebdomadaire par membre : 3 heures 
+* Durée de travail hebdomadaire par membre : 3 heures
 
 | US    | Description                                                  | Temps | Difficulté | Priorité| Sprint |
 | ----- | ------------------------------------------------------------ | :--------: | :------: |:------: |:------: |
@@ -29,10 +29,9 @@
 | 5 |**En tant qu’utilisateur**, je souhaite pouvoir créer un nouveau sprint au sein d’un projet déjà existant **afin de** pouvoir anticiper et répartir le travail sur plusieurs semaines de manière équitable. Cliquer sur un bouton "nouveau sprint" pour créer une interface de sprint basique aprés avoir nommé ce dernier dans un champ prévu à cet effet. |     x    |   x |  x | x |
 | 5.1  |**En tant qu'utilisateur**, je souhaite pouvoir creer une page pour les sprint **afin de** visualiser les éléments qu'il comport |     1      |   1   |  1  |  1 |
 | 5.2  |**En tant qu'utilisateur**, je souhaite pouvoir créer gérer l'ensemble de mes sprints **afin de** d'enregistrer, de modifier ou d'ajouter les différents sprints de mes projets     |     1     |   1   |  2 |  x |
-| 6 | **En tant qu’utilisateur**, je souhaite pouvoir éditer mon tableau kanban **afin de** pouvoir gérer mon projet selon mes différents critères et méthodes de travail. Cliquer sur un bouton "éditer" qui me donnera accées un une interface de modification du tableau permettant plusieurs choses :<br>   - modifier le nom des colones<br>   - ajouter ou supprimer une colone<br>   - déplacer les colones<br>  - modifier les caractéristiques des colones (tel que le nombre maximum de tâches acceptées) |     x    |   x   |  x | x 
+| 6 | **En tant qu’utilisateur**, je souhaite pouvoir éditer mon tableau kanban **afin de** pouvoir gérer mon projet selon mes différents critères et méthodes de travail. Cliquer sur un bouton "éditer" qui me donnera accées un une interface de modification du tableau permettant plusieurs choses :<br>   - modifier le nom des colones<br>   - ajouter ou supprimer une colone<br>   - déplacer les colones<br>  - modifier les caractéristiques des colones (tel que le nombre maximum de tâches acceptées) |     x    |   x   |  x | x
 | 6.1  |**En tant qu'utilisateur**, je souhaite pouvoir accéder à mon tableau kanban **afin de** de pouvoir visualiser l'avancement des différentes tâches. |     1      |   1   |  1  |  1 |
 | 6.2  |**En tant qu'utilisateur**, je souhaite pouvoir modifier mon tableau kanban **afin de** de pouvoir modifier, ajouter ou même supprimer une colonne afin qu'il soit en adéquation avec ma manière de travailler  |     2      |   1   |  3  |  x |
 | 7| **En tant qu’utilisateur**, je souhaite pouvoir créer une tâche et l’ajouter aux colonnes de mon tableau kanban **afin de** pouvoir lister l'ensembles des missions à remplir pour realiser le projet. De pouvoir les modifier et en ajouter suite aux différentes réunion avec mon client pour compléter la descritption du produit attendu.|     1      |   1   |  1  |  1 |
 | 7.1  |**En tant qu'utilisateur**, je souhaite pouvoir rajoutés de nouvelles US **afin de** de pouvoir les intégrer à mon projets |     2   |   2  |  1  |  X |
 | 7.2  |**En tant qu'utilisateur**, je souhaite pouvoir déplacer les tâches d’une colonne à une autre via un système de « drag and drop  **afin de** pouvoir notifier que l'une d'entre elle à changer de statut suite à mon travail. Cliquer sur une tâche et la glisser dans une nouvelle colone. Si la colone cible est sous la contrainte d'un nombre maximum de tâche atteint alors la tâche selectionner repartira dans sa colone d'origine |     2    |   2  |  2 |  x |
-
