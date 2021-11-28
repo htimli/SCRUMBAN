@@ -7,12 +7,18 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
 
-import  {RouterModule, Routes} from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { LoginPageComponent } from './login-page/login-page.component';
 import { RegistrationPageComponent } from './register-page/register-page.component' ;
 
 
-const appRoutes : Routes = [
-  { path: 'homepage', component : HomePageComponent }
+import { LogInService } from './service/logIn.service';
+import { SignInService } from './service/signIn.service';
+
+const appRoutes: Routes = [
+  { path: '', component: HomePageComponent },
+  { path: 'signIn', component: SignInPageComponent },
+  { path: 'logIn', component: LoginPageComponent },
 ];
 
 @NgModule({
@@ -20,6 +26,7 @@ const appRoutes : Routes = [
     AppComponent,
     HomePageComponent,
     SignInPageComponent,
+    LoginPageComponent,
     RegistrationPageComponent
   ],
   imports: [
@@ -28,7 +35,7 @@ const appRoutes : Routes = [
     AppRoutingModule,
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [LogInService, SignInService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,20 +1,18 @@
 <p>login-page works!</p>
 <div class="row">
-    <div class="col-sm-8 col-sm-offeset-2">
-        <h2>Login</h2>
-        <form [formGroupe]="signUpForm" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" id="email" class="form-control" formControlName="email">
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="text" id="password" class="form-control" formControlName="passeword">
-            </div>
-            <button class="btn btn-primary" type="submit" [disabled]="signUpForm.invalid">Login</button>
-        </form>
+  <div class="col-sm-8 col-sm-offeset-2">
+    <h2>Login</h2>
 
-
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text" id="email" class="form-control" formControlName="email">
     </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="text" id="password" class="form-control" formControlName="passeword">
+    </div>
+    <button class="btn btn-primary" type="submit" >Login</button>
+
+  </div>
 
 </div>
