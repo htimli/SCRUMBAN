@@ -11,7 +11,7 @@
         <label for="password">Password</label>
         <input type="text" id="password" class="form-control" name="passeword" ngModel required>
       </div>
-      <button class="btn btn-primary" type="submit" [disabled]="f.invalid">Login</button>
+      <button class="btn btn-primary" type="submit" [disabled]="f.invalid" (click)="onLogIn()">Login</button>
     </form>
 
   </div>
