@@ -11,12 +11,15 @@ import { LoginPageComponent } from './login-page/login-page.component' ;
 
 import { LogInService } from './service/logIn.service';
 import { SignInService } from './service/signIn.service';
+import { ProjectsListPageComponent } from './projects-list-page/projects-list-page.component';
+
 
 
 const appRoutes : Routes = [
   { path: '', component : HomePageComponent },
   {path: 'signIn', component : SignInPageComponent},
-  { path: 'logIn', component : LoginPageComponent } 
+  { path: 'logIn', component : LoginPageComponent },
+  { path: 'projects', component : ProjectsListPageComponent}
 ];
 
 @NgModule({
@@ -24,7 +27,8 @@ const appRoutes : Routes = [
     AppComponent,
     HomePageComponent,
     SignInPageComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    ProjectsListPageComponent
   ],
   imports: [
     BrowserModule,
