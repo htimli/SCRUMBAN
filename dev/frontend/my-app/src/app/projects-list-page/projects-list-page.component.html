@@ -9,18 +9,35 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor = "let project of projects" >
-                <th scope="row" >{{ project.id }}</th>
+            <tr *ngFor="let project of projects">
+                <th scope="row">{{ project.id }}</th>
                 <td><a class="nav-link" href="#">{{ project.name }}</a></td>
-                <td>{{ project.creationDate | date  }} </td>
+                <td>{{ project.creationDate | date }} </td>
                 <td>
-                    <ul class="list-group" *ngFor = "let participant of project.participants ">
-                    <li class="list-group-item">{{ participant}}</li>
+                    <ul class="list-group" *ngFor="let participant of project.participants ">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col "> {{ participant}} </div>
+                                <div class="col col-lg-2"> <i class="fas fa-trash-alt" style="color:red;"> </i> </div>
+                            </div>
+                        </li>
                     </ul>
+                    <div class="container">
+                    <div class="row">
+                        <div class="col align-self-center">
+                            <button type="button" class="btn btn-success" aria-label="Left Align">
+                                <span class="fas fa-user-plus" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                    </div>
+
+
+
                 </td>
-            
+
             </tr>
-            
+
         </tbody>
     </table>
 </div>
