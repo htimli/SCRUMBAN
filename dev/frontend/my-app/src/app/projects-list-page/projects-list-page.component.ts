@@ -12,17 +12,20 @@ export class ProjectsListPageComponent implements OnInit {
     {
       id : 0 ,
       name: 'projet 1',
-      participants : [ 'tata','toto']
+      participants : [ 'tata','toto','zozo'],
+      creationDate: new Date()
     },
     {
       id : 1 ,
       name: 'projet 2',
-      participants : [ 'momo','foto']
+      participants : [ 'momo','foto'],
+      creationDate: new Date()
     },
     {
       id : 2 ,
       name: 'projet 3',
-      participants : [ 'como','fafa']
+      participants : [ 'como','fafa'],
+      creationDate: new Date()
     }
   ];
 

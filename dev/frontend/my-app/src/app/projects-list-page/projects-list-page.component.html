@@ -4,6 +4,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Projet</th>
+                <th scope="col">Date de création</th>
                 <th scope="col">Participants</th>
             </tr>
         </thead>
@@ -11,6 +12,7 @@
             <tr *ngFor = "let project of projects" >
                 <th scope="row" >{{ project.id }}</th>
                 <td><a class="nav-link" href="#">{{ project.name }}</a></td>
+                <td>{{ project.creationDate | date  }} </td>
                 <td>
                     <ul class="list-group" *ngFor = "let participant of project.participants ">
                     <li class="list-group-item">{{ participant}}</li>
