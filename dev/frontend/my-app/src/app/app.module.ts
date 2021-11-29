@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -44,6 +44,7 @@ const appRoutes : Routes = [
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    FormsModule,
     RouterModule.forRoot(appRoutes),
   ],
   providers: [LogInService, SignInService],
