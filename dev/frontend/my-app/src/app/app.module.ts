@@ -14,11 +14,20 @@ import { RegistrationPageComponent } from './register-page/register-page.compone
 
 import { LogInService } from './service/logIn.service';
 import { SignInService } from './service/signIn.service';
+import { ProjectsListPageComponent } from './projects-list-page/projects-list-page.component';
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
-const appRoutes: Routes = [
-  { path: '', component: HomePageComponent },
-  { path: 'signIn', component: SignInPageComponent },
-  { path: 'logIn', component: LoginPageComponent },
+
+
+const appRoutes : Routes = [
+  { path: '', component : HomePageComponent },
+  { path: 'signIn', component : SignInPageComponent},
+  { path: 'logIn', component : LoginPageComponent },
+  { path: 'projects', component : ProjectsListPageComponent},
+  { path: 'register', component : RegistrationPageComponent},
+  { path: 'page-not-found',component :NotFoundPageComponent},
+  { path :'**', redirectTo :'page-not-found'}
+  
 ];
 
 @NgModule({
@@ -27,7 +36,9 @@ const appRoutes: Routes = [
     HomePageComponent,
     SignInPageComponent,
     LoginPageComponent,
-    RegistrationPageComponent
+    RegistrationPageComponent,
+    ProjectsListPageComponent,
+    NotFoundPageComponent
   ],
   imports: [
     BrowserModule,
