@@ -12,10 +12,16 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { RegistrationPageComponent } from './register-page/register-page.component' ;
 
 
-import { LogInService } from './service/logIn.service';
-import { SignInService } from './service/signIn.service';
+import { LogInService } from './services/logIn.service';
+import { SignInService } from './services/signIn.service';
 import { ProjectsListPageComponent } from './projects-list-page/projects-list-page.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
+
+// for drag & drop
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
+
 
 
 
@@ -25,6 +31,7 @@ const appRoutes : Routes = [
   { path: 'logIn', component : LoginPageComponent },
   { path: 'projects', component : ProjectsListPageComponent},
   { path: 'register', component : RegistrationPageComponent},
+  { path: 'kanban', component:KanbanBoardComponent},
   { path: 'page-not-found',component :NotFoundPageComponent},
   { path :'**', redirectTo :'page-not-found'}
   
@@ -38,13 +45,16 @@ const appRoutes : Routes = [
     LoginPageComponent,
     RegistrationPageComponent,
     ProjectsListPageComponent,
-    NotFoundPageComponent
+    NotFoundPageComponent,
+    KanbanBoardComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
     FormsModule,
+    BrowserAnimationsModule,
+    DragDropModule,
     RouterModule.forRoot(appRoutes),
   ],
   providers: [LogInService, SignInService],
