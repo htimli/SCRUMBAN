@@ -21,6 +21,7 @@ import { NotFoundPageComponent } from './not-found-page/not-found-page.component
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
+import { SprintsListComponent } from './sprints-list/sprints-list.component';
 
 
 
@@ -32,6 +33,7 @@ const appRoutes : Routes = [
   { path: 'projects', component : ProjectsListPageComponent},
   { path: 'register', component : RegistrationPageComponent},
   { path: 'kanban', component:KanbanBoardComponent},
+  { path: 'sprints', component:SprintsListComponent},
   { path: 'page-not-found',component :NotFoundPageComponent},
   { path :'**', redirectTo :'page-not-found'}
   
@@ -46,7 +48,8 @@ const appRoutes : Routes = [
     RegistrationPageComponent,
     ProjectsListPageComponent,
     NotFoundPageComponent,
-    KanbanBoardComponent
+    KanbanBoardComponent,
+    SprintsListComponent
   ],
   imports: [
     BrowserModule,
