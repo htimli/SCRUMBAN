@@ -25,9 +25,14 @@ import { SprintsListComponent } from './sprints-list/sprints-list.component';
 import { ProjectPageComponent } from './project-page/project-page.component';
 
 
+//http client 
+
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 const appRoutes : Routes = [
+  { path: '', component : HomePageComponent },
   { path: 'signIn', component : SignInPageComponent},
   { path: 'logIn', component : LoginPageComponent },
   { path: 'project', component : ProjectPageComponent},
@@ -35,7 +40,7 @@ const appRoutes : Routes = [
   { path: 'register', component : RegistrationPageComponent},
   { path: 'page-not-found',component :NotFoundPageComponent},
   { path :'**', redirectTo :'page-not-found'},
-  { path: '', component : HomePageComponent }
+  
   
 ];
 
@@ -60,6 +65,7 @@ const appRoutes : Routes = [
     BrowserAnimationsModule,
     DragDropModule,
     RouterModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes),
   ],
   providers: [LogInService, SignInService],
