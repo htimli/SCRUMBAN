@@ -1,4 +1,5 @@
 const usersrouter = require('express').Router(); 
+;
 
 const {getAllUsers, addUser , removeUser, updateUser } = require('../controllers/userController');
 
@@ -19,7 +20,7 @@ usersrouter.route('/updateOne').get( async(req,res ) => {
         res.status(404).json(response);
     }
 });
-usersrouter.route('/addOne').get( async(req,res ) => {
+usersrouter.route('/addOne').post( async(req,res ) => {
     let response = await addUser();
     if(response.success == true){
         res.status(200).json(response);
