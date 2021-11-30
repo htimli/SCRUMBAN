@@ -14,7 +14,7 @@
         <tbody>
             <tr *ngFor="let project of projects">
                 <th scope="row">{{ project.id }}</th>
-                <td><a class="nav-link" href="#">{{ project.name }}</a></td>
+                <td><a  routerLink="/project">{{ project.name }}</a></td>
                 <td>{{ project.creationDate | date }} </td>
                 <td>{{ project.scrumMaster }}</td>
                 <td>{{ project.avancement | percent:'1.2' }}</td>
@@ -42,7 +42,7 @@
                 -->
                 <td><select class="form-select" size="3" >
                     <option *ngFor="let participant of project.participants" value="participant.id">{{ participant}}</option>
-                  </select>
+                  </select></td>
 
             </tr>
 

@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
 
-import { RouterModule, Routes } from '@angular/router';
+import { Router, RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegistrationPageComponent } from './register-page/register-page.component' ;
 
@@ -22,20 +22,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
 import { SprintsListComponent } from './sprints-list/sprints-list.component';
+import { ProjectPageComponent } from './project-page/project-page.component';
 
 
 
 
 const appRoutes : Routes = [
-  { path: '', component : HomePageComponent },
   { path: 'signIn', component : SignInPageComponent},
   { path: 'logIn', component : LoginPageComponent },
+  { path: 'project', component : ProjectPageComponent},
   { path: 'projects', component : ProjectsListPageComponent},
   { path: 'register', component : RegistrationPageComponent},
-  { path: 'kanban', component:KanbanBoardComponent},
-  { path: 'sprints', component:SprintsListComponent},
   { path: 'page-not-found',component :NotFoundPageComponent},
-  { path :'**', redirectTo :'page-not-found'}
+  { path :'**', redirectTo :'page-not-found'},
+  { path: '', component : HomePageComponent }
   
 ];
 
@@ -49,7 +49,8 @@ const appRoutes : Routes = [
     ProjectsListPageComponent,
     NotFoundPageComponent,
     KanbanBoardComponent,
-    SprintsListComponent
+    SprintsListComponent,
+    ProjectPageComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +59,7 @@ const appRoutes : Routes = [
     FormsModule,
     BrowserAnimationsModule,
     DragDropModule,
+    RouterModule,
     RouterModule.forRoot(appRoutes),
   ],
   providers: [LogInService, SignInService],
