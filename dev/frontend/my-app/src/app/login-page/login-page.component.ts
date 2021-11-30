@@ -59,8 +59,8 @@ export class LoginPageComponent implements OnInit {
     this.logInService.logIn().then(
       () => {
         console.log('LogIn Success');
-        //this.router.navigate(['projects']);
-        this.saveUserId();
+        this.router.navigate(['projects']);
+        //this.saveUserId();
        // this.getuserIdFromServer();
 
       }
