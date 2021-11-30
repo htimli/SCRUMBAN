@@ -12,19 +12,25 @@ export class ProjectsListPageComponent implements OnInit {
     {
       id : 0 ,
       name: 'projet 1',
-      participants : [ 'tata','toto','zozo'],
+      scrumMaster : 'zozo',
+      participants : [ 'tata','toto','zozo','roro'],
+      avancement : 0.2,
       creationDate: new Date()
     },
     {
       id : 1 ,
       name: 'projet 2',
-      participants : [ 'momo','foto'],
+      scrumMaster : 'momo',
+      participants : [ 'momo','foto','lolo'],
+      avancement : 0.50,
       creationDate: new Date()
     },
     {
       id : 2 ,
       name: 'projet 3',
+      scrumMaster : 'fafa',
       participants : [ 'como','fafa'],
+      avancement : 1,
       creationDate: new Date()
     }
   ];
