@@ -1,0 +1,13 @@
+
+$ npm install @angular/cli^C
+
+//add this line on package.json 
+"scripts": {
+"ng": "ng"
+}
+
+$ export PATH=/opt/users/bin:$PATH
+ 
+$ npm run-script ng new my-app
+
+$ npm run-script ng serve --open 
