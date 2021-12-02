@@ -23,28 +23,22 @@ module.exports.getAllUsers = async function() {
 module.exports.addUser = async function(body){
     try{
 
-        
         const user = new User({
           ...body
         });
-      
+        
+       
         console.log(body);
-        user.save()
-        .then(doc => {})
-        .catch(err => {});
-        /*
-        const user  = new User(rep.);
         
         user.save()
         .then(doc => {})
         .catch(err => {});
-        */
+             
         return {
             success: true,
-            data: user,
+            data : user
             
         }
-
 
     }catch (err){
         return { success:false , message: "cannot add user "+err };
