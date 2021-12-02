@@ -32,7 +32,6 @@ export class LoginPageComponent implements OnInit {
 
   saveUserId(){
 
-    console.log(this.userData.userName);
     
     const headers = new HttpHeaders()
           .set('Authorization', 'my-auth-token')
@@ -59,8 +58,8 @@ export class LoginPageComponent implements OnInit {
     this.logInService.logIn().then(
       () => {
         console.log('LogIn Success');
-        //this.router.navigate(['projects']);
-        this.saveUserId();
+        this.router.navigate(['projects']);
+        //this.saveUserId();
        // this.getuserIdFromServer();
 
       }
