@@ -16,7 +16,7 @@ export class LoginPageComponent implements OnInit {
   private userData = {
     userName : '',
     password : ''
-  }
+  };
 
   constructor(private router: Router, private logInService: LogInService , private httpClient : HttpClient) { }
 
@@ -38,7 +38,7 @@ export class LoginPageComponent implements OnInit {
           .set('Authorization', 'my-auth-token')
           .set('Content-Type', 'application/json');
           
-    this.httpClient.post('http://localhost:5000/api/users/addOne',JSON.stringify(this.userData),{
+    this.httpClient.post('http://localhost:5000/api/users/addOne',this.userData,{
       headers :headers
     }).
     subscribe(data => {

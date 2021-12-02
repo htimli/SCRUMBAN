@@ -21,7 +21,7 @@ usersrouter.route('/updateOne').get( async(req,res ) => {
     }
 });
 usersrouter.route('/addOne').post( async(req,res ) => {
-    let response = await addUser();
+    let response = await addUser(req.body);
     if(response.success == true){
         res.status(200).json(response);
     }else {
