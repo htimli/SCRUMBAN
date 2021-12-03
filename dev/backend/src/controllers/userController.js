@@ -1,6 +1,7 @@
 const User = require('../models/userModel');
 
 
+
 module.exports.getAllUsers = async function() {
     let total = await User.countDocuments({});
     let limit = parseInt(total);
@@ -22,13 +23,23 @@ module.exports.getAllUsers = async function() {
 
 module.exports.addUser = async function(body){
     try{
+        
+        let user = await User.findOne({
+            email : body.email
+        });
+        if (user) {
+            return {
+                success: false,
+                msg: "email Already Exists"
+            }
+        }
+        
 
-        const user = new User({
+        console.log(body);
+        
+        user = new User({
           ...body
         });
-        
-       
-        console.log(body);
         
         user.save()
         .then(doc => {})
