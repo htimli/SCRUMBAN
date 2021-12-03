@@ -1,0 +1,56 @@
+<p>register-page works!</p>
+<div class="card">
+  <div class="card-header text-white bg-info">S'enregistrer</div>
+  <div class="card-body">
+    <form method="post" (ngSubmit)="onSubmit(form)" #form="ngForm">
+      <div class="form-group">
+        <div class="col-md-6 mb-3">
+          <label>Nom</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastname"
+            placeholder="Nom"
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label>Prenom</label>
+          <input
+            type="text"
+            class="form-control"
+            name="firstname"
+            placeholder="Prenom"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-md-6 mb-3">
+          <label>E-Mail</label>
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            placeholder="E-Mail"
+          />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="password">Mot de Passe</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            id="password"
+            placeholder="mot de passe"
+          />
+        </div>
+      </div>
+
+      <div class="text-right">
+        <button class="btn btn-info" type="submit" [disabled]="form.invalid">
+          Sauvegarder
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
