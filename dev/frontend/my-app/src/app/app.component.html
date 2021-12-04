@@ -1,19 +1,12 @@
 <div class="container">
   <div class="row">
-    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-    <div class="col">
-      <i  class="fas fa-sign-in-alt"></i>
+
+    <app-tool-bar></app-tool-bar>
+
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
     </div>
-    <div class="col">
-      <h1>SCRUMBAN</h1>
-    </div>
-    <div class="col">
-      <i class="fas fa-sign-out-alt"></i>
-    </div>
-  </nav>
-  <div class="container-fluid" >
-    <router-outlet></router-outlet>
-  </div>
+
   </div>
 
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { LogInService } from '../services/logIn.service';
+import { Router } from '@angular/router';
 /*
 
 function ratingRangeValidator(min: number, max: number): ValidatorFn {
@@ -49,9 +50,7 @@ export class RegistrationPageComponent implements OnInit {
 
   }; 
 
-
-
-  constructor( private httpClient : HttpClient, private logInService : LogInService ) {}
+  constructor( private httpClient : HttpClient, private logInService : LogInService, private router: Router ) {}
 
   ngOnInit(): void {}
   
@@ -61,7 +60,6 @@ export class RegistrationPageComponent implements OnInit {
     .subscribe(
       data => {console.log(data);}
       );
-    
   }
 
   onSubmit(form: NgForm){
@@ -85,6 +83,7 @@ export class RegistrationPageComponent implements OnInit {
     
   }
 
-
-
+  onSignIn(){
+    this.router.navigate(['projects']);
+  }
 }

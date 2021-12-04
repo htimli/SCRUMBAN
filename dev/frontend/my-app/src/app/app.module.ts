@@ -28,6 +28,8 @@ import { ProjectPageComponent } from './project-page/project-page.component';
 //http client 
 
 import { HttpClientModule } from '@angular/common/http';
+import { ProductBacklogComponent } from './product-backlog/product-backlog.component';
+import { ToolBarComponent } from './tool-bar/tool-bar.component';
 
 
 
@@ -55,7 +57,9 @@ const appRoutes : Routes = [
     NotFoundPageComponent,
     KanbanBoardComponent,
     SprintsListComponent,
-    ProjectPageComponent
+    ProjectPageComponent,
+    ProductBacklogComponent,
+    ToolBarComponent
   ],
   imports: [
     BrowserModule,

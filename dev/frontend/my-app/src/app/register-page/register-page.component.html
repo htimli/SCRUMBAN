@@ -1,6 +1,5 @@
-<p>register-page works!</p>
 <div class="card">
-  <div class="card-header text-white bg-info">S'enregistrer</div>
+  <h2>S'enregistrer</h2>
   <div class="card-body">
     <form  method="post" (ngSubmit)="onSubmit(form)" #form="ngForm">
       <div class="form-group">
@@ -87,7 +86,7 @@
       -->
 
         <div class="text-right">
-          <button class="btn btn-info" type="submit" [disabled]="form.invalid">
+          <button class="button btn btn-primary" type="submit" [disabled]="form.invalid" (click)="onSignIn()">
             Sauvegarder
           </button>
         </div>

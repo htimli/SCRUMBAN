@@ -30,17 +30,6 @@ export class UserStoriesService {
       ]
     },
     {
-      title: "Bloqué",
-      id: "inProgress",
-      tasks: [
-        {
-          id: 0,
-          title: "US1",
-          description: "En tant qu'utilisateur, je souhaite avoir m'inscrire afin de de pouvoir céer de nouveaux projets"
-        }
-      ]
-    },
-    {
       title: "A tester",
       id: "inProgress",
       tasks: [
