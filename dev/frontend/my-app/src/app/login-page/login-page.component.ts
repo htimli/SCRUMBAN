@@ -14,7 +14,7 @@ export class LoginPageComponent implements OnInit {
 
 
   private userData = {
-    userName : '',
+    email : '',
     password : ''
   };
 
@@ -25,24 +25,26 @@ export class LoginPageComponent implements OnInit {
   }
   onSubmit(form: NgForm) {
     //console.log(form.value);
-    this.userData.userName = form.value.email;
+    this.userData.email = form.value.email;
     this.userData.password = form.value.password;
+
+    this.logInService.logIn().then(
+      () => {
+        //this.router.navigate(['projects']);  
+        this.saveUserId();
+
+      }
+    
+    )
    
   }
 
   saveUserId(){
 
-    
-    const headers = new HttpHeaders()
-          .set('Authorization', 'my-auth-token')
-          .set('Content-Type', 'application/json');
-          
-    this.httpClient.post('http://localhost:5000/api/users/addOne',this.userData,{
-      headers :headers
-    }).
-    subscribe(data => {
-      console.log(data);
-    });
+    this.httpClient.post('http://localhost:5000/api/users/findOne',this.userData,).
+    subscribe(
+      data => {console.log(data);}
+    );
 
   }
 
@@ -54,17 +56,6 @@ export class LoginPageComponent implements OnInit {
     });
 
   }
-  onLogIn(){
-    this.logInService.logIn().then(
-      () => {
-        console.log('LogIn Success');
-        this.router.navigate(['projects']);
-        //this.saveUserId();
-       // this.getuserIdFromServer();
-
-      }
-    )
-  }
-
+  
 
 }

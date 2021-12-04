@@ -26,4 +26,7 @@ const routes = require("./routes/index");
 app.use('/api',routes);
 
 
-app.listen(process.env.PORT || 5000, () => console.log('Up and running 🚀'));
+app.listen(process.env.PORT || 5000, () => console.log('Up an running 🚀'));
+
+
+//npx kill-port 5000   //to kill terminal when app crashed
