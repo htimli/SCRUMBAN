@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../services/auth.service'; 
+
 
 @Component({
   selector: 'app-tool-bar',
@@ -9,27 +12,35 @@ import { Router } from '@angular/router';
 export class ToolBarComponent implements OnInit {
 
   loged:boolean;
+  logedSubscription: Subscription;
 
-  constructor(private router: Router) { 
-    this.loged = false;
+  constructor(private router: Router, private authService : AuthService) { 
+  
   }
 
   ngOnInit(): void {
+    this.logedSubscription = this.authService.logedSubject.subscribe(
+      (loged: boolean) => {
+        this.loged = loged;
+      }
+    );
   }
 
   onSignIn(){
-    this.loged = true;
-    this.router.navigate(['logIn']);
+    this.router.navigate(['register']);
   }
 
   onLogIn(){
-    this.loged =true;
     this.router.navigate(['logIn']);
   }
 
   onLogOut(){
-    this.loged = false;
-    this.router.navigate(['']);
+    this.authService.logOut().then(
+      () => {
+        this.authService.switchLog();
+        this.router.navigate(['']);
+      }
+    );
   }
 
 

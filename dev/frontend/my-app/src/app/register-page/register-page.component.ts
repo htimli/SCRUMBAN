@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { LogInService } from '../services/logIn.service';
+import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 /*
 
@@ -50,7 +50,7 @@ export class RegistrationPageComponent implements OnInit {
 
   }; 
 
-  constructor( private httpClient : HttpClient, private logInService : LogInService, private router: Router ) {}
+  constructor( private httpClient : HttpClient, private authService : AuthService, private router: Router ) {}
 
   ngOnInit(): void {}
   
@@ -70,20 +70,21 @@ export class RegistrationPageComponent implements OnInit {
 
     //console.log(this.userData);
     
-    
-    
-    this.logInService.logIn().then(
+    this.authService.logIn().then(
       () => {
-        console.log('LogIn Success');
         this.saveData();
 
       }
     )
     
-    
   }
 
   onSignIn(){
-    this.router.navigate(['projects']);
+    this.authService.signIn().then(
+      () => {
+        this.authService.switchLog();
+        this.router.navigate(['projects']);
+      }
+    )
   }
 }

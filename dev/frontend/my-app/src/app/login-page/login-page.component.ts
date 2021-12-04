@@ -2,7 +2,7 @@ import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LogInService } from '../services/logIn.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -18,7 +18,7 @@ export class LoginPageComponent implements OnInit {
     password : ''
   };
 
-  constructor(private router: Router, private logInService: LogInService , private httpClient : HttpClient) { }
+  constructor(private router: Router, private authService: AuthService , private httpClient : HttpClient) { }
 
   ngOnInit(): void {
 
@@ -54,14 +54,12 @@ export class LoginPageComponent implements OnInit {
     });
 
   }
-  onLogIn(){
-    this.logInService.logIn().then(
-      () => {
-        console.log('LogIn Success');
-        this.router.navigate(['projects']);
-        //this.saveUserId();
-       // this.getuserIdFromServer();
 
+  onLogIn(){
+    this.authService.logIn().then(
+      () => {
+        this.authService.switchLog();
+        this.router.navigate(['projects']);
       }
     )
   }

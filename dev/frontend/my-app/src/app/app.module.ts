@@ -30,6 +30,7 @@ import { ProjectPageComponent } from './project-page/project-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductBacklogComponent } from './product-backlog/product-backlog.component';
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
+import { NewProjectComponent } from './new-project/new-project.component';
 
 
 
@@ -59,7 +60,8 @@ const appRoutes : Routes = [
     SprintsListComponent,
     ProjectPageComponent,
     ProductBacklogComponent,
-    ToolBarComponent
+    ToolBarComponent,
+    NewProjectComponent
   ],
   imports: [
     BrowserModule,
