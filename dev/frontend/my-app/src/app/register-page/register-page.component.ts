@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  AbstractControl,
-  ValidatorFn,
-} from '@angular/forms';
-import { debounceTime } from 'rxjs/operators';
-
-import { User } from './user';
+import { NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { LogInService } from '../services/logIn.service';
+/*
 
 function ratingRangeValidator(min: number, max: number): ValidatorFn {
   return (c: AbstractControl): { [key: string]: boolean } | null => {
@@ -37,83 +31,60 @@ function emailMatcher(c: AbstractControl): { [key: string]: boolean } | null {
 
   return { match: true };
 }
-
+*/
 @Component({
   selector: 'app-registration-page',
   templateUrl: './register-page.component.html',
   styleUrls: ['./register-page.component.css'],
 })
+
 export class RegistrationPageComponent implements OnInit {
-  public registerForm: FormGroup;
-  public user: User = new User();
-  public errorMsg: string | undefined;
 
-  private validationErrorsMessages = {
-    required: 'Entrez votre E-Mail',
-    email: "L'E- Mail n'est pas valide",
-  };
+  private userData = {
+    userName : '',
+    password : '',
+    firstName : '',
+    lastName : '',
+    email : ''
 
-  constructor(private fb: FormBuilder) {}
+  }; 
 
-  ngOnInit(): void {
-    this.registerForm = this.fb.group({
-      firstName: ['', [Validators.required, Validators.maxLength(40)]],
-      lastName: ['', [Validators.required, Validators.minLength(4)]],
-      emailGroup: this.fb.group(
-        {
-          email: ['', [Validators.required, Validators.email]],
-          confirmEmail: ['', Validators.required],
-        },
-        { validators: emailMatcher }
-      ),
-      phone: '',
-      rating: [null, ratingRangeValidator(1, 5)],
-      notification: 'email',
-    });
 
-    this.registerForm.get('notification').valueChanges.subscribe((value) => {
-      this.setNotificationSetting(value);
-    });
 
-    const emailControl = this.registerForm.get('emailGroup.email');
-    emailControl.valueChanges.pipe(debounceTime(1000)).subscribe((val) => {
-      console.log(val);
-      this.setMessage(emailControl);
-    });
+  constructor( private httpClient : HttpClient, private logInService : LogInService ) {}
+
+  ngOnInit(): void {}
+  
+
+  saveData() {
+    this.httpClient.post('http://localhost:5000/api/users/addOne',this.userData)
+    .subscribe(
+      data => {console.log(data);}
+      );
+    
   }
 
-  public saveData() {
-    console.log(this.registerForm);
-    console.log('valeurs: ', JSON.stringify(this.registerForm.value));
-    console.log('hello');
+  onSubmit(form: NgForm){
+    //for the moment we save just the username & the passeword 
+    this.userData.userName = form.value.firstname;
+    this.userData.password = form.value.password;
+    this.userData.email = form.value.email;
+
+    //console.log(this.userData);
+    
+    
+    
+    this.logInService.logIn().then(
+      () => {
+        console.log('LogIn Success');
+        this.saveData();
+
+      }
+    )
+    
+    
   }
 
-  public fillFormData(): void {
-    this.registerForm.patchValue({
-      firstName: 'John',
-      lastName: 'Doe B',
-    });
-  }
 
-  public setNotificationSetting(method: string): void {
-    const phoneControl = this.registerForm.get('phone');
 
-    if (method === 'text') {
-      phoneControl.setValidators(Validators.required);
-    } else {
-      phoneControl.clearValidators();
-    }
-
-    phoneControl.updateValueAndValidity();
-  }
-
-  private setMessage(val: AbstractControl): void {
-    this.errorMsg = '';
-
-    if ((val.touched || val.dirty) && val.errors) {
-      this.errorMsg = Object.keys(val.errors)
-        .map((key) => this.validationErrorsMessages[key])
-        .join(' ');
-    }
-  }
 }
