@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service'; 
@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './tool-bar.component.html',
   styleUrls: ['./tool-bar.component.css']
 })
-export class ToolBarComponent implements OnInit {
+export class ToolBarComponent implements OnInit, OnDestroy {
 
   loged:boolean;
   logedSubscription: Subscription;
@@ -24,6 +24,10 @@ export class ToolBarComponent implements OnInit {
         this.loged = loged;
       }
     );
+  }
+
+  ngOnDestroy(){
+    this.logedSubscription.unsubscribe();
   }
 
   onSignIn(){

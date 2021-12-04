@@ -3,11 +3,11 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-new-project',
-  templateUrl: './new-project.component.html',
-  styleUrls: ['./new-project.component.css']
+  selector: 'app-new-task',
+  templateUrl: './new-task.component.html',
+  styleUrls: ['./new-task.component.css']
 })
-export class NewProjectComponent implements OnInit {
+export class NewTaskComponent implements OnInit {
 
   constructor(private router: Router) { }
 
@@ -18,8 +18,8 @@ export class NewProjectComponent implements OnInit {
 
   }
 
-  onNewProject(){
-    this.router.navigate(["project"])
+  onNewTask(){
+    this.router.navigate(['project'])
   }
 
 }

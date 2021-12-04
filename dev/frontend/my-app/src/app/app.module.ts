@@ -11,9 +11,6 @@ import { Router, RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegistrationPageComponent } from './register-page/register-page.component' ;
 
-
-import { LogInService } from './services/logIn.service';
-import { SignInService } from './services/signIn.service';
 import { ProjectsListPageComponent } from './projects-list-page/projects-list-page.component';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
@@ -31,6 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductBacklogComponent } from './product-backlog/product-backlog.component';
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
 import { NewProjectComponent } from './new-project/new-project.component';
+import { NewSprintComponent } from './new-sprint/new-sprint.component';
+import { NewTaskComponent } from './new-task/new-task.component';
 
 
 
@@ -39,7 +38,10 @@ const appRoutes : Routes = [
   { path: 'signIn', component : SignInPageComponent},
   { path: 'logIn', component : LoginPageComponent },
   { path: 'project', component : ProjectPageComponent},
+  { path: 'newProject', component : NewProjectComponent},
   { path: 'projects', component : ProjectsListPageComponent},
+  { path: 'newSprint', component : NewSprintComponent},
+  { path: 'newTask', component : NewTaskComponent},
   { path: 'register', component : RegistrationPageComponent},
   { path: 'page-not-found',component :NotFoundPageComponent},
   { path :'**', redirectTo :'page-not-found'},
@@ -61,7 +63,9 @@ const appRoutes : Routes = [
     ProjectPageComponent,
     ProductBacklogComponent,
     ToolBarComponent,
-    NewProjectComponent
+    NewProjectComponent,
+    NewSprintComponent,
+    NewTaskComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +78,7 @@ const appRoutes : Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [LogInService, SignInService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -30,9 +30,9 @@ export class LoginPageComponent implements OnInit {
 
     this.authService.logIn().then(
       () => {
-        //this.router.navigate(['projects']);  
+        this.authService.switchLog();
+        this.router.navigate(['projects']);  
         this.saveUserId();
-
       }
     
     )
