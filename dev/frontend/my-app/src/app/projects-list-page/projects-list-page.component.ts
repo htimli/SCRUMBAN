@@ -43,4 +43,8 @@ export class ProjectsListPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onNewProject(){
+    this.router.navigate(["newProject"]);
+  }
+
 }

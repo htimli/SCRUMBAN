@@ -1,0 +1,12 @@
+<h2>Nouveau Projet</h2>
+<div class="card">
+    <div class="card-body">
+        <form method="post" (ngSubmit)="onSubmit(f)" #f="ngForm">
+            <div class="form-group col-md-6 mb-3">
+                <label for="ProjectName">Nom du projet</label>
+                <input type="text" id="ProjectName" class="form-control" name="ProjectName" ngModel text required>
+            </div>
+            <button class="btn btn-primary" type="text" [disabled]="f.invalid" (click)="onNewProject()">Créer</button>
+        </form>
+    </div>
+</div>

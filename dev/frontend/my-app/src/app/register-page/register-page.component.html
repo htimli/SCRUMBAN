@@ -1,6 +1,5 @@
-<p>register-page works!</p>
+<h2>S'enregistrer</h2>
 <div class="card">
-  <div class="card-header text-white bg-info">S'enregistrer</div>
   <div class="card-body">
     <form  method="post" (ngSubmit)="onSubmit(form)" #form="ngForm">
       <div class="form-group">
@@ -54,7 +53,7 @@
 
       -->
       </div>
-      <div class="form-group mb-3">
+      <div class="form-group col-md-6 mb-3">
         <label for="password">Password</label>
         <input type="password" class="form-control" name='password' id="password" placeholder="Password"  ngModel required>
       </div>
@@ -87,7 +86,7 @@
       -->
 
         <div class="text-right">
-          <button class="btn btn-info" type="submit" [disabled]="form.invalid">
+          <button class="button btn btn-primary" type="submit" [disabled]="form.invalid" (click)="onSignIn()">
             Sauvegarder
           </button>
         </div>

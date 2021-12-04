@@ -1,0 +1,10 @@
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+    <div class="col">
+      <button class="btn btn-primary" (click)="onLogIn()" *ngIf="!loged">Connexion</button>
+      <button class="btn btn-primary" (click)="onSignIn()" *ngIf="!loged">Inscription</button>
+      <button class="btn btn-danger" (click)="onLogOut()" *ngIf="loged">Déconnexion</button>
+    </div>
+    <div class="col">
+      <h1>SCRUMBAN</h1>
+    </div>
+  </nav>

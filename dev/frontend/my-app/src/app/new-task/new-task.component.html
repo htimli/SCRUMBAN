@@ -1,0 +1,16 @@
+<h2>Nouvelle tâche</h2>
+<div class="card">
+    <div class="card-body">
+        <form method="post" (ngSubmit)="onSubmit(f)" #f="ngForm">
+            <div class="form-group col-md-6 mb-3">
+                <label for="TaskName">Nom de la tâche</label>
+                <input type="text" id="TaskName" class="form-control" name="TaskName" ngModel text required>
+            </div>
+            <div class="form-group">
+                <label for="TaskName">Description de la tâche</label>
+                <input type="text" id="TaskName" class="form-control" name="TaskName" ngModel text required>
+            </div>
+            <button class="btn btn-primary" type="text" [disabled]="f.invalid" (click)="onNewTask()">Créer</button>
+        </form>
+    </div>
+</div>
