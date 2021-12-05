@@ -70,7 +70,7 @@ export class RegistrationPageComponent implements OnInit {
 
     //console.log(this.userData);
     
-    this.authService.logIn().then(
+    this.authService.logIn(this.userData).then(
       () => {
         this.saveData();
 
