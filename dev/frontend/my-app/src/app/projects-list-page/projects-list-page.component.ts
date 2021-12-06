@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
+import { ProjectsService } from '../services/projects.service';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-projects-list-page',
   templateUrl: './projects-list-page.component.html',
@@ -38,27 +41,26 @@ export class ProjectsListPageComponent implements OnInit {
   ];
   */
   projects : any[] = [];
+  projectsSubscription : Subscription;
 
 
-  constructor(private router : Router, private httpClient : HttpClient) { }
+  constructor(private router : Router, private httpClient : HttpClient , private projectServices : ProjectsService  ) { }
 
   ngOnInit(): void {
-    this.getsavedProjects();
+    this.projectsSubscription = this.projectServices.projectsSubject.subscribe(
+      (projects)=>{
+        this.projects = projects;
+      }
+    )
+    this.projectServices.getSavedProjects();    
   }
 
+  
+
   onNewProject(){
+    this.projectServices.getSavedProjects();
     this.router.navigate(["newProject"]);  
   }
   
-  getsavedProjects(){
-    this.httpClient
-    .get<any[]>('http://localhost:5000/api/projects/all')
-    .subscribe(
-      (response: any) =>{
-        console.log(response.data);
-        this.projects = response.data;
-      }
-    );
-  }
 
 }
