@@ -16,21 +16,11 @@ export class AuthService {
     this.logedSubject = new Subject<boolean>();
   }
 
-  switchLog() {
-    if (this.loged) {
-      this.loged = false;
-    }
-    else {
-      this.loged = true;
-    }
-    this.logedSubject.next(this.loged);
-  }
-
   signIn(userData: object) {
     return new Promise(
       (resolve, rejected) => {
         this.saveData(userData).then(
-          () => {resolve(true); },
+          () => {resolve(true); this.loged=true; this.logedSubject.next(this.loged)},
           () => {rejected(true);}
         );
       }
@@ -53,7 +43,7 @@ export class AuthService {
     return new Promise(
       (resolve, rejected) => {
         this.saveUserId(userData).then(
-          () => { resolve(true); }, 
+          () => { resolve(true); this.loged=true; this.logedSubject.next(this.loged)}, 
           () => { rejected(true);}
         );
       }
@@ -76,9 +66,9 @@ export class AuthService {
   logOut() {
     return new Promise(
       (resolve, rejected) => {
-        setTimeout(() => {
-          resolve(true);
-        }, 2000);
+        this.loged=false; 
+        this.logedSubject.next(this.loged);
+        resolve(true);
       }
     );
   }

@@ -34,7 +34,6 @@ export class RegistrationPageComponent implements OnInit {
     this.authService.signIn(this.userData).then(
       () => {
         this.authService.logIn(this.userData);
-        this.authService.switchLog();
         this.router.navigate(['projects']);
       }
     )
