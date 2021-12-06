@@ -24,12 +24,17 @@ module.exports.getAllProjects = async function() {
     }
 }
 
-module.exports.addProject = async function() {
+module.exports.addProject = async function(body) {
 
     try {
     
-        let project = Project({titre : "projet_2",creationDate : new Date() , 
-        users : ["61aba199ecf32097e6fa78e7","61ab81a10e57448bde43cb6b"]});
+        let project = new Project({
+            title : body.title ,
+            scrumMaster: body.scrumMaster,
+            progress: body.progress,
+
+            creationDate : new Date()
+        });
         
 
         project.save()
@@ -48,3 +53,26 @@ module.exports.addProject = async function() {
         }
 }
 
+
+module.exports.getProjectParticipant = async function() {
+
+    try {
+
+        let project = Project.findOne({
+            title : "projet_2"
+        });
+    
+        console.log(project.users);
+        
+
+        return {
+            success : true,
+            
+        }
+
+    }catch (err){
+        return { 
+            success:false , 
+            message: "cannot add Project "+err };
+        }
+}
