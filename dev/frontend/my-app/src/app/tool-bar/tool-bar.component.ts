@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../services/auth.service'; 
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -11,11 +11,11 @@ import { AuthService } from '../services/auth.service';
 })
 export class ToolBarComponent implements OnInit, OnDestroy {
 
-  loged:boolean;
+  loged: boolean;
   logedSubscription: Subscription;
 
-  constructor(private router: Router, private authService : AuthService) { 
-  
+  constructor(private router: Router, private authService: AuthService) {
+
   }
 
   ngOnInit(): void {
@@ -26,19 +26,19 @@ export class ToolBarComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.logedSubscription.unsubscribe();
   }
 
-  onSignIn(){
+  onSignIn() {
     this.router.navigate(['register']);
   }
 
-  onLogIn(){
+  onLogIn() {
     this.router.navigate(['logIn']);
   }
 
-  onLogOut(){
+  onLogOut() {
     this.authService.logOut().then(
       () => {
         this.authService.switchLog();

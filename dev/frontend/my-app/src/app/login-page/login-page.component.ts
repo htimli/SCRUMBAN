@@ -11,14 +11,16 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginPageComponent implements OnInit {
 
-
+  logAlert: boolean;
 
   private userData = {
     email : '',
     password : ''
   };
 
-  constructor(private router: Router, private authService: AuthService , private httpClient : HttpClient) { }
+  constructor(private router: Router, private authService: AuthService , private httpClient : HttpClient) { 
+    this.logAlert = false;
+  }
 
   ngOnInit(): void {
 
@@ -27,27 +29,15 @@ export class LoginPageComponent implements OnInit {
     //console.log(form.value);
     this.userData.email = form.value.email;
     this.userData.password = form.value.password;
-
-    this.authService.logIn().then(
+    this.authService.logIn(this.userData).then(
       () => {
         this.authService.switchLog();
+        this.logAlert = false;
         this.router.navigate(['projects']);  
-        this.saveUserId();
-      }
-    
+      },
+      () => {this.logAlert = true;}
     )
-   
   }
-
-  saveUserId(){
-
-    this.httpClient.post('http://localhost:5000/api/users/findOne',this.userData).
-    subscribe(
-      data => {console.log(data);}
-    );
-
-  }
-
   
   getuserIdFromServer(){
     this.httpClient
@@ -56,15 +46,5 @@ export class LoginPageComponent implements OnInit {
     });
 
   }
-
-  onLogIn(){
-    this.authService.logIn().then(
-      () => {
-        this.authService.switchLog();
-        this.router.navigate(['projects']);
-      }
-    )
-  }
-
 
 }
