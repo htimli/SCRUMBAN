@@ -1,10 +1,10 @@
-const usersrouter = require('express').Router(); 
-;
-
-const {getAllUsers, addUser , removeUser, updateUser } = require('../controllers/userController');
+const usersRouter = require('express').Router(); 
 
 
-usersrouter.route('/all').get( async(req,res ) => {
+const {getAllUsers, addUser , removeUser, updateUser , getUserLogin} = require('../controllers/userController');
+
+
+usersRouter.route('/all').get( async(req,res ) => {
     let response = await getAllUsers();
     if(response.success == true){
         res.status(200).json(response);
@@ -12,7 +12,7 @@ usersrouter.route('/all').get( async(req,res ) => {
         res.status(404).json(response);
     }
 });
-usersrouter.route('/updateOne').get( async(req,res ) => {
+usersRouter.route('/updateOne').get( async(req,res ) => {
     let response = await updateUser();
     if(response.success == true){
         res.status(200).json(response);
@@ -20,7 +20,7 @@ usersrouter.route('/updateOne').get( async(req,res ) => {
         res.status(404).json(response);
     }
 });
-usersrouter.route('/addOne').post( async(req,res ) => {
+usersRouter.route('/addOne').post( async(req,res ) => {
     let response = await addUser(req.body);
     if(response.success == true){
         res.status(200).json(response);
@@ -28,7 +28,18 @@ usersrouter.route('/addOne').post( async(req,res ) => {
         res.status(404).json(response);
     }
 });
-usersrouter.route('/deleteOne').delete( async(req,res ) => {
+
+
+usersRouter.route('/findOne').post( async(req,res ) => {
+    let response = await getUserLogin(req.body);
+    if(response.success == true){
+        res.status(200).json(response);
+    }else {
+        res.status(404).json(response);
+    }
+});
+
+usersRouter.route('/deleteOne').delete( async(req,res ) => {
     let response = await removeUser();
     if(response.success == true){
         res.status(200).json(response);
@@ -37,4 +48,4 @@ usersrouter.route('/deleteOne').delete( async(req,res ) => {
     }
 });
 
-module.exports = usersrouter
+module.exports = usersRouter

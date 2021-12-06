@@ -33,6 +33,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy{
   ngOnDestroy() {
     this.taskGroupsSubscription.unsubscribe();
   }
+  
   onTaskDrop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
