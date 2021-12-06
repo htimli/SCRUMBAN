@@ -10,6 +10,7 @@ export class AuthService {
   loged: boolean;
   logedSubject: Subject<boolean>;
 
+
   constructor(private httpClient: HttpClient) {
     this.loged = false;
     this.logedSubject = new Subject<boolean>();
@@ -25,12 +26,25 @@ export class AuthService {
     this.logedSubject.next(this.loged);
   }
 
-  signIn() {
+  signIn(userData: object) {
     return new Promise(
       (resolve, rejected) => {
-        setTimeout(() => {
-          resolve(true);
-        }, 2000);
+        this.saveData(userData).then(
+          () => {resolve(true); },
+          () => {rejected(true);}
+        );
+      }
+    );
+  }
+
+  saveData(userData: object) {
+    return new Promise(
+      (resolve, rejected) => {
+        this.httpClient.post('http://localhost:5000/api/users/addOne',userData)
+    .subscribe(
+      data => {console.log(data); resolve(true);},
+      error => {rejected(true);}
+      );
       }
     );
   }
@@ -38,7 +52,9 @@ export class AuthService {
   logIn(userData: object) {
     return new Promise(
       (resolve, rejected) => {
-        this.saveUserId(userData).then(() => { resolve(true); }, () => { rejected(true);}
+        this.saveUserId(userData).then(
+          () => { resolve(true); }, 
+          () => { rejected(true);}
         );
       }
     );
