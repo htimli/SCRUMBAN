@@ -12,8 +12,8 @@ projectsRouter.route('/all').get( async( req ,res ) => {
     }
 } );
 
-projectsRouter.route('/add').get( async( req ,res ) => {
-    let response = await addProject();
+projectsRouter.route('/add').post( async( req ,res ) => {
+    let response = await addProject(req.body);
     if(response.success == true){
         res.status(200).json(response);
     }else {

@@ -41,7 +41,7 @@ export class LoginPageComponent implements OnInit {
 
   saveUserId(){
 
-    this.httpClient.post('http://localhost:5000/api/users/findOne',this.userData,).
+    this.httpClient.post('http://localhost:5000/api/users/findOne',this.userData).
     subscribe(
       data => {console.log(data);}
     );

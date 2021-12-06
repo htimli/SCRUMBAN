@@ -11,10 +11,10 @@
         </thead>
         <tbody>
             <tr *ngFor="let project of projects">
-                <td><a  routerLink="/project">{{ project.name }}</a></td>
+                <td><a  routerLink="/project">{{ project.title }}</a></td>
                 <td>{{ project.creationDate | date }} </td>
                 <td>{{ project.scrumMaster }}</td>
-                <td>{{ project.avancement | percent:'1.2' }}</td>
+                <td>{{ project.progress | percent:'1.2' }}</td>
                 <!--<td>{{ project.participants.length}}</td>
                 
                 <td>

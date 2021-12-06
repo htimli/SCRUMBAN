@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-projects-list-page',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class ProjectsListPageComponent implements OnInit {
 
-
+  /*
   projects = [
     {
       id : 0 ,
@@ -35,16 +36,29 @@ export class ProjectsListPageComponent implements OnInit {
       creationDate: new Date()
     }
   ];
+  */
+  projects : any[] = [];
 
 
-
-  constructor(private router : Router) { }
+  constructor(private router : Router, private httpClient : HttpClient) { }
 
   ngOnInit(): void {
+    this.getsavedProjects();
   }
 
   onNewProject(){
-    this.router.navigate(["newProject"]);
+    this.router.navigate(["newProject"]);  
+  }
+  
+  getsavedProjects(){
+    this.httpClient
+    .get<any[]>('http://localhost:5000/api/projects/all')
+    .subscribe(
+      (response: any) =>{
+        console.log(response.data);
+        this.projects = response.data;
+      }
+    );
   }
 
 }
