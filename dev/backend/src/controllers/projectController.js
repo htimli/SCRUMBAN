@@ -32,7 +32,6 @@ module.exports.addProject = async function(body) {
             title : body.title ,
             scrumMaster: body.scrumMaster,
             progress: body.progress,
-
             creationDate : new Date()
         });
         

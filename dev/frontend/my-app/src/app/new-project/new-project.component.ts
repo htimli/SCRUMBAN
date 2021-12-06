@@ -28,7 +28,7 @@ export class NewProjectComponent implements OnInit {
 
     this.saveProject();
 
-    //this.router.navigate(["project"])
+    this.router.navigate(["project"])
   }
 
   saveProject(){

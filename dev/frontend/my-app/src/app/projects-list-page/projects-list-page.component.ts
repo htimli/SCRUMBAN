@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -38,29 +37,28 @@ export class ProjectsListPageComponent implements OnInit {
     }
   ];
   */
-  projects : any[];
+  projects : any[] = [];
 
 
   constructor(private router : Router, private httpClient : HttpClient) { }
 
   ngOnInit(): void {
-  }
-
-  onNewProject(){
-    //this.router.navigate(["newProject"]);
     this.getsavedProjects();
   }
 
+  onNewProject(){
+    this.router.navigate(["newProject"]);  
+  }
+  
   getsavedProjects(){
     this.httpClient
-    .get<any[]>('http://localhost:5000/api/projects/all').subscribe(d => {
-      console.log(d);
-      
-      
-      //data.forEach(val => this.projects.push(Object.assign({}, val)));
-      console.log(this.projects);
-    
-    });
+    .get<any[]>('http://localhost:5000/api/projects/all')
+    .subscribe(
+      (response: any) =>{
+        console.log(response.data);
+        this.projects = response.data;
+      }
+    );
   }
 
 }
