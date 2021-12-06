@@ -38,8 +38,7 @@ export class AuthService {
   logIn(userData: object) {
     return new Promise(
       (resolve, rejected) => {
-        this.saveUserId(userData).then(() => { resolve(true); }, () => {console.log('err2');
-        }
+        this.saveUserId(userData).then(() => { resolve(true); }, () => { rejected(true);}
         );
       }
     );
@@ -50,8 +49,9 @@ export class AuthService {
       (resolve, rejected) => {
         this.httpClient.post('http://localhost:5000/api/users/findOne', userData,).
           subscribe(
-            data => { console.log(data); resolve(true); },
-            error => {console.log('err');}
+            data => { console.log(data); resolve(true);
+            },
+            error => {rejected(true);}
           );
       }
     );
