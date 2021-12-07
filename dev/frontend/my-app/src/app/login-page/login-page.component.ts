@@ -25,13 +25,12 @@ export class LoginPageComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
   onSubmit(form: NgForm) {
-    //console.log(form.value);
     this.userData.email = form.value.email;
     this.userData.password = form.value.password;
     this.authService.logIn(this.userData).then(
       () => {
-        this.authService.switchLog();
         this.logAlert = false;
         this.router.navigate(['projects']);  
       },
