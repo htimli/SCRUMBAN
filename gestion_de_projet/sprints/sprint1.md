@@ -9,9 +9,9 @@
 
 | US    | Description                                                  | Temps | Difficulté | Priorité |
 | ----- | ------------------------------------------------------------ | :--------: | :------: |:------: |
-| 2.1  | **En tant qu'utilisateur**, je souhaite avoir une page d'inscription afin de de pouvoir rejoindre un projet ou céer de nouveaux projets|     1      |   1    |  1  |
-| 1.1  | **En tant qu’utilisateur**, je souhaite avoir une page d'accueil afin de d'avoir la présentation du logiciel. |      1     |   1   |   1  |
-| 2.2  | **En tant qu’utilisateur**, je souhaite avoir m'inscrire afin de de pouvoir céer de nouveaux projets |     1      |   1   |   1  |
-| 3.1  | **En tant qu’utilisateur**, je souhaite avoir une liste de projet afin de de pouvoir rejoindre un projet en cours|     1      |    1  |  1  |
-|  1.2  | **En tant qu’utilisateur**, je souhaite avoir une page de connexion afin de pour pouvoir m'identifier.|     1      |    1  |  2  |
+| 2.1  | **En tant qu'utilisateur**, je souhaite avoir une page d'inscription afin de de pouvoir rejoindre un projet ou céer de nouveaux projets|     2      |   1    |  1  |
+| 1.1  | **En tant qu’utilisateur**, je souhaite avoir une page d'accueil afin de d'avoir la présentation du logiciel. |      2     |   1   |   1  |
+| 2.2  | **En tant qu’utilisateur**, je souhaite avoir m'inscrire afin de de pouvoir céer de nouveaux projets |     2      |   1   |   1  |
+| 3.1  | **En tant qu’utilisateur**, je souhaite avoir une liste de projet afin de de pouvoir rejoindre un projet en cours|     2      |    1  |  1  |
+|  1.2  | **En tant qu’utilisateur**, je souhaite avoir une page de connexion afin de pour pouvoir m'identifier.|     2      |    1  |  2  |
 
