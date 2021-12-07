@@ -6,40 +6,16 @@
                 <th scope="col">Date de création</th>
                 <th scope="col">Scrum Master</th>
                 <th scope="col">taux d'avancement</th>
-                <!--<th scope="col">Participants</th>-->
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let project of projects">
-                <td><a  routerLink="/project">{{ project.title }}</a></td>
+                <td>
+                    <a (click)="onActualizeCurrentProject(project._id)">{{ project.title }}</a>
+                </td>
                 <td>{{ project.creationDate | date }} </td>
                 <td>{{ project.scrumMaster }}</td>
                 <td>{{ project.progress | percent:'1.2' }}</td>
-                <!--<td>{{ project.participants.length}}</td>
-                
-                <td>
-                    <ul class="list-group" *ngFor="let participant of project.participants ">
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col "> {{ participant}} </div>
-                                <div class="col col-lg-2"> <i class="fas fa-trash-alt" style="color:red;"> </i> </div>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="container">
-                    <div class="row">
-                        <div class="col align-self-center">
-                            <button type="button" class="btn btn-success" aria-label="Left Align">
-                                <span class="fas fa-user-plus" aria-hidden="true"></span>
-                            </button>
-                        </div>
-                    </div>
-                    </div>
-                </td>
-                
-                <td><select class="form-select" size="3" >
-                    <option *ngFor="let participant of project.participants" value="participant.id">{{ participant}}</option>
-                  </select></td>-->
 
             </tr>
 

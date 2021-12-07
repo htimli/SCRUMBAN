@@ -12,6 +12,8 @@ export class ProjectsService {
   projects : any[] = [];
   projectsSubject = new Subject<any[]>();
 
+  currentProject : any = {};
+  currentProjectSubject = new Subject< {}>();
   
  
   constructor(private httpClient : HttpClient , private authService : AuthService) { }
@@ -32,8 +34,20 @@ export class ProjectsService {
       data => {console.log(data);}
     
     );
-
   }
-  
 
+  actualizeCurrentProject(id){
+    return new Promise(
+      (resolve,rejected) =>{
+        this.httpClient.get<any>('http://localhost:5000/api/projects/'+id).subscribe(
+          (response: any) => {
+            this.currentProject = response.data;
+            console.log(response.data);
+            this.currentProjectSubject.next(this.currentProject);
+          },
+          error => {rejected(true);}
+        );
+      }
+    );
+  }
 }
