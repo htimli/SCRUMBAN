@@ -2,6 +2,8 @@ import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { ProjectsService } from '../services/projects.service';
 
 @Component({
   selector: 'app-new-project',
@@ -13,22 +15,29 @@ export class NewProjectComponent implements OnInit {
   private projectData = {
     title : '' ,
     scrumMaster: '',
-    progress : 0
-  }  
+    progress : 0,
+    user : '',
+  }
+  
 
-  constructor(private router: Router , private httpClient : HttpClient) { }
+  constructor(private router: Router , private httpClient : HttpClient , private projectService : ProjectsService , private authService : AuthService) { }
 
   ngOnInit(): void {
+    
   }
 
   onSubmit(form: NgForm){
-    this.projectData.title = form.value.ProjectName;
-    this.projectData.scrumMaster = "toto";
-    this.projectData.progress = 0;
+    this.getDataFromForm(form);
 
-    this.saveProject();
-
+    this.projectService.saveProject(this.projectData);
+  
     this.router.navigate(["project"])
+  }
+
+  private getDataFromForm(form: NgForm) {
+    this.projectData.title = form.value.ProjectName;
+    this.projectData.user = this.authService.getcurrentUserId();
+    this.projectData.progress = 0;
   }
 
   saveProject(){
