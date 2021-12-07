@@ -35,9 +35,9 @@ export class AuthService {
       data => {console.log(data); resolve(true);},
       error => {rejected(true);}
       );
-      }
-    );
-  }
+    }
+  );
+}
 
   logIn(userData: object) {
     return new Promise(
@@ -54,11 +54,10 @@ export class AuthService {
     return new Promise(
       (resolve, rejected) => {
         this.httpClient.post('http://localhost:5000/api/users/findOne', userData,).
-          subscribe(
-            data => { console.log(data); resolve(true);
-            },
-            error => {rejected(true);}
-          );
+        subscribe(
+          data => { console.log(data); resolve(true);},
+          error => {rejected(true);}
+        );
       }
     );
   }
