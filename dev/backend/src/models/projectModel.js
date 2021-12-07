@@ -6,8 +6,9 @@ const projectSchema = new mongoose.Schema({
     creationDate: {type:Date}, 
     scrumMaster: {type: String},
     progress: {type: Number},
-    users: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}]
-
+    users: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+    tasks: [{type : mongoose.Schema.Types.ObjectId , ref: "Task"}],
+    sprints : [{type : mongoose.Schema.Types.ObjectId , ref: "Sprint"}]
 }); 
 
 
