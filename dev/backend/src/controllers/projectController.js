@@ -1,10 +1,10 @@
 const Project = require('../models/projectModel');
-const UserModel = require('../models/userModel');
+const User = require('../models/userModel');
 
 
 
 module.exports.getAllProjects = async function() {
-    let total = await Project.countDocuments({});
+   let total = await Project.countDocuments({});
     let limit = parseInt(total);
 
     try{
@@ -23,27 +23,54 @@ module.exports.getAllProjects = async function() {
         };
     }
 }
+module.exports.getAllUserProjects = async function(id) {
+
+     try{
+         const projects = await Project.find().where('users').in(id);
+         
+         return {
+             success : true,
+             data : projects,
+         }
+ 
+     }catch(err){
+         return {
+             success : false ,
+             message : 'Projects not found '+err 
+         };
+     }
+ }
+ 
+
 
 module.exports.addProject = async function(body) {
 
     try {
-    
+
+        let user = await User.findById(body.user);
+
         let project = new Project({
             title : body.title ,
-            scrumMaster: body.scrumMaster,
+            scrumMaster: user.userName,
             progress: body.progress,
-            creationDate : new Date()
+            creationDate : new Date(),
         });
-        
 
+        project.users.push(user._id);  
+        user.projects.push(project._id);
+
+        console.log(project);
+        console.log(user);
+        
         project.save()
         .then(doc =>{})
         .catch(err =>{});
-
+        
         return {
             success : true,
             data : project
         }
+        
 
     }catch (err){
         return { 

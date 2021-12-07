@@ -1,6 +1,5 @@
 # Backlog
 
-
 * Echelles de difficulté   : de 1 à 4 ( 4 étant la difficulté la plus grande )
 * US Prioritaire : de 1 à 3 ( 1 étant la priorité la plus grande )
 * Temps en heure
@@ -32,5 +31,5 @@
 | 6.1  |**En tant qu'utilisateur**, je souhaite pouvoir accéder à mon tableau kanban **afin de** de pouvoir visualiser l'avancement des différentes tâches. |     1      |   1   |  1  |  3 |
 | 6.2  |**En tant qu'utilisateur**, je souhaite pouvoir modifier mon tableau kanban **afin de** de pouvoir modifier, ajouter ou même supprimer une colonne afin qu'il soit en adéquation avec ma manière de travailler  |     2      |   1   |  3  |  3 |
 | 7| **En tant qu’utilisateur**, je souhaite pouvoir créer une tâche et l’ajouter aux colonnes de mon tableau kanban **afin de** pouvoir lister l'ensembles des missions à remplir pour realiser le projet. De pouvoir les modifier et en ajouter suite aux différentes réunion avec mon client pour compléter la descritption du produit attendu.|     1      |   1   |  1  |  1 |
-| 7.1  |**En tant qu'utilisateur**, je souhaite pouvoir rajoutés de nouvelles US **afin de** de pouvoir les intégrer à mon projets |     2   |   2  |  1  |  X |
+| 7.1  |**En tant qu'utilisateur**, je souhaite pouvoir rajoutés de nouvelles US **afin de** de pouvoir les intégrer à mon projets |     2   |   2  |  1  |  2 |
 | 7.2  |**En tant qu'utilisateur**, je souhaite pouvoir déplacer les tâches d’une colonne à une autre via un système de « drag and drop  **afin de** pouvoir notifier que l'une d'entre elle à changer de statut suite à mon travail. Cliquer sur une tâche et la glisser dans une nouvelle colone. Si la colone cible est sous la contrainte d'un nombre maximum de tâche atteint alors la tâche selectionner repartira dans sa colone d'origine |     2    |   2  |  2 |  2 |

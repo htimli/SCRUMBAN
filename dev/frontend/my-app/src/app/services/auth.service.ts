@@ -9,6 +9,7 @@ export class AuthService {
 
   loged: boolean;
   logedSubject: Subject<boolean>;
+  private currentUserId:  string; 
 
 
   constructor(private httpClient: HttpClient) {
@@ -43,7 +44,11 @@ export class AuthService {
     return new Promise(
       (resolve, rejected) => {
         this.saveUserId(userData).then(
-          () => { resolve(true); this.loged=true; this.logedSubject.next(this.loged)}, 
+          () => { 
+            resolve(true); 
+            this.loged=true; 
+            this.logedSubject.next(this.loged);
+          }, 
           () => { rejected(true);}
         );
       }
@@ -53,11 +58,17 @@ export class AuthService {
   saveUserId(userData: object) {
     return new Promise(
       (resolve, rejected) => {
-        this.httpClient.post('http://localhost:5000/api/users/findOne', userData,).
-        subscribe(
-          data => { console.log(data); resolve(true);},
-          error => {rejected(true);}
-        );
+        this.httpClient.post('http://localhost:5000/api/users/findOne', userData).
+          subscribe(
+            (rep:any) => { 
+              console.log(rep); 
+              this.currentUserId = rep.data._id;
+              console.log(this.currentUserId);
+              
+              resolve(true);
+            },
+            error => {rejected(true);}
+          );
       }
     );
   }
@@ -71,4 +82,12 @@ export class AuthService {
       }
     );
   }
+
+  getcurrentUserId(){
+    return this.currentUserId;
+  }
+
+
+
+
 }

@@ -37,13 +37,13 @@ export class LoginPageComponent implements OnInit {
       () => {this.logAlert = true;}
     )
   }
-  
+  /*
   getuserIdFromServer(){
     this.httpClient
     .get<any[]>('http://localhost:5000/api/users/all').subscribe(data => {
       console.log(data);
     });
 
-  }
+  }*/
 
 }
