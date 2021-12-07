@@ -1,6 +1,5 @@
 # Backlog
 
-
 * Echelles de difficulté   : de 1 à 4 ( 4 étant la difficulté la plus grande )
 * US Prioritaire : de 1 à 3 ( 1 étant la priorité la plus grande )
 * Temps en heure
