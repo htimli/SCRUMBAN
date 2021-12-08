@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class ProjectsListPageComponent implements OnInit {
 
-  projects : any[] = [];
+  projects : any[];
   projectsSubscription : Subscription;
 
   projectId: String;
@@ -36,6 +36,4 @@ export class ProjectsListPageComponent implements OnInit {
   onActualizeCurrentProject(id){
     this.projectServices.actualizeCurrentProject(id).then(() => {this.router.navigate(['project']);});
   }
-  
-
 }
