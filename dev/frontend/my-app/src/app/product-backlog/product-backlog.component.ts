@@ -15,4 +15,6 @@ export class ProductBacklogComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onNewTask(){}
+
 }

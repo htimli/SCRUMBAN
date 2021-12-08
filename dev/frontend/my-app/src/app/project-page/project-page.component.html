@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col">
-                    <h4>{{project.title}}</h4>
+                    <h1><u>{{project.title}}</u></h1>
                 </div>
                 <div class="col">
                     <select class="form-select" size="3">
@@ -13,7 +13,12 @@
                     <button class="btn btn-danger">Supprimer</button>
                 </div>
                 <div class="col">
-                    <h4>info</h4>
+                    <h4>Informations</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            Scrum master : {{project.scrumMaster}} <br> date de création : {{project.creationDate | date}} <br> Avancement : X%
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -22,8 +27,6 @@
                 </div>
                 <div class="col-2">
                     <app-product-backlog></app-product-backlog>
-                    <button class="btn btn-primary" (click)='onNewTask()'>Ajouter</button>
-                    <button class="btn btn-danger">Supprimer</button>
                 </div>
                 <div class="col-8">
                     <app-kanban-board></app-kanban-board>
