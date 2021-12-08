@@ -6,17 +6,23 @@
                 <th scope="col">Date de création</th>
                 <th scope="col">Scrum Master</th>
                 <th scope="col">taux d'avancement</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let project of projects">
-                <td>
-                    <a (click)="onActualizeCurrentProject(project._id)">{{ project.title }}</a>
-                </td>
+                <td>{{ project.title }}</td>
                 <td>{{ project.creationDate | date }} </td>
                 <td>{{ project.scrumMaster }}</td>
                 <td>{{ project.progress | percent:'1.2' }}</td>
-
+                <td>
+                    <button (click)="onActualizeCurrentProject(project._id)" type="button" class="btn btn-primary">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button type="button" class="btn btn-danger">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                </td>
             </tr>
 
         </tbody>

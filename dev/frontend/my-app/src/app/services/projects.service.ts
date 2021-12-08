@@ -9,43 +9,44 @@ import { AuthService } from './auth.service';
 export class ProjectsService {
 
 
-  projects : any[] = [];
+  projects: any[] = [];
   projectsSubject = new Subject<any[]>();
 
-  currentProject : any = {};
-  currentProjectSubject = new Subject< {}>();
-  
- 
-  constructor(private httpClient : HttpClient , private authService : AuthService) { }
+  currentProject: any = {};
+  currentProjectSubject = new Subject<{}>();
 
-  getSavedProjects(){
+  
+
+
+  constructor(private httpClient: HttpClient, private authService: AuthService) { }
+
+  getSavedProjects() {
     this.httpClient
-    .get<any[]>('http://localhost:5000/api/projects/all/'+this.authService.getcurrentUserId())
-    .subscribe(
-      (response: any) =>{
-        console.log(response.data);
-        this.projects = response.data;
-        this.projectsSubject.next(this.projects);
-      }  );   
+      .get<any[]>('http://localhost:5000/api/projects/all/' + this.authService.getcurrentUserId())
+      .subscribe(
+        (response: any) => {
+          console.log(response.data);
+          this.projects = response.data;
+          this.projectsSubject.next(this.projects);
+        });
   }
 
-  saveProject(projectData : any){
-    this.httpClient.post('http://localhost:5000/api/projects/add',projectData).subscribe(
-      data => {console.log(data);}
-    
+  saveProject(projectData: any) {
+    this.httpClient.post('http://localhost:5000/api/projects/add', projectData).subscribe(
+      data => { console.log(data); }
     );
   }
 
-  actualizeCurrentProject(id){
+  actualizeCurrentProject(id) {
     return new Promise(
-      (resolve,rejected) =>{
-        this.httpClient.get<any>('http://localhost:5000/api/projects/'+id).subscribe(
+      (resolve, rejected) => {
+        this.httpClient.get<any>('http://localhost:5000/api/projects/' + id).subscribe(
           (response: any) => {
             this.currentProject = response.data;
-            console.log(response.data);
             this.currentProjectSubject.next(this.currentProject);
+            resolve(true);
           },
-          error => {rejected(true);}
+          error => { rejected(true); }
         );
       }
     );

@@ -25,7 +25,7 @@ export class ProjectsListPageComponent implements OnInit {
         this.projects = projects;
       }
     );
-    this.projectServices.getSavedProjects();    
+    this.projectServices.getSavedProjects(); 
   }
 
   onNewProject(){

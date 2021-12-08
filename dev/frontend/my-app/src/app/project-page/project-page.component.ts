@@ -13,10 +13,7 @@ import { ProjectsService } from '../services/projects.service';
 export class ProjectPageComponent implements OnInit {
 
 
-  project : any = {
-    title : 'tete',
-    progress : '0'
-  } ;
+  project : any;
   projectSubscription : Subscription;
 
   constructor(private router: Router, private projectService : ProjectsService ) {  }
@@ -25,11 +22,9 @@ export class ProjectPageComponent implements OnInit {
     this.projectSubscription = this.projectService.projectsSubject.subscribe(
       (project ) => { this.project = project;}
     );
-    this.projectService.actualizeCurrentProject("61af6525461d98d8f498a17c");
      console.log("=====>" ,this.projectService.currentProject);
       this.project = this.projectService.currentProject;
      console.log(this.project);
-     
   }
 
   onNewTask(){
