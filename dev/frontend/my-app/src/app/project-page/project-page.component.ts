@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Subscription } from 'rxjs';
 import { ProjectsService } from '../services/projects.service';
 
  
@@ -13,19 +12,14 @@ import { ProjectsService } from '../services/projects.service';
 export class ProjectPageComponent implements OnInit {
 
 
-  project : any;
-  projectSubscription : Subscription;
+  project : any = {};
 
-  constructor(private router: Router, private projectService : ProjectsService ) {  }
+  constructor(private router: Router, private projectService : ProjectsService ) { 
+   }
 
-  ngOnInit(): void {
-    this.projectSubscription = this.projectService.projectsSubject.subscribe(
-      (project ) => { this.project = project;}
-    );
-     console.log("=====>" ,this.projectService.currentProject);
-     this.project = this.projectService.currentProject;
-     console.log(this.project);
-  }
+  ngOnInit(): void { 
+    this.project = this.projectService.currentProject;
+   }
 
   onNewTask(){
     this.router.navigate(['newTask'])

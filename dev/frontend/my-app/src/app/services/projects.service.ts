@@ -12,11 +12,7 @@ export class ProjectsService {
   projects: any[] = [];
   projectsSubject = new Subject<any[]>();
 
-  currentProject: any = {};
-  currentProjectSubject = new Subject<{}>();
-
-  
-
+  currentProject: any;
 
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
@@ -38,18 +34,17 @@ export class ProjectsService {
   }
 
   actualizeCurrentProject(id) {
-    return new Promise(
-      (resolve, rejected) => {
+      return new Promise(
+        (resolve,rejected) => {
         this.httpClient.get<any>('http://localhost:5000/api/projects/' + id).subscribe(
           (response: any) => {
-            this.currentProject = response.data;
-            this.currentProjectSubject.next(this.currentProject);
             resolve(true);
+            this.currentProject = response.data;
           },
-          error => { rejected(true); }
+          error => {rejected(true);} 
         );
-      }
-    );
+  }
+      );
   }
 
   getProjectSprints(s :any,idProject:string){
