@@ -36,9 +36,9 @@ export class AuthService {
       data => {console.log(data); resolve(true);},
       error => {rejected(true);}
       );
-      }
-    );
-  }
+    }
+  );
+}
 
   logIn(userData: object) {
     return new Promise(
