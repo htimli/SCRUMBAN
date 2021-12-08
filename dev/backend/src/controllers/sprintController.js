@@ -7,15 +7,9 @@ module.exports.getAllProjectSprints = async function(){
     try{
         let idProject = '61af6525461d98d8f498a17c';
 
-        const id_sprints = await Project.findById(idProject).select('sprints').exec();
+        const id_sprints = await Project.findById(idProject).select('sprints').exec();            
+        const sprints = await Sprint.find().where('_id').in(id_sprints.sprints).exec();
         
-
-        
-
-       const sprints = await Sprint.find().where('_id').in(id_sprints.sprints).exec();
-        
-       
-
         return {
             success : true,
             data : sprints
