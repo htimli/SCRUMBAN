@@ -30,6 +30,7 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
 import { NewProjectComponent } from './new-project/new-project.component';
 import { NewSprintComponent } from './new-sprint/new-sprint.component';
 import { NewTaskComponent } from './new-task/new-task.component';
+import { ProjectMembersComponent } from './project-members/project-members.component';
 
 
 
@@ -65,7 +66,8 @@ const appRoutes : Routes = [
     ToolBarComponent,
     NewProjectComponent,
     NewSprintComponent,
-    NewTaskComponent
+    NewTaskComponent,
+    ProjectMembersComponent
   ],
   imports: [
     BrowserModule,
