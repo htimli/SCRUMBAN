@@ -33,7 +33,8 @@ export class AuthService {
       (resolve, rejected) => {
         this.httpClient.post('http://localhost:5000/api/users/addOne',userData)
     .subscribe(
-      data => {console.log(data); resolve(true);},
+      data => {console.log(data); 
+        resolve(true);},
       error => {rejected(true);}
       );
     }
