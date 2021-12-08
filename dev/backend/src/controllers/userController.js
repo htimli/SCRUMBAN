@@ -1,4 +1,5 @@
 const User = require('../models/userModel');
+const Project = require('../models/projectModel');
 
 
 
@@ -15,17 +16,17 @@ module.exports.getAllUsers = async function() {
             total: total.toString(),
         }
 
-    }catch(err){
-        return { success:false , message: "Users not found "+err };
+    } catch (err) {
+        return { success: false, message: "Users not found " + err };
     }
 }
 
 
-module.exports.addUser = async function(body){
-    try{
-        
+module.exports.addUser = async function(body) {
+    try {
+
         let user = await User.findOne({
-            email : body.email
+            email: body.email
         });
         if (user) {
             return {
@@ -33,67 +34,67 @@ module.exports.addUser = async function(body){
                 msg: "email Already Exists"
             }
         }
-        
+
 
         console.log(body);
-        
+
         user = new User({
-          ...body
+            ...body
         });
-        
+
         user.save()
-        .then(doc => {})
-        .catch(err => {});
-             
+            .then(doc => {})
+            .catch(err => {});
+
         return {
             success: true,
-            data : user
-            
+            data: user
+
         }
 
-    }catch (err){
-        return { success:false , message: "cannot add user "+err };
+    } catch (err) {
+        return { success: false, message: "cannot add user " + err };
     }
 
 }
 module.exports.updateUser = async function() {
     try {
-        
-        await User.updateOne({_id: '618cf9a4bdbd06f5bb3523d6'},{userName: "soso"})
-        .then(doc => {})
-        .catch(err => {});
-        
+
+        await User.updateOne({ _id: '618cf9a4bdbd06f5bb3523d6' }, { userName: "soso" })
+            .then(doc => {})
+            .catch(err => {});
+
         return {
-            success: true,     
+            success: true,
         }
 
-    }catch(err){
-        return { success:false , message: "cannot update user "+err };
+    } catch (err) {
+        return { success: false, message: "cannot update user " + err };
     }
 }
 
 module.exports.removeUser = async function() {
     try {
-        
-        await User.deleteOne({ _id :'618cf9a0bdbd06f5bb3523d4'})
-        .then(doc => {})
-        .catch(err => {});
+
+        await User.deleteOne({ _id: '618cf9a0bdbd06f5bb3523d4' })
+            .then(doc => {})
+            .catch(err => {});
 
         return {
-            success: true,     
+            success: true,
         }
 
-    }catch(err){
-        return { success:false , message: "cannot remove user "+err };
+    } catch (err) {
+        return { success: false, message: "cannot remove user " + err };
     }
 }
 
-module.exports.getUserLogin = async function(body){
-    try{
-        
+module.exports.getUserLogin = async function(body) {
+    try {
+
         let user = await User.findOne({
-            email : body.email,
-            password : body.password
+            email: body.email,
+            password: body.password
         });
 
         if (!user) {
@@ -101,24 +102,35 @@ module.exports.getUserLogin = async function(body){
                 success: false,
                 msg: "user does not exists"
             }
-        }
-        else {            
+        } else {
             return {
                 success: true,
-                data : user
-                
+                data: user
+
             }
         }
 
-    }catch (err){
-        return { success:false , message: "cannot find user "+err };
+    } catch (err) {
+        return { success: false, message: "cannot find user " + err };
     }
 
 }
 
-
-
-
-
-
-
+module.exports.getAllProjectUsers = async function(id) {
+    try {
+        let users = await Project.findById(id).select('users');
+        if (!users) {
+            return {
+                success: false,
+                msg: "users does not exists"
+            }
+        } else {
+            return {
+                success: true,
+                data: users
+            }
+        }
+    } catch (err) {
+        return { success: false, message: "cannot find users" + err };
+    }
+}
