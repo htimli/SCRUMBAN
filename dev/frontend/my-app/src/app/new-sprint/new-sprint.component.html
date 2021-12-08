@@ -5,7 +5,7 @@
             <form method="post" (ngSubmit)="onSubmit(f)" #f="ngForm">
                 <div class="form-group col-md-6 mb-3">
                     <label for="SprintName">Nom du sprint</label>
-                    <input type="text" id="SprintName" class="form-control" name="SprinttName" ngModel text required>
+                    <input type="text" id="SprintName" class="form-control" name="SprintName" ngModel text required>
                 </div>
             </form>
         </div>
@@ -25,7 +25,7 @@
         <div class="row">
             <div class="col-2">
                 <button class="btn btn-primary" type="text" [disabled]="f.invalid"
-                    (click)="onNewSprint()">Créer</button>
+                    (click)="onNewSprint(f)">Créer</button>
             </div>
         </div>
     </div>

@@ -23,7 +23,7 @@ export class ProjectPageComponent implements OnInit {
       (project ) => { this.project = project;}
     );
      console.log("=====>" ,this.projectService.currentProject);
-      this.project = this.projectService.currentProject;
+     this.project = this.projectService.currentProject;
      console.log(this.project);
   }
 
