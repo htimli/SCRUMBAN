@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { ProjectsService } from '../services/projects.service';
 
 @Component({
   selector: 'app-sprints-list',
@@ -9,17 +11,19 @@ import { Router } from '@angular/router';
 export class SprintsListComponent implements OnInit {
 
 
+  @Input() idProject : string ;
 
+  sprints :any[];
 
-  sprints = [1, 2, 3, 4, 5];
-
-  constructor(private router: Router) { }
+  constructor(private router: Router , private projectService : ProjectsService) { }
 
   ngOnInit(): void {
+    this.projectService.getProjectSprints(this,this.idProject);
   }
 
   onNewSprint(){
-    this.router.navigate(["newSprint"])
+    this.router.navigate(["newSprint"]);
+    //this.projectService.addProjectSprint(this,this.idProject);
   }
 
   onRemoveSprint(){

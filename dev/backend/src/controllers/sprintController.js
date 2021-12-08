@@ -3,9 +3,9 @@ const Project = require('../models/projectModel');
 
 
 
-module.exports.getAllProjectSprints = async function(){
+module.exports.getAllProjectSprints = async function(idProject){
     try{
-        let idProject = '61af6525461d98d8f498a17c';
+
 
         const id_sprints = await Project.findById(idProject).select('sprints').exec();            
         const sprints = await Sprint.find().where('_id').in(id_sprints.sprints).exec();
@@ -23,15 +23,19 @@ module.exports.getAllProjectSprints = async function(){
     }
 }
 
-module.exports.addProjectSprint = async function(){
+module.exports.addProjectSprint = async function(idProject,body){
+
+
+    
+
     try{
         let sprint = new Sprint({
-            number : 1,
-            name : "sprint1"
+            name : body.name
         });
-        let idProject = '61af6525461d98d8f498a17c';
-
+        console.log('body =>',body);
         let project = await Project.findById(idProject);
+        sprint.number = project.sprints.length +1 ;
+
         project.sprints.push(sprint._id);
 
         console.log(project);
@@ -49,7 +53,7 @@ module.exports.addProjectSprint = async function(){
         
         return {
             success : true,
-            data : project
+            data : sprint
         }
 
 
@@ -60,3 +64,4 @@ module.exports.addProjectSprint = async function(){
         };
     }
 }
+

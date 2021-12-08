@@ -46,4 +46,35 @@ export class ProjectsService {
   }
       );
   }
+
+  getProjectSprints(s :any,idProject:string){
+    this.httpClient
+      .get<any[]>('http://localhost:5000/api/sprints/project/'+idProject)
+      .subscribe(
+        (response: any) => {
+          console.log(response.data);
+          s.sprints = response.data;
+
+        });
+  }
+  addProjectSprint(s :any, idProject:string, sprintData :any){
+    return new Promise(
+      (resolve, rejected) => {
+    this.httpClient
+      .post('http://localhost:5000/api/sprints/project/add/'+idProject , sprintData)
+      .subscribe(
+        (response: any) => {
+          console.log(response.data);
+          s.sprints.push(response.data);
+          resolve(true);
+        },
+        error => {rejected(true);}
+        );
+  }
+    );
+
 }
+}
+
+
+
