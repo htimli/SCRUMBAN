@@ -16,3 +16,5 @@
 |   11   |  Sur la page gestion de projet, je clique sur créer un sprint       | Cela m'envoie sur la page création de sprint | ok |  08/12 | | Yassir|
 |   12   |  Sur la page création de sprint, je rentre le nom du sprint       | Cela m'envoie sur la page gestion de projet | ok |  08/12 | | Yassir|
 |   13   |  Sur la page création de sprint, je rentre le nom du sprint       | Cela m'envoie sur la page gestion de projet, et le sprint créé apparaît dans la catégorie sprint | ok |  08/12 | | Yassir|
+|   14   |  Sur la page de gestion de projet, je clique sur le bouton pour ajouter une tâche       | Cela m'envoie sur la page de création de tâche | ok |  09/12 | | Hassan|
+|   15   |  Sur la page de création de tâche, je rempli le nom et la description de la tâche       | Cela m'envoie sur la page de gestion de projet et la tâche créé apparaît sur la partie Backlog, avec toutes les autres tâche | ok |  09/12 | | Hassan|
