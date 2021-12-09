@@ -1,4 +1,4 @@
-import { Component, Input, OnInit} from '@angular/core';
+import { Component, HostListener, Input, OnInit} from '@angular/core';
 import { ProjectsService } from '../services/projects.service';
 
 @Component({
@@ -14,7 +14,9 @@ export class ProductBacklogComponent implements OnInit {
 
   tasks : any[];
 
- 
+  selectedOption: any;
+  selectedItem: any;
+  
 
   constructor(private projectService : ProjectsService) { }
 
@@ -23,6 +25,11 @@ export class ProductBacklogComponent implements OnInit {
     console.log('project tasks',this.tasks);
   }
   
+  @HostListener("click") onClick(){
+    console.log('clicked');
+    console.log(this.selectedItem);
+    this.selectedItem = this.selectedOption;
+  }
 
   onNewTask(){}
 
