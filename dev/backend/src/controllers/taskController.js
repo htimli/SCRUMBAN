@@ -1,36 +1,35 @@
 const Task = require('../models/taskModel');
 const Project =require('../models/projectModel');
 
-module.exports.getAllTasks = async function(){
+module.exports.getAllProjectTasks = async function(idProject){
     try{
-
-        let idProject = '61af6525461d98d8f498a17c';
 
         const idTasks = await Project.findById(idProject).select('tasks').exec();            
         const tasks = await Task.find().where('_id').in(idTasks.tasks).exec();
+
+        console.log(tasks)
         
         return {
             success : true, 
             data : tasks
         }
 
-    }catch{
+    }catch(err){
         return {
             success : false,
             message :'Tasks not found '+err
         }
     }
 }
-module.exports.addProjectTask = async function(){
+module.exports.addProjectTask = async function(idProject,body){
     try{
 
         let task = new Task({
-            title : "task1", 
-            desc : "ajouter formulaire a la premiere page",
+            title : body.title, 
+            desc : body.desc,
             state : 'En cours',
         });
 
-        let idProject = '61af6525461d98d8f498a17c';
         let project = await Project.findById(idProject);
         project.tasks.push(task._id);
 

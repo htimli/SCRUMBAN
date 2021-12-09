@@ -28,10 +28,11 @@ export class NewSprintComponent implements OnInit {
   onNewSprint(form:NgForm) {
   this.sprintData.name = form.value.SprintName;
 
-  this.projectService.addProjectSprint(this.projectService.currentProject,this.projectService.currentProject._id,this.sprintData).then(
+  this.projectService.addProjectSprint(this.projectService.currentProject,this.sprintData)
+  .then(
     () => {this.router.navigate(['project'])},
     () => {console.log("err");}
-    );
+  );
   }
 
 

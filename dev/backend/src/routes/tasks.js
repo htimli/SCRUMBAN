@@ -1,9 +1,9 @@
 const tasksRouter = require('express').Router();
 
-const {getAllTasks ,addProjectTask } = require('../controllers/taskController') ;
+const {getAllProjectTasks ,addProjectTask } = require('../controllers/taskController') ;
 
-tasksRouter.route('/project').get( async( req ,res ,next) => {
-    let response = await getAllTasks();
+tasksRouter.route('/project/:id').get( async( req ,res ,next) => {
+    let response = await getAllProjectTasks(req.params.id);
     if(response.success == true){
         res.status(200).json(response);
     }else {
@@ -12,8 +12,8 @@ tasksRouter.route('/project').get( async( req ,res ,next) => {
     next();
 } );
 
-tasksRouter.route('/project/add').get( async( req ,res ,next) => {
-    let response = await addProjectTask();
+tasksRouter.route('/project/add/:id').post( async( req ,res ,next) => {
+    let response = await addProjectTask(req.params.id, req.body);
     if(response.success == true){
         res.status(200).json(response);
     }else {

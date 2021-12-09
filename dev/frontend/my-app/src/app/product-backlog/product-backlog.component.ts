@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ProjectsService } from '../services/projects.service';
 
 @Component({
   selector: 'app-product-backlog',
@@ -7,12 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductBacklogComponent implements OnInit {
 
+  @Input() idProject : string;
 
-  tasks = [0,1,2,3];
+  tasks : any[];
 
-  constructor() { }
+  constructor(private projectService : ProjectsService) { }
 
   ngOnInit(): void {
+    this.projectService.getProjectTasks(this,this.idProject);
+    console.log('project tasks',this.tasks);
   }
 
 }
