@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProjectsService } from '../services/projects.service';
 
+
 @Component({
   selector: 'app-project-members',
   templateUrl: './project-members.component.html',
@@ -10,6 +11,7 @@ import { ProjectsService } from '../services/projects.service';
 export class ProjectMembersComponent implements OnInit {
 
   @Input() idProject : string;
+  memberEmail: string;
 
   members: any[];
 
@@ -19,8 +21,9 @@ export class ProjectMembersComponent implements OnInit {
     this.projectService.getProjectMembers(this,this.idProject);
   }
 
-  onAddMember(){
-    this.projectService.addProjectUser(this,this.idProject,userid);
+  onAddMember(memberEmail: string){
+    this.memberEmail = memberEmail;
+    this.projectService.addProjectUser(this,this.idProject,this.memberEmail);
   }
 
 }

@@ -5,6 +5,12 @@
         <li class="fas fa-user-minus"></li>
     </button>
 </select>
-<button class="btn btn-primary" (click)="onAddMember()">
-    <i class="fas fa-user-plus"></i>
-</button>
+
+<div class="input-group mb-3">
+    <div class="input group prepend">
+        <input type="text" id="email" ng-model="memberEmail" ngModel email required>
+        <button class="btn btn-primary" (click)="onAddMember(memberEmail)">
+            <i class="fas fa-user-plus"></i>
+        </button>
+    </div>
+</div>

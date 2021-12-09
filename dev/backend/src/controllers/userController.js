@@ -106,7 +106,6 @@ module.exports.getUserLogin = async function(body) {
             return {
                 success: true,
                 data: user
-
             }
         }
 

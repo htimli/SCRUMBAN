@@ -87,11 +87,11 @@ export class ProjectsService {
       );
     }
 
-  addProjectUser(s:any, idProject:string, idUser:string){
+  addProjectUser(s:any, idProject:string, memberEmail:string){
   return new Promise(
     (resolve, rejected) => {
   this.httpClient
-    .post('http://localhost:5000/api/project/addUser/'+idProject , idUser)
+    .post('http://localhost:5000/api/project/addUser/'+idProject , memberEmail)
     .subscribe(
       (response: any) => {
         console.log(response.data);

@@ -141,7 +141,7 @@ module.exports.getAllProjectUsers = async function(id) {
     }
 }
 
-module.exports.addProjectUser = async function(projectId, userId) {
+module.exports.addProjectUser = async function(projectId, memberEmail) {
     try {
 
         let user = await User.findById(userId);
