@@ -1,5 +1,6 @@
 const Sprint = require('../models/sprintModel');
 const Project = require('../models/projectModel');
+const Task = require('../models/taskModel');
 
 
 
@@ -24,9 +25,6 @@ module.exports.getAllProjectSprints = async function(idProject){
 }
 
 module.exports.addProjectSprint = async function(idProject,body){
-
-
-    
 
     try{
         let sprint = new Sprint({
@@ -65,3 +63,23 @@ module.exports.addProjectSprint = async function(idProject,body){
     }
 }
 
+module.exports.getSprintTasks = async function(idSprint){
+    try{
+
+
+                  
+        const sprint = await Sprint.findById(idSprint);
+        const tasks = await Task.find().where('_id').in(sprint.tasks).exec();
+
+        return {
+            success : true,
+            data : tasks
+        }
+
+    }catch(err){
+        return {
+            success : false,
+            message : 'sprints not found '+err
+        };
+    }
+}

@@ -22,7 +22,9 @@
                     <app-sprints-list [idProject]=" project._id "></app-sprints-list>
                 </div>
                 <div class="col-2">
-                    <app-product-backlog></app-product-backlog>
+                    <app-product-backlog [idProject]=" project._id "></app-product-backlog>
+                    <button class="btn btn-primary" (click)='onNewTask()'>Ajouter</button>
+                    <button class="btn btn-danger">Supprimer</button>
                 </div>
                 <div class="col-8">
                     <app-kanban-board></app-kanban-board>

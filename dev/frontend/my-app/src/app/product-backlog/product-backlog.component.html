@@ -1,5 +1,4 @@
 <h4>ProductBacklog</h4>
 <select class="form-select" size="25">
-    <option *ngFor="let t of tasks" value="t">US{{t}}</option>
+    <option *ngFor="let t of tasks" value="t">{{t.title}}</option>
   </select>
-<button class="btn btn-primary" (click)='onNewTask()'>Ajouter</button>

@@ -10,6 +10,9 @@ import { ProjectsService } from '../services/projects.service';
 })
 export class NewSprintComponent implements OnInit {
 
+  
+  projectId :'';
+
   tasks = [0, 1, 2, 3];
 
   sprintData = {
@@ -19,6 +22,7 @@ export class NewSprintComponent implements OnInit {
   constructor(private router: Router ,private projectService : ProjectsService) { }
 
   ngOnInit(): void {
+    this.projectId = this.projectService.currentProject._id;
   }
 
   onSubmit(form: NgForm) {
@@ -28,11 +32,14 @@ export class NewSprintComponent implements OnInit {
   onNewSprint(form:NgForm) {
   this.sprintData.name = form.value.SprintName;
 
-  this.projectService.addProjectSprint(this.projectService.currentProject,this.projectService.currentProject._id,this.sprintData).then(
+  this.projectService.addProjectSprint(this.projectService.currentProject,this.sprintData)
+  .then(
     () => {this.router.navigate(['project'])},
     () => {console.log("err");}
-    );
+  );
   }
+
+  
 
 
   

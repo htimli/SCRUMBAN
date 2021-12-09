@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UserStoriesService } from '../services/user-stories.service';
 
@@ -9,6 +9,8 @@ import { UserStoriesService } from '../services/user-stories.service';
   styleUrls: ['./kanban-board.component.css']
 })
 export class KanbanBoardComponent implements OnInit, OnDestroy{
+
+  @Input() idProject: string;
 
   taskGroups: any[];
   taskGroupsSubscription: Subscription;

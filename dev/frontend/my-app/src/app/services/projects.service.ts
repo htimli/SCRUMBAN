@@ -47,29 +47,29 @@ export class ProjectsService {
       );
   }
 
-  getProjectSprints(s :any,idProject:string){
+  getProjectSprints(project :any, idProject:string){
     this.httpClient
       .get<any[]>('http://localhost:5000/api/sprints/project/'+idProject)
       .subscribe(
         (response: any) => {
           console.log(response.data);
-          s.sprints = response.data;
+          project.sprints = response.data;
 
         });
   }
 
-  addProjectSprint(s :any, idProject:string, sprintData :any){
+  addProjectSprint(project :any, sprintData :any){
     return new Promise(
       (resolve, rejected) => {
     this.httpClient
-      .post('http://localhost:5000/api/sprints/project/add/'+idProject , sprintData)
+      .post('http://localhost:5000/api/sprints/project/add/'+project._id, sprintData)
       .subscribe(
-        (response: any) => {
+          (response: any) => {
           console.log(response.data);
-          s.sprints.push(response.data);
+          project.sprints.push(response.data);
           resolve(true);
-        },
-        error => {rejected(true);}
+          },
+          error => {rejected(true);}
         );
       }
     );
@@ -86,6 +86,46 @@ export class ProjectsService {
         }
       );
     }
+
+  getProjectTasks(project :any,idProject:string){
+    this.httpClient
+      .get<any[]>('http://localhost:5000/api/tasks/project/'+idProject)
+      .subscribe(
+        (response: any) => {
+          console.log('response.data',response.data);
+          project.tasks = response.data;
+
+        });
+
+  }
+
+  addProjectTask(b: any, taskData :any ){
+    return new Promise(
+      (resolve ,rejected) => {
+        this.httpClient
+        .post('http://localhost:5000/api/tasks/project/add/'+b._id,taskData)
+        .subscribe(
+            (response: any) => {
+            console.log(response.data);
+            b.tasks.push(response.data);
+            resolve(true);
+            },
+            error => {rejected(true);}
+          );
+        }
+        );
+  }
+  getSprintTasks(sprint :any,idSprint:string){
+    this.httpClient
+      .get<any[]>('http://localhost:5000/api/sprints/'+idSprint+'/tasks')
+      .subscribe(
+        (response: any) => {
+          console.log('response.data',response.data);
+          sprint.tasks = response.data;
+
+        });
+
+  }
 
   addProjectUser(s:any, idProject:string, memberEmail:string){
   return new Promise(

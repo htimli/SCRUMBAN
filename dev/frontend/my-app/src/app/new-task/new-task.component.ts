@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ProjectsService } from '../services/projects.service';
 
 @Component({
   selector: 'app-new-task',
@@ -9,7 +10,12 @@ import { Router } from '@angular/router';
 })
 export class NewTaskComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  taskData = {
+    title : '',
+    desc  : ''
+  }
+
+  constructor(private router: Router ,private projectService : ProjectsService) { }
 
   ngOnInit(): void {
   }
@@ -18,8 +24,19 @@ export class NewTaskComponent implements OnInit {
 
   }
 
-  onNewTask(){
-    this.router.navigate(['project'])
+  onNewTask(form:NgForm){
+
+    this.taskData.title = form.value.TaskName;
+    this.taskData.desc = form.value.TaskDesc;
+
+    this.projectService.addProjectTask(this.projectService.currentProject,this.taskData)
+    .then(
+      () => {this.router.navigate(['project'])},
+      () => {console.log("err");}
+    );
+
+
+    
   }
 
 }

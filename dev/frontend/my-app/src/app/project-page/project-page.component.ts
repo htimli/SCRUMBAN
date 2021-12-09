@@ -21,4 +21,9 @@ export class ProjectPageComponent implements OnInit {
     this.project = this.projectService.currentProject;
    }
 
+  onNewTask(){
+    this.router.navigate(['newTask'])
+  }
+  
+
 }
