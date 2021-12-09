@@ -102,10 +102,18 @@ export class ProjectsService {
           );
         }
         );
-      }
+  }
+  getSprintTasks(sprint :any,idSprint:string){
+    this.httpClient
+      .get<any[]>('http://localhost:5000/api/sprints/'+idSprint+'/tasks')
+      .subscribe(
+        (response: any) => {
+          console.log('response.data',response.data);
+          sprint.tasks = response.data;
 
+        });
 
-
+  }
 
 
 

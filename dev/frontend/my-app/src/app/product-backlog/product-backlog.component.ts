@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import { ProjectsService } from '../services/projects.service';
 
 @Component({
@@ -8,9 +8,13 @@ import { ProjectsService } from '../services/projects.service';
 })
 export class ProductBacklogComponent implements OnInit {
 
+  
+
   @Input() idProject : string;
 
   tasks : any[];
+
+ 
 
   constructor(private projectService : ProjectsService) { }
 
@@ -18,5 +22,6 @@ export class ProductBacklogComponent implements OnInit {
     this.projectService.getProjectTasks(this,this.idProject);
     console.log('project tasks',this.tasks);
   }
+  
 
 }

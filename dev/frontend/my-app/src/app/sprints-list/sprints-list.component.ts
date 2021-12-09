@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProjectsService } from '../services/projects.service';
@@ -11,9 +11,12 @@ import { ProjectsService } from '../services/projects.service';
 export class SprintsListComponent implements OnInit {
 
 
+
   @Input() idProject : string ;
 
   sprints :any[];
+
+  selectedOption :any;
 
   constructor(private router: Router , private projectService : ProjectsService) { }
 
@@ -29,5 +32,5 @@ export class SprintsListComponent implements OnInit {
   onRemoveSprint(){
 
   }
-
+  
 }
