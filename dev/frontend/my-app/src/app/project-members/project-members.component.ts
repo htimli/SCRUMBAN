@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ProjectsService } from '../services/projects.service';
 
 @Component({
   selector: 'app-project-members',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectMembersComponent implements OnInit {
 
-  constructor() { }
+  @Input() idProject : string;
+
+  members: any[];
+
+  constructor(private router: Router, private projectService: ProjectsService ) { }
 
   ngOnInit(): void {
+    this.projectService.getProjectMembers(this,this.idProject);
+  }
+
+  onAddMember(){
+    this.projectService.addProjectUser(this,this.idProject,userid);
   }
 
 }

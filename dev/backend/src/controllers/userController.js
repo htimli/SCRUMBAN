@@ -115,22 +115,3 @@ module.exports.getUserLogin = async function(body) {
     }
 
 }
-
-module.exports.getAllProjectUsers = async function(id) {
-    try {
-        let users = await Project.findById(id).select('users');
-        if (!users) {
-            return {
-                success: false,
-                msg: "users does not exists"
-            }
-        } else {
-            return {
-                success: true,
-                data: users
-            }
-        }
-    } catch (err) {
-        return { success: false, message: "cannot find users" + err };
-    }
-}

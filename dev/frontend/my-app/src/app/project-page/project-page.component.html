@@ -6,7 +6,7 @@
                     <h1><u>{{project.title}}</u></h1>
                 </div>
                 <div class="col">
-                    <app-project-members></app-project-members>
+                    <app-project-members [idProject]=" project._id "></app-project-members>
                 </div>
                 <div class="col">
                     <h4>Informations</h4>
@@ -19,7 +19,7 @@
             </div>
             <div class="row">
                 <div id='sprints' class="col-2">
-                    <app-sprints-list [idProject]=" project._id " ></app-sprints-list>
+                    <app-sprints-list [idProject]=" project._id "></app-sprints-list>
                 </div>
                 <div class="col-2">
                     <app-product-backlog></app-product-backlog>

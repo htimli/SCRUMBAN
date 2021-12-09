@@ -14,6 +14,7 @@ module.exports.getAllProjects = async function() {
             success: true,
             data: projects,
             total: total.toString(),
+
         }
 
     } catch (err) {
@@ -118,5 +119,42 @@ module.exports.getProjectParticipant = async function() {
             success: false,
             message: "cannot add Project " + err
         };
+    }
+}
+
+module.exports.getAllProjectUsers = async function(id) {
+    try {
+        let users = await Project.findById(id).select('users');
+        if (!users) {
+            return {
+                success: false,
+                msg: "users does not exists"
+            }
+        } else {
+            return {
+                success: true,
+                data: users
+            }
+        }
+    } catch (err) {
+        return { success: false, message: "cannot find users" + err };
+    }
+}
+
+module.exports.addProjectUser = async function(projectId, userId) {
+    try {
+
+        let user = await User.findById(userId);
+
+        let project = await Project.findById(projectId);
+
+        project.users.push(user._id);
+
+        project.save()
+            .then(doc => {})
+            .catch(err => {});
+
+    } catch (err) {
+        return { success: false, message: "cannot find user" + err };
     }
 }

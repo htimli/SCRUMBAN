@@ -57,6 +57,7 @@ export class ProjectsService {
 
         });
   }
+
   addProjectSprint(s :any, idProject:string, sprintData :any){
     return new Promise(
       (resolve, rejected) => {
@@ -70,11 +71,39 @@ export class ProjectsService {
         },
         error => {rejected(true);}
         );
-  }
+      }
     );
 
-}
-}
+  }
 
+  getProjectMembers(s: any, idProject:string){
+  this.httpClient
+      .get<any[]>('http://localhost:5000/api/projects/users/'+idProject)
+      .subscribe(
+        (response: any) => {
+          console.log(response.data + "salut");
+          s.sprints = response.data;
+        }
+      );
+    }
+
+  addProjectUser(s:any, idProject:string, idUser:string){
+  return new Promise(
+    (resolve, rejected) => {
+  this.httpClient
+    .post('http://localhost:5000/api/project/addUser/'+idProject , idUser)
+    .subscribe(
+      (response: any) => {
+        console.log(response.data);
+        s.sprints.push(response.data);
+        resolve(true);
+      },
+      error => {rejected(true);}
+      );
+    }
+  );
+
+  }
+}
 
 
