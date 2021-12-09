@@ -88,6 +88,33 @@ module.exports.removeUser = async function() {
     }
 }
 
+module.exports.getUserLogin = async function(body){
+    try{
+        
+        let user = await User.findOne({
+            email : body.email,
+            password : body.password
+        });
+
+        if (!user) {
+            return {
+                success: false,
+                msg: "user does not exists"
+            }
+        }
+        else {            
+            return {
+                success: true,
+                data : user
+                
+            }
+        }
+
+    }catch (err){
+        return { success:false , message: "cannot find user "+err };
+    }
+
+}
 
 
 

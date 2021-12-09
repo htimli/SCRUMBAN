@@ -2,10 +2,13 @@ const mongoose = require('mongoose');
 
 
 const projectSchema = new mongoose.Schema({
-    titre: {type: String},
+    title: {type: String},
     creationDate: {type:Date}, 
-    users: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}]
-
+    scrumMaster: {type: String},
+    progress: {type: Number},
+    users: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}],
+    tasks: [{type : mongoose.Schema.Types.ObjectId , ref: "Task"}],
+    sprints : [{type : mongoose.Schema.Types.ObjectId , ref: "Sprint"}]
 }); 
 
 

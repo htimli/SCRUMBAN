@@ -2,7 +2,7 @@ import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LogInService } from '../services/logIn.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -11,60 +11,31 @@ import { LogInService } from '../services/logIn.service';
 })
 export class LoginPageComponent implements OnInit {
 
-
+  logAlert: boolean;
 
   private userData = {
-    userName : '',
+    email : '',
     password : ''
   };
 
-  constructor(private router: Router, private logInService: LogInService , private httpClient : HttpClient) { }
+  constructor(private router: Router, private authService: AuthService , private httpClient : HttpClient) { 
+    this.logAlert = false;
+  }
 
   ngOnInit(): void {
 
   }
+
   onSubmit(form: NgForm) {
-    //console.log(form.value);
-    this.userData.userName = form.value.email;
+    this.userData.email = form.value.email;
     this.userData.password = form.value.password;
-   
-  }
-
-  saveUserId(){
-
-    
-    const headers = new HttpHeaders()
-          .set('Authorization', 'my-auth-token')
-          .set('Content-Type', 'application/json');
-          
-    this.httpClient.post('http://localhost:5000/api/users/addOne',this.userData,{
-      headers :headers
-    }).
-    subscribe(data => {
-      console.log(data);
-    });
-
-  }
-
-  
-  getuserIdFromServer(){
-    this.httpClient
-    .get<any[]>('http://localhost:5000/api/users/all').subscribe(data => {
-      console.log(data);
-    });
-
-  }
-  onLogIn(){
-    this.logInService.logIn().then(
+    this.authService.logIn(this.userData).then(
       () => {
-        console.log('LogIn Success');
-        this.router.navigate(['projects']);
-        //this.saveUserId();
-       // this.getuserIdFromServer();
-
-      }
+        this.logAlert = false;
+        this.router.navigate(['projects']);  
+      },
+      () => {this.logAlert = true;}
     )
   }
-
 
 }

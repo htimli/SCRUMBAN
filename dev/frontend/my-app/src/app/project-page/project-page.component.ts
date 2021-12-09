@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
+import { ProjectsService } from '../services/projects.service';
+
+ 
 @Component({
   selector: 'app-project-page',
   templateUrl: './project-page.component.html',
@@ -7,11 +11,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectPageComponent implements OnInit {
 
-  title: string;
 
-  constructor() { this.title = 'Title'; }
+  project : any = {};
 
-  ngOnInit(): void {
+  constructor(private router: Router, private projectService : ProjectsService ) { 
+   }
+
+  ngOnInit(): void { 
+    this.project = this.projectService.currentProject;
+   }
+
+  onNewTask(){
+    this.router.navigate(['newTask'])
   }
 
 }
