@@ -1,6 +1,6 @@
 <h4>Membres</h4>
 <select class="form-select" size="3">
-    <option *ngFor="let member of members" value="s">{{member}}</option>
+    <option *ngFor="let member of members" value="s">{{member.userName}} &nbsp;@: {{member.email}}</option>
     <button class="btn btn-danger">
         <li class="fas fa-user-minus"></li>
     </button>
@@ -8,7 +8,7 @@
 
 <div class="input-group mb-3">
     <div class="input group prepend">
-        <input type="text" id="email" ng-model="memberEmail" ngModel email required>
+        <input type="text" id="email" [(ngModel)]="memberEmail" ngModel email required>
         <button class="btn btn-primary" (click)="onAddMember(memberEmail)">
             <i class="fas fa-user-plus"></i>
         </button>

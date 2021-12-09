@@ -76,13 +76,13 @@ export class ProjectsService {
 
   }
 
-  getProjectMembers(s: any, idProject:string){
+  getProjectMembers(p: any, idProject:string){
   this.httpClient
       .get<any[]>('http://localhost:5000/api/projects/users/'+idProject)
       .subscribe(
         (response: any) => {
           console.log(response.data + "salut");
-          s.sprints = response.data;
+          p.members = response.data;
         }
       );
     }
@@ -127,15 +127,15 @@ export class ProjectsService {
 
   }
 
-  addProjectUser(s:any, idProject:string, memberEmail:string){
+  addProjectUser(s:any, idProject:string, memberData:any){
   return new Promise(
     (resolve, rejected) => {
   this.httpClient
-    .post('http://localhost:5000/api/project/addUser/'+idProject , memberEmail)
+    .post('http://localhost:5000/api/projects/addUser/'+idProject,memberData)
     .subscribe(
       (response: any) => {
         console.log(response.data);
-        s.sprints.push(response.data);
+        s.members.push(response.data);
         resolve(true);
       },
       error => {rejected(true);}

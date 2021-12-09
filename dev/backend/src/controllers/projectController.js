@@ -124,7 +124,14 @@ module.exports.getProjectParticipant = async function() {
 
 module.exports.getAllProjectUsers = async function(id) {
     try {
-        let users = await Project.findById(id).select('users');
+        let users_id = await Project.findById(id).select('users');
+
+        let users = await User.find().where('_id').in(users_id.users);
+
+        console.log('users',users);
+
+
+
         if (!users) {
             return {
                 success: false,
@@ -141,10 +148,17 @@ module.exports.getAllProjectUsers = async function(id) {
     }
 }
 
-module.exports.addProjectUser = async function(projectId, memberEmail) {
+module.exports.addProjectUser = async function(projectId,body) {
     try {
 
-        let user = await User.findById(userId);
+        let user = await User.findOne({email : body.email});
+
+        if(!user){
+            return {
+                success :false,
+                msg :'email not found'
+            }
+        }
 
         let project = await Project.findById(projectId);
 
@@ -154,7 +168,12 @@ module.exports.addProjectUser = async function(projectId, memberEmail) {
             .then(doc => {})
             .catch(err => {});
 
+        return {
+            success : true,
+            data : user
+        } 
+            
     } catch (err) {
-        return { success: false, message: "cannot find user" + err };
+        return { success: false, message: "cannot find add user to project" + err };
     }
 }

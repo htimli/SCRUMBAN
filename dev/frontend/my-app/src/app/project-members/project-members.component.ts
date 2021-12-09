@@ -11,9 +11,12 @@ import { ProjectsService } from '../services/projects.service';
 export class ProjectMembersComponent implements OnInit {
 
   @Input() idProject : string;
-  memberEmail: string;
 
+  memberData = {
+  email: '',
+  }
   members: any[];
+  memberEmail: string;
 
   constructor(private router: Router, private projectService: ProjectsService ) { }
 
@@ -22,8 +25,12 @@ export class ProjectMembersComponent implements OnInit {
   }
 
   onAddMember(memberEmail: string){
-    this.memberEmail = memberEmail;
-    this.projectService.addProjectUser(this,this.idProject,this.memberEmail);
+
+    console.log('memeber',memberEmail)
+
+    this.memberData.email = memberEmail;
+
+    this.projectService.addProjectUser(this,this.idProject,this.memberData);
   }
 
 }
