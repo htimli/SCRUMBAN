@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ProductBacklogComponent } from '../product-backlog/product-backlog.component';
 import { ProjectsService } from '../services/projects.service';
 
 @Component({
@@ -17,7 +18,11 @@ export class NewSprintComponent implements OnInit {
 
   sprintData = {
     name : '',
+    tasks : []
   }
+
+  @ViewChild(ProductBacklogComponent, {static :true}) hijo : ProductBacklogComponent 
+
 
   constructor(private router: Router ,private projectService : ProjectsService) { }
 
@@ -28,15 +33,22 @@ export class NewSprintComponent implements OnInit {
   onSubmit(form: NgForm) {
     
   }
-
+  onAjouter(){
+    this.sprintData.tasks.push(this.hijo.getTaskSelected());
+  }
   onNewSprint(form:NgForm) {
   this.sprintData.name = form.value.SprintName;
+  
+
+
+  console.log('this.sprintData',this.sprintData);
 
   this.projectService.addProjectSprint(this.projectService.currentProject,this.sprintData)
   .then(
     () => {this.router.navigate(['project'])},
     () => {console.log("err");}
   );
+  
   }
 
   

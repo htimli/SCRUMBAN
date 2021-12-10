@@ -1,6 +1,6 @@
 const projectsRouter = require('express').Router();
 
-const { getAllProjects, getProject, addProject, getProjectParticipant, getAllUserProjects, getAllProjectUsers ,addProjectUser } = require('../controllers/projectController');
+const { getAllProjects, getProject, addProject, getProjectParticipant, getAllUserProjects, getAllProjectUsers ,addProjectUser , addSprintTask } = require('../controllers/projectController');
 
 
 projectsRouter.route('/all').get(async(req, res, next) => {
@@ -70,6 +70,16 @@ projectsRouter.route('/addUser/:pid').post(async(req, res) => {
         res.status(404).json(response);
     }
 });
+
+projectsRouter.route('/addSprintTask/:pid/:sid/:tid').post(async(req, res) => {
+    let response = await addSprintTask(req.params.pid,req.params.sid,req.params.tid,req.body);
+    if (response.success == true) {
+        res.status(200).json(response);
+    } else {
+        res.status(404).json(response);
+    }
+});
+
 
 
 module.exports = projectsRouter;

@@ -4,6 +4,7 @@
             <div class="row">
                 <div class="col">
                     <h1><u>{{project.title}}</u></h1>
+                    <h1>{{getSprintToShow()}}</h1>
                 </div>
                 <div class="col">
                     <app-project-members [idProject]=" project._id "></app-project-members>

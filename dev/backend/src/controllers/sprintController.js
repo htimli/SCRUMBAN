@@ -28,9 +28,9 @@ module.exports.addProjectSprint = async function(idProject,body){
 
     try{
         let sprint = new Sprint({
-            name : body.name
+            name : body.name,
         });
-        console.log('body =>',body);
+        console.log('body to add this sprint=>',body);
         let project = await Project.findById(idProject);
         sprint.number = project.sprints.length +1 ;
 

@@ -13,6 +13,7 @@ export class ProductBacklogComponent implements OnInit {
   @Input() idProject : string;
 
   tasks : any[];
+  taskSelected : string;
 
  
 
@@ -24,6 +25,12 @@ export class ProductBacklogComponent implements OnInit {
   }
   
 
-  onNewTask(){}
+  getTaskSelected(){
+    return this.taskSelected;
+  }
+
+  onChange(v :any){
+    this.taskSelected = v ;
+  }
 
 }
