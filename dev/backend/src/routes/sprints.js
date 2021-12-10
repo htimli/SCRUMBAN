@@ -1,7 +1,7 @@
 const sprintsRouter = require('express').Router();
 
 
-const {getAllProjectSprints , addProjectSprint , getSprintTasks} = require('../controllers/sprintController');
+const {getAllProjectSprints , addProjectSprint } = require('../controllers/sprintController');
 
 
 sprintsRouter.route('/project/:id').get( async( req ,res ,next) => {

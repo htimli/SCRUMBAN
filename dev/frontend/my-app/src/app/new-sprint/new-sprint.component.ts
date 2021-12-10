@@ -14,13 +14,17 @@ export class NewSprintComponent implements OnInit {
   
   projectId :'';
 
-  tasks = [0, 1, 2, 3];
+  
 
   sprintData = {
     name : '',
     tasks : []
   }
+  
+  
 
+  
+  
   @ViewChild(ProductBacklogComponent, {static :true}) hijo : ProductBacklogComponent 
 
 
@@ -39,8 +43,6 @@ export class NewSprintComponent implements OnInit {
   onNewSprint(form:NgForm) {
   this.sprintData.name = form.value.SprintName;
   
-
-
   console.log('this.sprintData',this.sprintData);
 
   this.projectService.addProjectSprint(this.projectService.currentProject,this.sprintData)

@@ -29,15 +29,13 @@ module.exports.addProjectSprint = async function(idProject,body){
     try{
         let sprint = new Sprint({
             name : body.name,
+            tasks : body.tasks
         });
-        console.log('body to add this sprint=>',body);
+        console.log("==>",body);
         let project = await Project.findById(idProject);
         sprint.number = project.sprints.length +1 ;
 
         project.sprints.push(sprint._id);
-
-        console.log(project);
-        console.log(sprint);
 
         project.save()
         .then(doc =>{})

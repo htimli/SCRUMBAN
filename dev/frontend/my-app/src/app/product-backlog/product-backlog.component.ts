@@ -21,7 +21,7 @@ export class ProductBacklogComponent implements OnInit {
 
   ngOnInit(): void {
     this.projectService.getProjectTasks(this,this.idProject);
-    console.log('project tasks',this.tasks);
+    
   }
   
 
@@ -31,6 +31,7 @@ export class ProductBacklogComponent implements OnInit {
 
   onChange(v :any){
     this.taskSelected = v ;
+    console.log('v',v);
   }
 
 }
