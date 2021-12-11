@@ -46,7 +46,7 @@ module.exports.addProjectTask = async function(idProject,body){
         let task = new Task({
             title : body.title, 
             desc : body.desc,
-            state : 'init',
+            state : 'A faire',
         });
 
         let project = await Project.findById(idProject);

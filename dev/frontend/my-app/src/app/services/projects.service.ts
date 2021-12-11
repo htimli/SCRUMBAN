@@ -82,7 +82,7 @@ export class ProjectsService {
           .subscribe(
             (response: any) => {
               console.log(response.data);
-              task.task = response.data;
+              task.currentTask = response.data;
               resolve(true);
             },
             error => { rejected(true); }
@@ -140,6 +140,7 @@ export class ProjectsService {
             (response: any) => {
               console.log(response.data);
               b.tasks.push(response.data);
+              
               resolve(true);
             },
             error => { rejected(true); }

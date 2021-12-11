@@ -26,13 +26,7 @@ export class UserStoriesService {
     {
       title: "Terminé",
       id: "done",
-      tasks: [
-        {
-          id: 0,
-          title: "US4",
-          description: "En tant qu'utilisateur, je souhaite avoir une liste de projet afin de de pouvoir rejoindre un projet en cours"
-        },
-      ]
+      tasks: []
     }
   ];
 
@@ -40,21 +34,29 @@ export class UserStoriesService {
 
   tasksArray: Array<{ id: number, title: string, description: string }>;
 
+  currentTask: any;
+
   constructor(private projectService: ProjectsService) { }
 
   emitTaskGroups() {
     this.taskGroupsSubject.next(this.taskGroups);
   }
 
+  clearGroups(){
+    this.taskGroups.forEach(group => {
+      group.tasks = [];
+    });
+  }
+
   updateTaskGroups(sprint: any) {
+    this.clearGroups();
     let id = 0;
-    let task: any;
     sprint.tasks.forEach(idTask => {
       this.projectService.getTask(this, idTask).then(() => {
-        this.taskGroups.find(group => group.id === task.state).tasks.push({
+        this.taskGroups.find(group => group.title === this.currentTask.state).tasks.push({
           id: id,
-          title: task.title,
-          description: task.description
+          title: this.currentTask.title,
+          description: this.currentTask.desc
         });
         id++;
       });
