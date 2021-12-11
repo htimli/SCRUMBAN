@@ -46,4 +46,5 @@ export class KanbanBoardComponent implements OnInit, OnDestroy{
         event.currentIndex);
     }
   }
+  
 }

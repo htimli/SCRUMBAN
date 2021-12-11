@@ -34,22 +34,22 @@ export class ProjectsService {
   }
 
   actualizeCurrentProject(id) {
-      return new Promise(
-        (resolve,rejected) => {
+    return new Promise(
+      (resolve, rejected) => {
         this.httpClient.get<any>('http://localhost:5000/api/projects/' + id).subscribe(
           (response: any) => {
             resolve(true);
             this.currentProject = response.data;
           },
-          error => {rejected(true);} 
+          error => { rejected(true); }
         );
-  }
-      );
+      }
+    );
   }
 
-  getProjectSprints(project :any, idProject:string){
+  getProjectSprints(project: any, idProject: string) {
     this.httpClient
-      .get<any[]>('http://localhost:5000/api/sprints/project/'+idProject)
+      .get<any[]>('http://localhost:5000/api/sprints/project/' + idProject)
       .subscribe(
         (response: any) => {
           console.log(response.data);
@@ -58,90 +58,107 @@ export class ProjectsService {
         });
   }
 
-  addProjectSprint(project :any, sprintData :any){
+  getProjectSprint(sprint: any, idSprint: string) {
     return new Promise(
       (resolve, rejected) => {
-    this.httpClient
-      .post('http://localhost:5000/api/sprints/project/add/'+project._id, sprintData)
-      .subscribe(
-          (response: any) => {
-          console.log(response.data);
-          project.sprints.push(response.data);
-          resolve(true);
-          },
-          error => {rejected(true);}
-        );
+        this.httpClient
+          .get<any[]>('http://localhost:5000/api/sprints/sprint/' + idSprint)
+          .subscribe(
+            (response: any) => {
+              console.log(response.data);
+              sprint.currentSprint = response.data;
+              resolve(true);
+            },
+            error => { rejected(true); }
+          );
+      });
+  }
+
+  addProjectSprint(project: any, sprintData: any) {
+    return new Promise(
+      (resolve, rejected) => {
+        this.httpClient
+          .post('http://localhost:5000/api/sprints/project/add/' + project._id, sprintData)
+          .subscribe(
+            (response: any) => {
+              console.log(response.data);
+              project.sprints.push(response.data);
+              resolve(true);
+            },
+            error => { rejected(true); }
+          );
       }
     );
 
   }
 
-  getProjectMembers(p: any, idProject:string){
-  this.httpClient
-      .get<any[]>('http://localhost:5000/api/projects/users/'+idProject)
+  getProjectMembers(p: any, idProject: string) {
+    this.httpClient
+      .get<any[]>('http://localhost:5000/api/projects/users/' + idProject)
       .subscribe(
         (response: any) => {
           console.log(response.data + "salut");
           p.members = response.data;
         }
       );
-    }
+  }
 
-  getProjectTasks(project :any,idProject:string){
+  getProjectTasks(project: any, idProject: string) {
     this.httpClient
-      .get<any[]>('http://localhost:5000/api/tasks/project/'+idProject)
+      .get<any[]>('http://localhost:5000/api/tasks/project/' + idProject)
       .subscribe(
         (response: any) => {
-          console.log('response.data',response.data);
+          console.log('response.data', response.data);
           project.tasks = response.data;
 
         });
 
   }
 
-  addProjectTask(b: any, taskData :any ){
+  addProjectTask(b: any, taskData: any) {
     return new Promise(
-      (resolve ,rejected) => {
+      (resolve, rejected) => {
         this.httpClient
-        .post('http://localhost:5000/api/tasks/project/add/'+b._id,taskData)
-        .subscribe(
+          .post('http://localhost:5000/api/tasks/project/add/' + b._id, taskData)
+          .subscribe(
             (response: any) => {
-            console.log(response.data);
-            b.tasks.push(response.data);
-            resolve(true);
+              console.log(response.data);
+              b.tasks.push(response.data);
+              resolve(true);
             },
-            error => {rejected(true);}
+            error => { rejected(true); }
           );
-        }
-        );
+      }
+    );
   }
-  getSprintTasks(sprint :any,idSprint:string){
+  
+  getSprintTasks(sprint: any, idSprint: string) {
     this.httpClient
-      .get<any[]>('http://localhost:5000/api/sprints/'+idSprint+'/tasks')
+      .get<any[]>('http://localhost:5000/api/sprints/' + idSprint + '/tasks')
       .subscribe(
         (response: any) => {
-          console.log('response.data',response.data);
+          console.log('response.data', response.data);
           sprint.tasks = response.data;
 
         });
 
   }
 
-  addProjectUser(s:any, idProject:string, memberData:any){
-  return new Promise(
-    (resolve, rejected) => {
-  this.httpClient
-    .post('http://localhost:5000/api/projects/addUser/'+idProject,memberData)
-    .subscribe(
-      (response: any) => {
-        console.log(response.data);
-        s.members.push(response.data);
-        resolve(true);
-      },
-      error => {rejected(true);}
-      );
-    }
-  );
+  addProjectUser(s: any, idProject: string, memberData: any) {
+    return new Promise(
+      (resolve, rejected) => {
+        this.httpClient
+          .post('http://localhost:5000/api/projects/addUser/' + idProject, memberData)
+          .subscribe(
+            (response: any) => {
+              console.log(response.data);
+              s.members.push(response.data);
+              resolve(true);
+            },
+            error => { rejected(true); }
+          );
+      }
+    );
 
   }
 }

@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ProjectsService } from '../services/projects.service';
+import { UserStoriesService } from '../services/user-stories.service';
 import { SprintsListComponent } from '../sprints-list/sprints-list.component';
 
  
@@ -16,25 +17,27 @@ export class ProjectPageComponent implements OnInit {
 
 
   project : any = {};
-  sprintToShow : number; 
+  sprintToShow : string;
+  currentSprint : any = {};
 
-  constructor(private router: Router, private projectService : ProjectsService ) { 
+  constructor(private router: Router, private projectService : ProjectsService, private userStorieService : UserStoriesService) { 
    }
 
   ngOnInit(): void { 
     this.project = this.projectService.currentProject;
     this.sprintToShow = this.hijo.getSprintSelected();
    }
-
+   
   onNewTask(){
    this.router.navigate(['newTask'])
 
-   
    console.log(this.sprintToShow);
   }
-  getSprintToShow(){
-    return this.hijo.getSprintSelected();
 
+  getSprintToShow(){
+    this.sprintToShow = this.hijo.getSprintSelected();
+    this.projectService.getProjectSprint(this,this.sprintToShow).then(() => {console.log(this.currentSprint);});
+    
   }
 
 

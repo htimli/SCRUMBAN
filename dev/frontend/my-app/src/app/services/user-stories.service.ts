@@ -10,35 +10,17 @@ export class UserStoriesService {
     {
       title: "A faire",
       id: "todo",
-      tasks: [
-        {
-          id: 0,
-          title: "US1",
-          description: "En tant qu'utilisateur, je souhaite avoir une page d'accueil afin de d'avoir la présentation du logiciel."
-        }   
-      ]
+      tasks: []
     },
     {
       title: "En cours",
       id: "inProgress",
-      tasks: [
-        {
-          id: 0,
-          title: "US0",
-          description: "En tant qu'utilisateur, je souhaite pouvoir me connecter afin de de récupérer mes projets en cours, modifier ou supprimer ."
-        }
-      ]
+      tasks: []
     },
     {
       title: "A tester",
-      id: "inProgress",
-      tasks: [
-        {
-          id: 2,
-          title: "US2",
-          description: "Voir la recette de la quiche"
-        }
-      ]
+      id: "toTest",
+      tasks: []
     },
     {
       title: "Terminé",

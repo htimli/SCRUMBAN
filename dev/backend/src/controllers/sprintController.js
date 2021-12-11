@@ -24,6 +24,24 @@ module.exports.getAllProjectSprints = async function(idProject){
     }
 }
 
+module.exports.getProjectSprint = async function(idSprint){
+    try{
+            
+        const sprint = await Sprint.findById(idSprint).exec();
+        
+        return {
+            success : true,
+            data : sprint
+        }
+
+    }catch(err){
+        return {
+            success : false,
+            message : 'sprint not found '+err
+        };
+    }
+}
+
 module.exports.addProjectSprint = async function(idProject,body){
 
     try{
