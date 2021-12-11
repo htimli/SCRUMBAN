@@ -13,6 +13,7 @@ export class ProductBacklogComponent implements OnInit {
   @Input() idProject : string;
 
   tasks : any[];
+  taskSelected : string;
 
   selectedOption: any;
   selectedItem: any;
@@ -22,15 +23,16 @@ export class ProductBacklogComponent implements OnInit {
 
   ngOnInit(): void {
     this.projectService.getProjectTasks(this,this.idProject);
-    console.log('project tasks',this.tasks);
-  }
-  
-  @HostListener("click") onClick(){
-    console.log('clicked');
-    console.log(this.selectedItem);
-    this.selectedItem = this.selectedOption;
+    
   }
 
-  onNewTask(){}
+  getTaskSelected(){
+    return this.taskSelected;
+  }
+
+  onChange(v :any){
+    this.taskSelected = v ;
+    console.log('v',v);
+  }
 
 }

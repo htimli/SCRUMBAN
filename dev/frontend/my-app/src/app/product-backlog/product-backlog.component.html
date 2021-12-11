@@ -1,4 +1,7 @@
+
 <h4>ProductBacklog</h4>
-<select class="form-select" [(ngModel)]=selectedOption size="25">
-    <option *ngFor="let t of tasks" value="t">{{t.title}}</option>
+<select class="form-select"  (change)="onChange($event.target.value)" size="25">
+    <option *ngFor="let t of tasks" value="{{t._id}}">{{t.title}}</option>
   </select>
+
+

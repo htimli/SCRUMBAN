@@ -18,6 +18,8 @@ export class SprintsListComponent implements OnInit {
 
   selectedOption :any;
 
+  sprintSelected : number;
+
   constructor(private router: Router , private projectService : ProjectsService) { }
 
   ngOnInit(): void {
@@ -30,7 +32,17 @@ export class SprintsListComponent implements OnInit {
   }
 
   onRemoveSprint(){
-
+    
   }
+  onchange(value){
+    this.sprintSelected = value;
+    
+  }
+  getSprintSelected(){
+    return this.sprintSelected;
+  }
+  
+
+
   
 }
