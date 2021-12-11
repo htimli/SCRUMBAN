@@ -34,12 +34,12 @@ export class NewSprintComponent implements OnInit {
     this.projectId = this.projectService.currentProject._id;
   }
 
-  onSubmit(form: NgForm) {
-    
-  }
-  onAjouter(){
+
+  onAdd(){
     this.sprintData.tasks.push(this.hijo.getTaskSelected());
   }
+
+
   onNewSprint(form:NgForm) {
   this.sprintData.name = form.value.SprintName;
   

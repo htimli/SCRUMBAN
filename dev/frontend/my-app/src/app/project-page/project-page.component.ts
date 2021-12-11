@@ -27,17 +27,14 @@ export class ProjectPageComponent implements OnInit {
     this.project = this.projectService.currentProject;
     this.sprintToShow = this.hijo.getSprintSelected();
    }
-   
-  onNewTask(){
-   this.router.navigate(['newTask'])
 
-   console.log(this.sprintToShow);
+  onNewTask(){
+   this.router.navigate(['newTask']);
   }
 
   getSprintToShow(){
     this.sprintToShow = this.hijo.getSprintSelected();
-    this.projectService.getProjectSprint(this,this.sprintToShow).then(() => {console.log(this.currentSprint);});
-    
+    this.projectService.getProjectSprint(this,this.sprintToShow).then(() => {this.userStorieService.updateTaskGroups(this.currentSprint);});
   }
 
 

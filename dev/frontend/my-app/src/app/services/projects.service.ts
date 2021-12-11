@@ -74,6 +74,22 @@ export class ProjectsService {
       });
   }
 
+  getTask(task: any, idTask: string) {
+    return new Promise(
+      (resolve, rejected) => {
+        this.httpClient
+          .get<any[]>('http://localhost:5000/api/tasks/task/' + idTask)
+          .subscribe(
+            (response: any) => {
+              console.log(response.data);
+              task.task = response.data;
+              resolve(true);
+            },
+            error => { rejected(true); }
+          );
+      });
+  }
+
   addProjectSprint(project: any, sprintData: any) {
     return new Promise(
       (resolve, rejected) => {
@@ -97,7 +113,7 @@ export class ProjectsService {
       .get<any[]>('http://localhost:5000/api/projects/users/' + idProject)
       .subscribe(
         (response: any) => {
-          console.log(response.data + "salut");
+          console.log(response.data);
           p.members = response.data;
         }
       );

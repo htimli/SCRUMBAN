@@ -21,13 +21,32 @@ module.exports.getAllProjectTasks = async function(idProject){
         }
     }
 }
+
+module.exports.getTask = async function(idTask){
+    try{
+            
+        const task = await Task.findById(idTask).exec();
+        
+        return {
+            success : true,
+            data : task
+        }
+
+    }catch(err){
+        return {
+            success : false,
+            message : 'task not found '+err
+        };
+    }
+}
+
 module.exports.addProjectTask = async function(idProject,body){
     try{
 
         let task = new Task({
             title : body.title, 
             desc : body.desc,
-            state : 'En cours',
+            state : 'init',
         });
 
         let project = await Project.findById(idProject);

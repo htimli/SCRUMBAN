@@ -45,6 +45,7 @@ module.exports.getProjectSprint = async function(idSprint){
 module.exports.addProjectSprint = async function(idProject,body){
 
     try{
+
         let sprint = new Sprint({
             name : body.name,
             tasks : body.tasks
@@ -81,9 +82,7 @@ module.exports.addProjectSprint = async function(idProject,body){
 
 module.exports.getSprintTasks = async function(idSprint){
     try{
-
-
-                  
+         
         const sprint = await Sprint.findById(idSprint);
         const tasks = await Task.find().where('_id').in(sprint.tasks).exec();
 

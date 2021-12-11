@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { find, Subject } from 'rxjs';
+import { ProjectsService } from './projects.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class UserStoriesService {
   taskGroups: any[] = [
     {
       title: "A faire",
-      id: "todo",
+      id: "init",
       tasks: []
     },
     {
@@ -34,12 +35,33 @@ export class UserStoriesService {
       ]
     }
   ];
-  
+
   taskGroupsSubject = new Subject<any[]>();
 
-  constructor() { }
+  tasksArray: Array<{ id: number, title: string, description: string }>;
+
+  constructor(private projectService: ProjectsService) { }
 
   emitTaskGroups() {
     this.taskGroupsSubject.next(this.taskGroups);
   }
+
+  updateTaskGroups(sprint: any) {
+    let id = 0;
+    let task: any;
+    sprint.tasks.forEach(idTask => {
+      this.projectService.getTask(this, idTask).then(() => {
+        this.taskGroups.find(group => group.id === task.state).tasks.push({
+          id: id,
+          title: task.title,
+          description: task.description
+        });
+        id++;
+      });
+    });
+
+  }
+
+
+
 }
