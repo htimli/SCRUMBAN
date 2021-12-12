@@ -23,6 +23,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
     this.taskGroupsSubscription = this.tasksService.taskGroupsSubject.subscribe(
       (taskGroups: any[]) => {
         this.taskGroups = taskGroups;
+        this.tasksService.clearGroups();
       }
     );
     this.tasksService.emitTaskGroups();
