@@ -3,7 +3,7 @@ const User = require('../models/userModel');
 
 
 
-module.exports.getAllProjects = async function() {
+module.exports.getAllProjects = async function () {
     let total = await Project.countDocuments({});
     let limit = parseInt(total);
 
@@ -25,7 +25,7 @@ module.exports.getAllProjects = async function() {
     }
 }
 
-module.exports.getProject = async function(id) {
+module.exports.getProject = async function (id) {
     try {
         const project = await Project.findById(id);
         return {
@@ -40,7 +40,7 @@ module.exports.getProject = async function(id) {
     }
 }
 
-module.exports.getAllUserProjects = async function(id) {
+module.exports.getAllUserProjects = async function (id) {
 
     try {
         const projects = await Project.find().where('users').in(id);
@@ -60,7 +60,7 @@ module.exports.getAllUserProjects = async function(id) {
 
 
 
-module.exports.addProject = async function(body) {
+module.exports.addProject = async function (body) {
 
     try {
 
@@ -80,8 +80,8 @@ module.exports.addProject = async function(body) {
         console.log(user);
 
         project.save()
-            .then(doc => {})
-            .catch(err => {});
+            .then(doc => { })
+            .catch(err => { });
 
         return {
             success: true,
@@ -98,7 +98,7 @@ module.exports.addProject = async function(body) {
 }
 
 
-module.exports.getProjectParticipant = async function() {
+module.exports.getProjectParticipant = async function () {
 
     try {
 
@@ -122,13 +122,13 @@ module.exports.getProjectParticipant = async function() {
     }
 }
 
-module.exports.getAllProjectUsers = async function(id) {
+module.exports.getAllProjectUsers = async function (id) {
     try {
         let users_id = await Project.findById(id).select('users');
 
         let users = await User.find().where('_id').in(users_id.users);
 
-        console.log('users',users);
+        console.log('users', users);
 
 
 
@@ -148,15 +148,16 @@ module.exports.getAllProjectUsers = async function(id) {
     }
 }
 
-module.exports.addProjectUser = async function(projectId,body) {
+module.exports.addProjectUser = async function (projectId, body) {
     try {
 
-        let user = await User.findOne({email : body.email});
+        let user = await User.findOne({ email: body.email });
+        console.log(user);
 
-        if(!user){
+        if (!user) {
             return {
-                success :false,
-                msg :'email not found'
+                success: false,
+                msg: 'email not found'
             }
         }
 
@@ -165,16 +166,55 @@ module.exports.addProjectUser = async function(projectId,body) {
         project.users.push(user._id);
 
         project.save()
-            .then(doc => {})
-            .catch(err => {});
+            .then(doc => { })
+            .catch(err => { });
 
         return {
-            success : true,
-            data : user
-        } 
-            
+            success: true,
+            data: user
+        }
+
     } catch (err) {
         return { success: false, message: "cannot find add user to project" + err };
     }
 }
+
+module.exports.removeProjectUser = async function (projectId, body) {
+    try {
+
+
+        let user = await User.findOne({ email: body.email });
+
+        if (!user) {
+            return {
+                success: false,
+                msg: 'email not found'
+            }
+        }
+
+        let project = await Project.findById(projectId);
+
+        console.log(project.users);
+        console.log('hassan');
+
+        let index = project.users.indexOf(user._id);
+        project.users.splice(index,1);
+
+        project.save()
+            .then(doc => { })
+            .catch(err => { });
+
+        console.log(project.users);
+
+        return {
+            success: true,
+            data: user
+        }
+
+    } catch (err) {
+        return { success: false, message: "cannot find remove user to project" + err };
+    }
+}
+
+
 

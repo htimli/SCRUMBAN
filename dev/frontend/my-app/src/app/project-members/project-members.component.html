@@ -1,9 +1,11 @@
 <h4>Membres</h4>
-<select class="form-select" size="3">
-    <option *ngFor="let member of members" value="s">{{member.userName}} &nbsp;@: {{member.email}}</option>
-    <button class="btn btn-danger">
-        <li class="fas fa-user-minus"></li>
-    </button>
+<select class="form-select" (change)="onChange($event.target.value)" size="4">
+    <option *ngFor="let member of members" value="{{member.email}}">
+        <p>{{member.userName}} &nbsp;@: {{member.email}}</p>
+        <button class="btn btn-danger">
+            <i class="fas fa-user-minus"></i>
+        </button>
+    </option>
 </select>
 
 <div class="input-group mb-3">
@@ -11,6 +13,9 @@
         <input type="text" id="email" [(ngModel)]="memberEmail" ngModel email required>
         <button class="btn btn-primary" (click)="onAddMember(memberEmail)">
             <i class="fas fa-user-plus"></i>
+        </button>
+        <button class="btn btn-danger" (click)="onRemoveMember()">
+            <i class="fas fa-user-minus"></i>
         </button>
     </div>
 </div>

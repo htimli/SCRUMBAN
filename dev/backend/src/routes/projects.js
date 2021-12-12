@@ -1,6 +1,6 @@
 const projectsRouter = require('express').Router();
 
-const { getAllProjects, getProject, addProject, getProjectParticipant, getAllUserProjects, getAllProjectUsers ,addProjectUser , addSprintTask } = require('../controllers/projectController');
+const { getAllProjects, getProject, addProject, getProjectParticipant, getAllUserProjects, getAllProjectUsers ,addProjectUser , addSprintTask, removeProjectUser } = require('../controllers/projectController');
 
 
 projectsRouter.route('/all').get(async(req, res, next) => {
@@ -63,7 +63,17 @@ projectsRouter.route('/users/:id').get(async(req, res) => {
 });
 
 projectsRouter.route('/addUser/:pid').post(async(req, res) => {
+    console.log(req.body);
     let response = await addProjectUser(req.params.pid,req.body);
+    if (response.success == true) {
+        res.status(200).json(response);
+    } else {
+        res.status(404).json(response);
+    }
+});
+
+projectsRouter.route('/removeUser/:pid').post(async(req, res) => {
+    let response = await removeProjectUser(req.params.pid,req.body);
     if (response.success == true) {
         res.status(200).json(response);
     } else {

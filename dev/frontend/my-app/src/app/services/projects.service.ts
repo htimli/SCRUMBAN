@@ -12,7 +12,7 @@ export class ProjectsService {
   projects: any[] = [];
   projectsSubject = new Subject<any[]>();
 
-  currentProject: any;
+  currentProject: any = {};
 
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
@@ -21,15 +21,24 @@ export class ProjectsService {
       .get<any[]>('http://localhost:5000/api/projects/all/' + this.authService.getcurrentUserId())
       .subscribe(
         (response: any) => {
-          console.log(response.data);
           this.projects = response.data;
           this.projectsSubject.next(this.projects);
         });
   }
 
   saveProject(projectData: any) {
-    this.httpClient.post('http://localhost:5000/api/projects/add', projectData).subscribe(
-      data => { console.log(data); }
+    return new Promise(
+      (resolve, rejected) => {
+        this.httpClient.post('http://localhost:5000/api/projects/add', projectData).subscribe(
+          (response: any) => {
+            console.log(response.data);
+            this.currentProject = response.data;
+            this.actualizeCurrentProject(this.currentProject._id);
+            resolve(true);
+          },
+          error => { rejected(true); } 
+        );
+      }
     );
   }
 
@@ -38,8 +47,8 @@ export class ProjectsService {
       (resolve, rejected) => {
         this.httpClient.get<any>('http://localhost:5000/api/projects/' + id).subscribe(
           (response: any) => {
-            resolve(true);
             this.currentProject = response.data;
+            resolve(true);
           },
           error => { rejected(true); }
         );
@@ -140,7 +149,7 @@ export class ProjectsService {
             (response: any) => {
               console.log(response.data);
               b.tasks.push(response.data);
-              
+
               resolve(true);
             },
             error => { rejected(true); }
@@ -148,7 +157,7 @@ export class ProjectsService {
       }
     );
   }
-  
+
   getSprintTasks(sprint: any, idSprint: string) {
     this.httpClient
       .get<any[]>('http://localhost:5000/api/sprints/' + idSprint + '/tasks')
@@ -162,6 +171,7 @@ export class ProjectsService {
   }
 
   addProjectUser(s: any, idProject: string, memberData: any) {
+
     return new Promise(
       (resolve, rejected) => {
         this.httpClient
@@ -177,6 +187,24 @@ export class ProjectsService {
       }
     );
 
+  }
+
+  removeProjectUser(s: any, idProject: string, memberData: any) {
+
+    return new Promise(
+      (resolve, rejected) => {
+        this.httpClient
+          .post('http://localhost:5000/api/projects/removeUser/' + idProject, memberData)
+          .subscribe(
+            (response: any) => {
+              console.log(response.data);
+              s.members.pop(response.data);
+              resolve(true);
+            },
+            error => { rejected(true); }
+          );
+      }
+    );
   }
 }
 

@@ -29,9 +29,7 @@ export class NewProjectComponent implements OnInit {
   onSubmit(form: NgForm){
     this.getDataFromForm(form);
 
-    this.projectService.saveProject(this.projectData);
-  
-    this.router.navigate(["project"])
+    this.projectService.saveProject(this.projectData).then(() => {this.router.navigate(['project']);});
   }
 
   private getDataFromForm(form: NgForm) {

@@ -1,4 +1,4 @@
-<select class="form-select" (change)="onchange($event.target.value)" size="25">
+<select class="form-select" (change)="onChange($event.target.value)" size="25">
     <option *ngFor="let s of sprints" value="{{s._id}}">Sprint n°{{s.number}}</option>
   </select>
 <button class="btn btn-primary" (click)="onNewSprint()">Ajouter</button>

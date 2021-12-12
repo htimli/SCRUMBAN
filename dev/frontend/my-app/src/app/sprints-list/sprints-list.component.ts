@@ -35,7 +35,7 @@ export class SprintsListComponent implements OnInit {
     
   }
 
-  onchange(value){
+  onChange(value){
     this.sprintSelected = value;
   }
 

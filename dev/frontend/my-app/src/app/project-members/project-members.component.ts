@@ -18,6 +18,10 @@ export class ProjectMembersComponent implements OnInit {
   members: any[];
   memberEmail: string;
 
+  selectedMember = {
+    email: '',
+  }
+
   constructor(private router: Router, private projectService: ProjectsService ) { }
 
   ngOnInit(): void {
@@ -31,6 +35,16 @@ export class ProjectMembersComponent implements OnInit {
     this.memberData.email = memberEmail;
 
     this.projectService.addProjectUser(this,this.idProject,this.memberData);
+  }
+
+  onChange(value){
+    this.selectedMember.email = value;
+    console.log(this.selectedMember);
+    
+  }
+
+  onRemoveMember(){
+    this.projectService.removeProjectUser(this,this.idProject,this.selectedMember);
   }
 
 }
