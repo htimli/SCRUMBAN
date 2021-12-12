@@ -8,7 +8,7 @@ import { UserStoriesService } from '../services/user-stories.service';
   templateUrl: './kanban-board.component.html',
   styleUrls: ['./kanban-board.component.css']
 })
-export class KanbanBoardComponent implements OnInit, OnDestroy{
+export class KanbanBoardComponent implements OnInit, OnDestroy {
 
   @Input() idProject: string;
 
@@ -31,9 +31,10 @@ export class KanbanBoardComponent implements OnInit, OnDestroy{
   ngOnDestroy() {
     this.taskGroupsSubscription.unsubscribe();
   }
-  
+
   onTaskDrop(event: CdkDragDrop<any[]>) {
-    
+    console.log(event);
+  
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -42,12 +43,12 @@ export class KanbanBoardComponent implements OnInit, OnDestroy{
         event.previousIndex,
         event.currentIndex);
 
-        this.taskGroups.forEach(group => {
-          group.tasks.forEach(task => {
-            this.tasksService.updateTaskState(task.id,group.title);
-          });
+      this.taskGroups.forEach(group => {
+        group.tasks.forEach(task => {
+          this.tasksService.updateTaskState(task.id, group.title);
         });
+      });
     }
   }
-  
+
 }

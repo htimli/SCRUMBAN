@@ -13,11 +13,12 @@ export class ProductBacklogComponent implements OnInit {
   @Input() idProject : string;
 
   tasks : any[];
-  taskSelected : string;
+  taskSelectedId : string;
 
   selectedOption: any;
   selectedItem: any;
-  
+
+  currentTask: any;
 
   constructor(private projectService : ProjectsService) { }
 
@@ -27,11 +28,11 @@ export class ProductBacklogComponent implements OnInit {
   }
 
   getTaskSelected(){
-    return this.taskSelected;
+    return this.taskSelectedId;
   }
 
   onChange(v :any){
-    this.taskSelected = v ;
+    this.taskSelectedId = v ;
     console.log('v',v);
   }
 

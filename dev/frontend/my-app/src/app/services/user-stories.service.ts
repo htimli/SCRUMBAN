@@ -65,9 +65,9 @@ export class UserStoriesService {
 
   updateTaskState(taskId: string,state: string) {
     console.log(state);
-    console.log(taskId);    
+    console.log(taskId);
     
-    this.httpClient.get('http://localhost:5000/api/tasks/update/' + taskId + "/" + state).subscribe(
+    this.httpClient.post('http://localhost:5000/api/tasks/update/' + taskId, {state: state}).subscribe(
       (response: any) => {
         console.log(response.data);
         

@@ -32,8 +32,8 @@ tasksRouter.route('/project/add/:id').post( async( req ,res ,next) => {
     next();
 } );
 
-tasksRouter.route('/update/:id/:state').get( async( req ,res ,next) => {
-    let response = await updateTask(req.params.id,req.params.state);
+tasksRouter.route('/update/:id').post( async( req ,res ,next) => {
+    let response = await updateTask(req.params.id,req.body);
     if(response.success == true){
         res.status(200).json(response);
     }else {

@@ -14,15 +14,14 @@ export class NewSprintComponent implements OnInit {
   
   projectId :'';
 
-  
 
   sprintData = {
     name : '',
     tasks : []
   }
-  
-  
 
+  currentTask: any;
+  tasksNames: string[] = [];
   
   
   @ViewChild(ProductBacklogComponent, {static :true}) hijo : ProductBacklogComponent 
@@ -36,7 +35,14 @@ export class NewSprintComponent implements OnInit {
 
 
   onAdd(){
-    this.sprintData.tasks.push(this.hijo.getTaskSelected());
+    let tmp: string;
+    tmp = this.hijo.getTaskSelected();
+    this.sprintData.tasks.push(tmp);
+
+    this.projectService.getTask(this,tmp).then(() => {
+     console.log(this.currentTask.title);
+     this.tasksNames.push(this.currentTask.title);
+    });
   }
 
 

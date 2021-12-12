@@ -72,12 +72,12 @@ module.exports.addProjectTask = async function(idProject,body){
     }
 }
 
-module.exports.updateTask = async function(idTask,state){
+module.exports.updateTask = async function(idTask,body){
     try{
         
         const task = await Task.findByIdAndUpdate(
             {_id: idTask},
-            {state: state}
+            {state: body.state}
         ).exec();
 
         return {
