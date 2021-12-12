@@ -3,5 +3,15 @@
 <select class="form-select"  (change)="onChange($event.target.value)" size="25">
     <option *ngFor="let t of tasks" value="{{t._id}}">{{t.title}}</option>
   </select>
+  <div>
+    <div *ngIf="projectPageContext">
+      <button class="btn btn-primary" (click)='onNewTask()'>
+        <i class="fas fa-plus"></i>
+    </button>
+    <button class="btn btn-danger" (click)='onRemoveTask()'>
+        <i class="fas fa-minus"></i>
+    </button>
+    </div>
+  </div>
 
 

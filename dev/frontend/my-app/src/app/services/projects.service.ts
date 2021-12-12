@@ -158,6 +158,25 @@ export class ProjectsService {
     );
   }
 
+  removeProjectTask(b: any, idProject: string, taskData: any) {
+    
+    return new Promise(
+      (resolve, rejected) => {
+        this.httpClient
+          .post('http://localhost:5000/api/tasks/project/remove/' + idProject, taskData)
+          .subscribe(
+            (response: any) => {
+              console.log(response.data);
+              b.tasks.pop(response.data);
+
+              resolve(true);
+            },
+            error => { rejected(true); }
+          );
+      }
+    );
+  }
+
   getSprintTasks(sprint: any, idSprint: string) {
     this.httpClient
       .get<any[]>('http://localhost:5000/api/sprints/' + idSprint + '/tasks')

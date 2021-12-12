@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProductBacklogComponent } from '../product-backlog/product-backlog.component';
 
 import { ProjectsService } from '../services/projects.service';
 import { UserStoriesService } from '../services/user-stories.service';
@@ -13,7 +14,9 @@ import { SprintsListComponent } from '../sprints-list/sprints-list.component';
 })
 export class ProjectPageComponent implements OnInit {
 
-  @ViewChild(SprintsListComponent,{static : true})hijo :SprintsListComponent
+  @ViewChild(SprintsListComponent,{static : true})hijo :SprintsListComponent;
+  @ViewChild(ProductBacklogComponent,{static : true})hijoBackLog :ProductBacklogComponent;
+  
 
 
   project : any = {};
@@ -26,10 +29,6 @@ export class ProjectPageComponent implements OnInit {
   ngOnInit(): void { 
     this.project = this.projectService.currentProject;
    }
-
-  onNewTask(){
-   this.router.navigate(['newTask']);
-  }
 
   getSprintToShow(){
     this.sprintToShow = this.hijo.getSprintSelected();

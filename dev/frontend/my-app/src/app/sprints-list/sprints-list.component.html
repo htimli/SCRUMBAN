@@ -1,5 +1,9 @@
 <select class="form-select" (change)="onChange($event.target.value)" size="25">
     <option *ngFor="let s of sprints" value="{{s._id}}">Sprint n°{{s.number}}</option>
   </select>
-<button class="btn btn-primary" (click)="onNewSprint()">Ajouter</button>
-<button class="btn btn-danger" (click)="onRemoveSprint()">Supprimer</button>
+<button class="btn btn-primary" (click)="onNewSprint()">
+  <i class="fas fa-plus"></i>
+</button>
+<button class="btn btn-danger" (click)="onRemoveSprint()">
+  <i class="fas fa-minus"></i>
+</button>

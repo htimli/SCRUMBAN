@@ -198,7 +198,12 @@ module.exports.removeProjectUser = async function (projectId, body) {
         console.log('hassan');
 
         let index = project.users.indexOf(user._id);
-        project.users.splice(index,1);
+        if (index !== -1) {
+            project.users.splice(index, 1);
+        }
+        else{
+            return {success: false, message: "cannot find user index in project" + err};
+        }
 
         project.save()
             .then(doc => { })
