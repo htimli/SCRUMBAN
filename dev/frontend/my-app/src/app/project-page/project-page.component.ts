@@ -25,7 +25,6 @@ export class ProjectPageComponent implements OnInit {
 
   ngOnInit(): void { 
     this.project = this.projectService.currentProject;
-    this.sprintToShow = this.hijo.getSprintSelected();
    }
 
   onNewTask(){

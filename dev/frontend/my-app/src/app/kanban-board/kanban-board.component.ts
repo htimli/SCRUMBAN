@@ -33,15 +33,20 @@ export class KanbanBoardComponent implements OnInit, OnDestroy{
   }
   
   onTaskDrop(event: CdkDragDrop<any[]>) {
-    console.log(event);
+    
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      
       transferArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex);
+
+        this.taskGroups.forEach(group => {
+          group.tasks.forEach(task => {
+            this.tasksService.updateTaskState(task.id,group.title);
+          });
+        });
     }
   }
   

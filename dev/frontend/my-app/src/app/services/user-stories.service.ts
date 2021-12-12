@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { find, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { ProjectsService } from './projects.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -36,13 +37,13 @@ export class UserStoriesService {
 
   currentTask: any;
 
-  constructor(private projectService: ProjectsService) { }
+  constructor(private projectService: ProjectsService, private httpClient: HttpClient) { }
 
   emitTaskGroups() {
     this.taskGroupsSubject.next(this.taskGroups);
   }
 
-  clearGroups(){
+  clearGroups() {
     this.taskGroups.forEach(group => {
       group.tasks = [];
     });
@@ -50,20 +51,29 @@ export class UserStoriesService {
 
   updateTaskGroups(sprint: any) {
     this.clearGroups();
-    let id = 0;
     sprint.tasks.forEach(idTask => {
       this.projectService.getTask(this, idTask).then(() => {
         this.taskGroups.find(group => group.title === this.currentTask.state).tasks.push({
-          id: id,
+          id: this.currentTask._id,
           title: this.currentTask.title,
           description: this.currentTask.desc
         });
-        id++;
       });
     });
 
   }
 
+  updateTaskState(taskId: string,state: string) {
+    console.log(state);
+    console.log(taskId);    
+    
+    this.httpClient.get('http://localhost:5000/api/tasks/update/' + taskId + "/" + state).subscribe(
+      (response: any) => {
+        console.log(response.data);
+        
+      }
+    );
+  }
 
 
 }

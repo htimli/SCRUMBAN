@@ -71,3 +71,24 @@ module.exports.addProjectTask = async function(idProject,body){
         };
     }
 }
+
+module.exports.updateTask = async function(idTask,state){
+    try{
+        
+        const task = await Task.findByIdAndUpdate(
+            {_id: idTask},
+            {state: state}
+        ).exec();
+
+        return {
+            success : true,
+            data : task
+        }
+
+    }catch(err){
+        return {
+            success : false,
+            message : 'task not found '+err
+        };
+    }
+}
