@@ -1,6 +1,5 @@
 <h2>S'enregistrer</h2>
 <div class="card">
-  <div class="card-header text-white bg-info">S'enregistrer</div>
   <div class="card-body">
     <form method="post" (ngSubmit)="onSubmit(form)" #form="ngForm">
       <div class="form-group">
@@ -11,6 +10,7 @@
             class="form-control"
             name="lastname"
             placeholder="Nom"
+            ngModel
           />
         </div>
         <div class="col-md-6 mb-3">
@@ -20,6 +20,7 @@
             class="form-control"
             name="firstname"
             placeholder="Prenom"
+            ngModel
           />
         </div>
       </div>
@@ -32,25 +33,81 @@
             class="form-control"
             name="email"
             placeholder="E-Mail"
-          />
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="password">Mot de Passe</label>
-          <input
-            type="password"
-            class="form-control"
-            name="password"
-            id="password"
-            placeholder="mot de passe"
+            ngModel
+            email
           />
         </div>
       </div>
+      <div class="form-group col-md-6 mb-3">
+        <label for="password">Mot de passe</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          id="password"
+          placeholder="Password"
+          ngModel
+          required
+        />
+      </div>
+      <div class="form-group col-md-6 mb-3">
+        <label for="password">Confirmer le mot de passe</label>
+        <input
+          type="password"
+          class="form-control"
+          name="confirmPassword"
+          id="password"
+          placeholder="Password"
+          ngModel
+          required
+        />
+      </div>
 
       <div class="text-right">
-        <button class="btn btn-info" type="submit" [disabled]="form.invalid">
+        <button
+          class="button btn btn-primary"
+          type="submit"
+          [disabled]="form.invalid"
+        >
           Sauvegarder
         </button>
       </div>
     </form>
+  </div>
+</div>
+
+<div
+  class="alert alert-danger d-flex align-items-center"
+  role="alert"
+  *ngIf="!correctPassword"
+>
+  <svg
+    class="bi flex-shrink-0 me-2"
+    width="24"
+    height="24"
+    role="img"
+    aria-label="Danger:"
+  >
+    <use xlink:href="#exclamation-triangle-fill" />
+  </svg>
+  <div>Les deux mots de passes doivent être identiques!</div>
+</div>
+
+<div>
+  <div
+    class="alert alert-danger d-flex align-items-center"
+    role="alert"
+    *ngIf="!correctEmail"
+  >
+    <svg
+      class="bi flex-shrink-0 me-2"
+      width="24"
+      height="24"
+      role="img"
+      aria-label="Danger:"
+    >
+      <use xlink:href="#exclamation-triangle-fill" />
+    </svg>
+    <div>Email deja utilisé!</div>
   </div>
 </div>

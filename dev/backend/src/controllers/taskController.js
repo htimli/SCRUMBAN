@@ -1,55 +1,72 @@
-const Task = require('../models/taskModel');
-const Project =require('../models/projectModel');
+const Task = require("../models/taskModel");
+const Project = require("../models/projectModel");
 
-module.exports.getAllTasks = async function(){
-    try{
+module.exports.getAllProjectTasks = async function (idProject) {
+  try {
+    const idTasks = await Project.findById(idProject).select("tasks").exec();
+    const tasks = await Task.find().where("_id").in(idTasks.tasks).exec();
 
-        let idProject = '61af6525461d98d8f498a17c';
+    console.log(tasks);
 
-        const idTasks = await Project.findById(idProject).select('tasks').exec();            
-        const tasks = await Task.find().where('_id').in(idTasks.tasks).exec();
-        
-        return {
-            success : true, 
-            data : tasks
-        }
+    return {
+      success: true,
+      data: tasks,
+    };
+  } catch (err) {
+    return {
+      success: false,
+      message: "Tasks not found " + err,
+    };
+  }
+};
 
-    }catch{
-        return {
-            success : false,
-            message :'Tasks not found '+err
-        }
-    }
-}
-module.exports.addProjectTask = async function(){
-    try{
+module.exports.getTask = async function (idTask) {
+  try {
+    const task = await Task.findById(idTask).exec();
 
-        let task = new Task({
-            title : "task1", 
-            desc : "ajouter formulaire a la premiere page",
-            state : 'En cours',
-        });
+    return {
+      success: true,
+      data: task,
+    };
+  } catch (err) {
+    return {
+      success: false,
+      message: "task not found " + err,
+    };
+  }
+};
 
-        let idProject = '61af6525461d98d8f498a17c';
-        let project = await Project.findById(idProject);
-        project.tasks.push(task._id);
+module.exports.addProjectTask = async function (idProject, body) {
+  try {
+    let task = new Task({
+      title: body.title,
+      desc: body.desc,
+      state: "A faire",
+    });
 
-        console.log(project);
-        console.log(task);
+    let project = await Project.findById(idProject);
+    project.tasks.push(task._id);
 
-        project.save().then(doc =>{}).catch(err =>{});
-        task.save().then(doc =>{}).catch(err =>{});
+    console.log(project);
+    console.log(task);
 
-        return {
-            success : true,
-            data : project
-        }
+    project
+      .save()
+      .then((doc) => {})
+      .catch((err) => {});
+    task
+      .save()
+      .then((doc) => {})
+      .catch((err) => {});
 
-
-    }catch(err){
-        return {
-            success : false,
-            message : 'can not add Task '+err
-        };
-    }
-}
+    return {
+      success: true,
+      data: project,
+    };
+  } catch (err) {
+    return {
+      success: false,
+      message: "can not add Task " + err,
+    };
+  }
+};

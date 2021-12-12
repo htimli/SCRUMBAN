@@ -1,34 +1,48 @@
 <div class="card">
-    <div class="card-body">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col">
-                    <h4>{{project.title}}</h4>
-                </div>
-                <div class="col">
-                    <select class="form-select" size="3">
-
-                    </select>
-                    <button class="btn btn-primary">Ajouter</button>
-                    <button class="btn btn-danger">Supprimer</button>
-                </div>
-                <div class="col">
-                    <h4>info</h4>
-                </div>
-            </div>
-            <div class="row">
-                <div id='sprints' class="col-2">
-                    <app-sprints-list [idProject]=" project._id " ></app-sprints-list>
-                </div>
-                <div class="col-2">
-                    <app-product-backlog></app-product-backlog>
-                    <button class="btn btn-primary" (click)='onNewTask()'>Ajouter</button>
-                    <button class="btn btn-danger">Supprimer</button>
-                </div>
-                <div class="col-8">
-                    <app-kanban-board></app-kanban-board>
-                </div>
-            </div>
+  <div class="card-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <h1>
+            <u>{{ project.title }}</u>
+          </h1>
         </div>
+        <div class="col">
+          <app-project-members [idProject]="project._id"></app-project-members>
+        </div>
+        <div class="col">
+          <h4>Informations</h4>
+          <div class="card">
+            <div class="card-body">
+              Scrum master : {{ project.scrumMaster }} <br />
+              date de création : {{ project.creationDate | date }} <br />
+              Avancement : X%
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div id="sprints" class="col-2">
+          <h4>
+            Sprints
+            <button class="btn btn-primary" (click)="getSprintToShow()">
+              Travailler
+            </button>
+          </h4>
+          <app-sprints-list [idProject]="project._id"></app-sprints-list>
+        </div>
+        <div class="col-2">
+          <app-product-backlog [idProject]="project._id"></app-product-backlog>
+          <button class="btn btn-primary" (click)="onNewTask()">Ajouter</button>
+          <button class="btn btn-danger">Supprimer</button>
+        </div>
+        <div class="col-8">
+          <h3>
+            <u>Sprint : {{ currentSprint.name }}</u>
+          </h3>
+          <app-kanban-board></app-kanban-board>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

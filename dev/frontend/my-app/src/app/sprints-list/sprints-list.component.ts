@@ -6,28 +6,38 @@ import { ProjectsService } from '../services/projects.service';
 @Component({
   selector: 'app-sprints-list',
   templateUrl: './sprints-list.component.html',
-  styleUrls: ['./sprints-list.component.css']
+  styleUrls: ['./sprints-list.component.css'],
 })
 export class SprintsListComponent implements OnInit {
+  @Input() idProject: string;
 
+  sprints: any[];
 
-  @Input() idProject : string ;
+  selectedOption: any;
 
-  sprints :any[];
+  sprintSelected: string;
 
-  constructor(private router: Router , private projectService : ProjectsService) { }
+  constructor(
+    private router: Router,
+    private projectService: ProjectsService
+  ) {}
 
   ngOnInit(): void {
-    this.projectService.getProjectSprints(this,this.idProject);
+    this.projectService.getProjectSprints(this, this.idProject);
   }
 
-  onNewSprint(){
-    this.router.navigate(["newSprint"]);
+  onNewSprint() {
+    this.router.navigate(['newSprint']);
     //this.projectService.addProjectSprint(this,this.idProject);
   }
 
-  onRemoveSprint(){
+  onRemoveSprint() {}
 
+  onchange(value) {
+    this.sprintSelected = value;
   }
 
+  getSprintSelected() {
+    return this.sprintSelected;
+  }
 }

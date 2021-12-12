@@ -1,67 +1,92 @@
-const Sprint = require('../models/sprintModel');
-const Project = require('../models/projectModel');
+const Sprint = require("../models/sprintModel");
+const Project = require("../models/projectModel");
+const Task = require("../models/taskModel");
 
+module.exports.getAllProjectSprints = async function (idProject) {
+  try {
+    const id_sprints = await Project.findById(idProject)
+      .select("sprints")
+      .exec();
+    const sprints = await Sprint.find()
+      .where("_id")
+      .in(id_sprints.sprints)
+      .exec();
 
+    return {
+      success: true,
+      data: sprints,
+    };
+  } catch (err) {
+    return {
+      success: false,
+      message: "sprints not found " + err,
+    };
+  }
+};
 
-module.exports.getAllProjectSprints = async function(idProject){
-    try{
+module.exports.getProjectSprint = async function (idSprint) {
+  try {
+    const sprint = await Sprint.findById(idSprint).exec();
 
+    return {
+      success: true,
+      data: sprint,
+    };
+  } catch (err) {
+    return {
+      success: false,
+      message: "sprint not found " + err,
+    };
+  }
+};
 
-        const id_sprints = await Project.findById(idProject).select('sprints').exec();            
-        const sprints = await Sprint.find().where('_id').in(id_sprints.sprints).exec();
-        
-        return {
-            success : true,
-            data : sprints
-        }
+module.exports.addProjectSprint = async function (idProject, body) {
+  try {
+    let sprint = new Sprint({
+      name: body.name,
+      tasks: body.tasks,
+    });
+    console.log("==>", body);
+    let project = await Project.findById(idProject);
+    sprint.number = project.sprints.length + 1;
 
-    }catch(err){
-        return {
-            success : false,
-            message : 'sprints not found '+err
-        };
-    }
-}
+    project.sprints.push(sprint._id);
 
-module.exports.addProjectSprint = async function(idProject,body){
+    project
+      .save()
+      .then((doc) => {})
+      .catch((err) => {});
 
+    sprint
+      .save()
+      .then((doc) => {})
+      .catch((err) => {});
 
-    
+    return {
+      success: true,
+      data: sprint,
+    };
+  } catch (err) {
+    return {
+      success: false,
+      message: "can not add a sprint " + err,
+    };
+  }
+};
 
-    try{
-        let sprint = new Sprint({
-            name : body.name
-        });
-        console.log('body =>',body);
-        let project = await Project.findById(idProject);
-        sprint.number = project.sprints.length +1 ;
+module.exports.getSprintTasks = async function (idSprint) {
+  try {
+    const sprint = await Sprint.findById(idSprint);
+    const tasks = await Task.find().where("_id").in(sprint.tasks).exec();
 
-        project.sprints.push(sprint._id);
-
-        console.log(project);
-        console.log(sprint);
-
-        project.save()
-        .then(doc =>{})
-        .catch(err =>{});
-
-        sprint.save()
-        .then(doc =>{})
-        .catch(err =>{});
-
-        
-        
-        return {
-            success : true,
-            data : sprint
-        }
-
-
-    }catch(err){
-        return {
-            success : false,
-            message : 'can not add a sprint '+err
-        };
-    }
-}
-
+    return {
+      success: true,
+      data: tasks,
+    };
+  } catch (err) {
+    return {
+      success: false,
+      message: "sprints not found " + err,
+    };
+  }
+};

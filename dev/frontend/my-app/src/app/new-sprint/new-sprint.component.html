@@ -1,32 +1,48 @@
 <h2>Nouveau Sprint</h2>
 <div class="card">
-    <div class="card-body">
-        <div class="row">
-            <form method="post" (ngSubmit)="onSubmit(f)" #f="ngForm">
-                <div class="form-group col-md-6 mb-3">
-                    <label for="SprintName">Nom du sprint</label>
-                    <input type="text" id="SprintName" class="form-control" name="SprintName" ngModel text required>
-                </div>
-            </form>
+  <div class="card-body">
+    <div class="row">
+      <form method="post" #f="ngForm">
+        <div class="form-group col-md-6 mb-3">
+          <label for="SprintName">Nom du sprint</label>
+          <input
+            type="text"
+            id="SprintName"
+            class="form-control"
+            name="SprintName"
+            ngModel
+            text
+            required
+          />
         </div>
-        <div class="row">
-            <div class="col">
-                <app-product-backlog></app-product-backlog>
-                <button class="btn btn-primary">Ajouter</button>
-            </div>
-            <div class="col">
-                <h4>Tâches du sprint</h4>
-                <select class="form-select" size="25">
-                    <option *ngFor="let t of tasks" value="t">US{{t}}</option>
-                </select>
-                <button class="btn btn-danger">Supprimer</button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-2">
-                <button class="btn btn-primary" type="text" [disabled]="f.invalid"
-                    (click)="onNewSprint(f)">Créer</button>
-            </div>
-        </div>
+      </form>
     </div>
+    <div class="row">
+      <div class="col">
+        <app-product-backlog [idProject]="projectId"></app-product-backlog>
+        <button (click)="onAdd()" class="btn btn-primary">Ajouter</button>
+      </div>
+      <div class="col">
+        <h4>Tâches du sprint</h4>
+        <select class="form-select" size="25">
+          <option *ngFor="let t of sprintData.tasks" value="t">
+            US{{ t }}
+          </option>
+        </select>
+        <button class="btn btn-danger">Supprimer</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2">
+        <button
+          class="btn btn-primary"
+          type="text"
+          [disabled]="f.invalid"
+          (click)="onNewSprint(f)"
+        >
+          Créer
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
