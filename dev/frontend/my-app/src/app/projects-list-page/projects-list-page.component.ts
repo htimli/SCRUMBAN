@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { ProjectsService } from '../services/projects.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-projects-list-page',
@@ -17,7 +18,7 @@ export class ProjectsListPageComponent implements OnInit {
 
   projectId: String;
 
-  constructor(private router : Router, private httpClient : HttpClient , private projectServices : ProjectsService  ) { }
+  constructor(private router : Router, private httpClient : HttpClient , private projectServices : ProjectsService, private authService: AuthService ) { }
 
   ngOnInit(): void {
     this.projectsSubscription = this.projectServices.projectsSubject.subscribe(
@@ -35,5 +36,9 @@ export class ProjectsListPageComponent implements OnInit {
 
   onActualizeCurrentProject(id){
     this.projectServices.actualizeCurrentProject(id).then(() => {this.router.navigate(['project']);});
+  }
+
+  onRemoveProject(id){
+    this.projectServices.removeProject(this,id,{id: this.authService.getcurrentUserId()});
   }
 }

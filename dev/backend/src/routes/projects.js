@@ -1,6 +1,6 @@
 const projectsRouter = require('express').Router();
 
-const { getAllProjects, getProject, addProject, getProjectParticipant, getAllUserProjects, getAllProjectUsers ,addProjectUser , addSprintTask, removeProjectUser } = require('../controllers/projectController');
+const { getAllProjects, getProject, addProject, removeQuitProject, getProjectParticipant, getAllUserProjects, getAllProjectUsers ,addProjectUser , addSprintTask, removeProjectUser } = require('../controllers/projectController');
 
 
 projectsRouter.route('/all').get(async(req, res, next) => {
@@ -42,6 +42,15 @@ projectsRouter.route('/add').post(async(req, res) => {
         res.status(404).json(response);
     }
 });
+
+projectsRouter.route('/project/remove/:id').post( async( req ,res) => {
+    let response = await removeQuitProject(req.params.id, req.body);
+    if(response.success == true){
+        res.status(200).json(response);
+    }else {
+        res.status(404).json(response);
+    }
+} );
 
 projectsRouter.route('/participant').get(async(req, res) => {
     let response = await getProjectParticipant();

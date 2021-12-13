@@ -90,22 +90,15 @@ module.exports.removeProjectTask = async function (idProject, body) {
 
         for (idSprint of project.sprints) {
             let sprint = await Sprint.findById(idSprint);
-            console.log(sprint);
-            console.log('je veux rentrer');
             let index = sprint.tasks.indexOf(task._id);
-            console.log(index);
             if (index !== -1) {
                 sprint.tasks.splice(index, 1);
             }
 
         }
 
-        console.log(Task);
-        console.log('ici');
         await Task.deleteOne({ _id: body.id }).then(doc => { })
             .catch(err => { });
-
-        console.log(Task);
 
         project.save().then(doc => { }).catch(err => { });
 

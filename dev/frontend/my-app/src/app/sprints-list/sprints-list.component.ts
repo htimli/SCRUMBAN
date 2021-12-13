@@ -32,7 +32,7 @@ export class SprintsListComponent implements OnInit {
   }
 
   onRemoveSprint(){
-    
+    this.projectService.removeProjectSprint(this,this.idProject,{id: this.getSprintSelected()});
   }
 
   onChange(value){

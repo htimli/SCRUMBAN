@@ -68,7 +68,7 @@ module.exports.addProject = async function (body) {
 
         let project = new Project({
             title: body.title,
-            scrumMaster: user.userName,
+            scrumMaster: user._id,
             progress: body.progress,
             creationDate: new Date(),
         });
@@ -77,6 +77,7 @@ module.exports.addProject = async function (body) {
         user.projects.push(project._id);
 
         console.log(project);
+        console.log('ici');
         console.log(user);
 
         project.save()
@@ -93,6 +94,66 @@ module.exports.addProject = async function (body) {
         return {
             success: false,
             message: "cannot add Project " + err
+        };
+    }
+}
+
+
+module.exports.removeQuitProject = async function (idProject, body) {
+    try {
+
+        let user = await User.findById(body.id);
+
+        let project = await Project.findById(idProject);
+        console.log(user);
+
+        console.log("je suis la");
+
+        if (user._id !== project.scrumMaster) {
+
+            console.log("ou ici");
+            let index = project.users.indexOf(user._id);
+            if (index !== -1) {
+                project.users.splice(index, 1);
+            }
+            else {
+                return { success: false, message: "cannot find user index in project" + err };
+            }
+
+            let index2 = user.projects.indexOf(idProject);
+            if (index2 !== -1) {
+                user.projects.splice(index2, 1);
+            } else {
+                return { success: false, message: "cannot find project in user" + err };
+            }
+            project.save().then(doc => { }).catch(err => { });
+
+        } else {
+
+            console.log("ou encore la");
+            for (idUser of project.users) {
+                let projectUser = await User.findById(idUser);
+                let index3 = projectUser.projects.indexOf(project._id);
+                if (index3 !== -1) {
+                    projectUser.projects.splice(index3, 1);
+                }
+            }
+            console.log("enfin");
+            await Project.deleteOne({ _id: body.id }).then(doc => { })
+                .catch(err => { });
+        }
+
+        console.log("fini");
+
+        return {
+            success: true,
+            data: project
+        }
+
+    } catch (err) {
+        return {
+            success: false,
+            message: 'can not remove Project ' + err
         };
     }
 }
@@ -194,6 +255,13 @@ module.exports.removeProjectUser = async function (projectId, body) {
 
         let project = await Project.findById(projectId);
 
+        if (user._id == project.scrumMaster) {
+            return {
+                success: false,
+                msg: 'cannot remove Scrum master'
+            }
+        }
+
         console.log(project.users);
         console.log('hassan');
 
@@ -201,8 +269,8 @@ module.exports.removeProjectUser = async function (projectId, body) {
         if (index !== -1) {
             project.users.splice(index, 1);
         }
-        else{
-            return {success: false, message: "cannot find user index in project" + err};
+        else {
+            return { success: false, message: "cannot find user index in project" + err };
         }
 
         project.save()

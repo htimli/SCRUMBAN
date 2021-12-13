@@ -3,10 +3,10 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col">
-                    <h1><u>{{project.title}}</u></h1>
                     <button class="btn btn-primary" (click)="onBackToProjects()">
                         <i class="fas fa-folder"></i>
                       </button>
+                    <h1><u>{{project.title}}</u></h1>
                 </div>
                 <div class="col">
                     <app-project-members [idProject]=" project._id "></app-project-members>

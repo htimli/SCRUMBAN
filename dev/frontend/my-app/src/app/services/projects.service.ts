@@ -42,6 +42,29 @@ export class ProjectsService {
     );
   }
 
+  removeProject(b: any, idProject: string, userData: any) {
+
+    return new Promise(
+      (resolve, rejected) => {
+        this.httpClient
+          .post('http://localhost:5000/api/projects/project/remove/' + idProject, userData)
+          .subscribe(
+            (response: any) => {
+              console.log(response.data._id);
+              let index = b.projects.map((x) => { return x._id; }).indexOf(response.data._id);
+              if (index !== -1) {
+                b.projects.splice(index, 1);
+                resolve(true);
+              } else {
+                error => { rejected(true); };
+              }
+            },
+            error => { rejected(true); }
+          );
+      }
+    );
+  }
+
   actualizeCurrentProject(id) {
     return new Promise(
       (resolve, rejected) => {
@@ -117,6 +140,29 @@ export class ProjectsService {
 
   }
 
+  removeProjectSprint(b: any, idProject: string, sprintData: any) {
+
+    return new Promise(
+      (resolve, rejected) => {
+        this.httpClient
+          .post('http://localhost:5000/api/sprints/project/remove/' + idProject, sprintData)
+          .subscribe(
+            (response: any) => {
+              console.log(response.data._id);
+              let index = b.sprints.map((x) => { return x._id; }).indexOf(response.data._id);
+              if (index !== -1) {
+                b.sprints.splice(index, 1);
+                resolve(true);
+              } else {
+                error => { rejected(true); };
+              }
+            },
+            error => { rejected(true); }
+          );
+      }
+    );
+  }
+
   getProjectMembers(p: any, idProject: string) {
     this.httpClient
       .get<any[]>('http://localhost:5000/api/projects/users/' + idProject)
@@ -170,10 +216,14 @@ export class ProjectsService {
           .post('http://localhost:5000/api/tasks/project/remove/' + idProject, taskData)
           .subscribe(
             (response: any) => {
-              console.log(response.data);
-              b.tasks.pop(response.data);
-
-              resolve(true);
+              console.log(response.data._id);
+              let index = b.tasks.map((x) => { return x._id; }).indexOf(response.data._id);
+              if (index !== -1) {
+                b.tasks.splice(index, 1);
+                resolve(true);
+              } else {
+                error => { rejected(true); };
+              }
             },
             error => { rejected(true); }
           );
@@ -212,7 +262,7 @@ export class ProjectsService {
 
   }
 
-  removeProjectUser(s: any, idProject: string, memberData: any) {
+  removeProjectUser(p: any, idProject: string, memberData: any) {
 
     return new Promise(
       (resolve, rejected) => {
@@ -221,8 +271,13 @@ export class ProjectsService {
           .subscribe(
             (response: any) => {
               console.log(response.data);
-              s.members.pop(response.data);
-              resolve(true);
+              let index = p.members.map((x) => { return x._id; }).indexOf(response.data._id);
+              if (index !== -1) {
+                p.members.splice(index, 1);
+                resolve(true);
+              } else {
+                error => { rejected(true); }
+              }
             },
             error => { rejected(true); }
           );

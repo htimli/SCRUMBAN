@@ -80,6 +80,39 @@ module.exports.addProjectSprint = async function(idProject,body){
     }
 }
 
+module.exports.removeProjectSprint = async function (idProject, body) {
+    try {
+
+        let sprint = await Sprint.findById(body.id);
+
+        let project = await Project.findById(idProject);
+
+        let index = project.sprints.indexOf(sprint._id);
+        if (index !== -1) {
+            project.sprints.splice(index, 1);
+        }
+        else {
+            return { success: false, message: "cannot find sprint index in project" + err };
+        }
+
+        await Sprint.deleteOne({ _id: body.id }).then(doc => { })
+            .catch(err => { });
+
+        project.save().then(doc => { }).catch(err => { });
+
+        return {
+            success: true,
+            data: sprint
+        }
+
+    } catch (err) {
+        return {
+            success: false,
+            message: 'can not remove Sprint ' + err
+        };
+    }
+}
+
 module.exports.getSprintTasks = async function(idSprint){
     try{
          
