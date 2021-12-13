@@ -4,6 +4,9 @@
             <div class="row">
                 <div class="col">
                     <h1><u>{{project.title}}</u></h1>
+                    <button class="btn btn-primary" (click)="onBackToProjects()">
+                        <i class="fas fa-folder"></i>
+                      </button>
                 </div>
                 <div class="col">
                     <app-project-members [idProject]=" project._id "></app-project-members>
@@ -12,7 +15,7 @@
                     <h4>Informations</h4>
                     <div class="card">
                         <div class="card-body">
-                            Scrum master : {{project.scrumMaster}} <br> date de création : {{project.creationDate | date}} <br> Avancement : X%
+                            Scrum master : {{project.scrumMaster}} <br> date de création : {{project.creationDate | date}} <br> Avancement : {{updateAvancement()}}%
                         </div>
                     </div>
                 </div>

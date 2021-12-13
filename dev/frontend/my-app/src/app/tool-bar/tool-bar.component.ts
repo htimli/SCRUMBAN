@@ -24,7 +24,6 @@ export class ToolBarComponent implements OnInit, OnDestroy {
         this.loged = loged;
       }
     );
-    
   }
 
   ngOnDestroy(){

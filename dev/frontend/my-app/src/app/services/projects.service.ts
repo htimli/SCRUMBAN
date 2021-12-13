@@ -36,7 +36,7 @@ export class ProjectsService {
             this.actualizeCurrentProject(this.currentProject._id);
             resolve(true);
           },
-          error => { rejected(true); } 
+          error => { rejected(true); }
         );
       }
     );
@@ -129,15 +129,19 @@ export class ProjectsService {
   }
 
   getProjectTasks(project: any, idProject: string) {
-    this.httpClient
-      .get<any[]>('http://localhost:5000/api/tasks/project/' + idProject)
-      .subscribe(
-        (response: any) => {
-          console.log('response.data', response.data);
-          project.tasks = response.data;
-
-        });
-
+    return new Promise(
+      (resolve, rejected) => {
+        this.httpClient
+          .get<any[]>('http://localhost:5000/api/tasks/project/' + idProject)
+          .subscribe(
+            (response: any) => {
+              console.log('response.data', response.data);
+              project.tasks = response.data;
+              resolve(true);
+            },
+            error => { rejected(true); }
+          );
+      });
   }
 
   addProjectTask(b: any, taskData: any) {
@@ -159,7 +163,7 @@ export class ProjectsService {
   }
 
   removeProjectTask(b: any, idProject: string, taskData: any) {
-    
+
     return new Promise(
       (resolve, rejected) => {
         this.httpClient

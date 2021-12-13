@@ -6,7 +6,7 @@ const taskSchema = new mongoose.Schema({
     desc :  {type : String},
     state : {
         type : String ,
-        enum : ['A faire' , 'En cours','A tester', 'Terminée'] ,
+        enum : ['A faire' , 'En cours','A tester', 'Terminé'] ,
         default : 'A faire'       
     }
 
