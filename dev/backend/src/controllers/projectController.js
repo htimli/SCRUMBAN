@@ -74,15 +74,15 @@ module.exports.addProject = async function (body) {
         });
 
         project.users.push(user._id);
+        
         user.projects.push(project._id);
 
         console.log(project);
         console.log('ici');
         console.log(user);
 
-        project.save()
-            .then(doc => { })
-            .catch(err => { });
+        project.save().then(doc => { }).catch(err => { });
+        user.save().then(doc => { }).catch(err => { });
 
         return {
             success: true,

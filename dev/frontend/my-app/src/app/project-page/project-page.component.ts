@@ -25,6 +25,7 @@ export class ProjectPageComponent implements OnInit {
   currentSprint: any = {};
   tasks: any[] = [];
 
+
   constructor(private router: Router, private projectService: ProjectsService, private userStorieService: UserStoriesService) {
   }
 
