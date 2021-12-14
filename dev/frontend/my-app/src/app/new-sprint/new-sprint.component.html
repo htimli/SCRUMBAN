@@ -1,3 +1,6 @@
+<button class="btn btn-primary" (click)="onBackToProject()">
+    <i class="fas fa-arrow-left"></i>
+  </button>
 <h2>Nouveau Sprint</h2>
 <div class="card">
     <div class="card-body">
@@ -11,8 +14,8 @@
         </div>
         <div class="row">
             <div class="col">
-                <app-product-backlog [idProject]="projectId" ></app-product-backlog>
-                <button  (click)="onAdd()" class="btn btn-primary">Ajouter</button>
+                <app-product-backlog [idProject]="projectId"></app-product-backlog>
+                <button (click)="onAdd()" class="btn btn-primary">Ajouter</button>
             </div>
             <div class="col">
                 <h4>Tâches du sprint</h4>
@@ -24,8 +27,7 @@
         </div>
         <div class="row">
             <div class="col-2">
-                <button class="btn btn-primary" type="text" [disabled]="f.invalid"
-                    (click)="onNewSprint(f)">Créer</button>
+                <button class="btn btn-primary" type="text" [disabled]="f.invalid" (click)="onNewSprint(f)">Créer</button>
             </div>
         </div>
     </div>

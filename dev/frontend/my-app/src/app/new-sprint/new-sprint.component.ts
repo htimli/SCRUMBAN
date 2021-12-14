@@ -59,6 +59,10 @@ export class NewSprintComponent implements OnInit {
   
   }
 
+  onBackToProject(){
+    this.router.navigate(['project']);
+  }
+
   
 
 

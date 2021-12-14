@@ -39,4 +39,8 @@ export class NewTaskComponent implements OnInit {
     
   }
 
+  onBackToProject(){
+    this.router.navigate(['project']);
+  }
+
 }
