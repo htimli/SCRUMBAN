@@ -13,7 +13,7 @@
             <tr *ngFor="let project of projects">
                 <td>{{ project.title }}</td>
                 <td>{{ project.creationDate | date }} </td>
-                <td>{{ project.scrumMaster }}</td>
+                <td> {{ project.scrumMaster }}</td>
                 <td>{{ project.progress | percent:'1.2' }}</td>
                 <td>
                     <button (click)="onActualizeCurrentProject(project._id)" type="button" class="btn btn-primary">

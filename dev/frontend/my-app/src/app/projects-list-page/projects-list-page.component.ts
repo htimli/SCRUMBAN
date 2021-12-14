@@ -14,7 +14,9 @@ import { AuthService } from '../services/auth.service';
 export class ProjectsListPageComponent implements OnInit {
 
   projects : any[];
+  scrumMasters: any = {};
   projectsSubscription : Subscription;
+  user : '';
 
   projectId: String;
 
@@ -26,7 +28,10 @@ export class ProjectsListPageComponent implements OnInit {
         this.projects = projects;
       }
     );
-    this.projectServices.getSavedProjects(); 
+    
+    this.projectServices.getSavedProjects().then(() => { 
+  });
+  
   }
 
   onNewProject(){

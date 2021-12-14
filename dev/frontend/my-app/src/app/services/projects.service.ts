@@ -17,13 +17,21 @@ export class ProjectsService {
   constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
   getSavedProjects() {
+    return new Promise(
+      (resolve,rejected) => {
     this.httpClient
       .get<any[]>('http://localhost:5000/api/projects/all/' + this.authService.getcurrentUserId())
       .subscribe(
         (response: any) => {
           this.projects = response.data;
           this.projectsSubject.next(this.projects);
-        });
+          resolve(true);
+        },
+        error => {rejected(true);}
+        );
+
+      }
+    );
   }
 
   saveProject(projectData: any) {
@@ -241,6 +249,20 @@ export class ProjectsService {
 
         });
 
+  }
+
+  getUser(id: string , project){
+    console.log('coucou2',id);
+    
+
+    this.httpClient.get('http://localhost:5000/api/users/'+id).subscribe(
+            (response: any) => {
+              console.log(response.data.email);
+              project.user = response.data.email;
+
+              
+            })
+            
   }
 
   addProjectUser(s: any, idProject: string, memberData: any) {

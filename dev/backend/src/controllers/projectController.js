@@ -3,7 +3,7 @@ const User = require('../models/userModel');
 
 
 
-module.exports.getAllProjects = async function () {
+module.exports.getAllProjects = async function() {
     let total = await Project.countDocuments({});
     let limit = parseInt(total);
 
@@ -25,7 +25,7 @@ module.exports.getAllProjects = async function () {
     }
 }
 
-module.exports.getProject = async function (id) {
+module.exports.getProject = async function(id) {
     try {
         const project = await Project.findById(id);
         return {
@@ -40,7 +40,7 @@ module.exports.getProject = async function (id) {
     }
 }
 
-module.exports.getAllUserProjects = async function (id) {
+module.exports.getAllUserProjects = async function(id) {
 
     try {
         const projects = await Project.find().where('users').in(id);
@@ -60,7 +60,7 @@ module.exports.getAllUserProjects = async function (id) {
 
 
 
-module.exports.addProject = async function (body) {
+module.exports.addProject = async function(body) {
 
     try {
 
@@ -68,21 +68,21 @@ module.exports.addProject = async function (body) {
 
         let project = new Project({
             title: body.title,
-            scrumMaster: user._id,
+            scrumMaster: user.email,
             progress: body.progress,
             creationDate: new Date(),
         });
 
         project.users.push(user._id);
-        
+
         user.projects.push(project._id);
 
         console.log(project);
         console.log('ici');
         console.log(user);
 
-        project.save().then(doc => { }).catch(err => { });
-        user.save().then(doc => { }).catch(err => { });
+        project.save().then(doc => {}).catch(err => {});
+        user.save().then(doc => {}).catch(err => {});
 
         return {
             success: true,
@@ -99,7 +99,7 @@ module.exports.addProject = async function (body) {
 }
 
 
-module.exports.removeQuitProject = async function (idProject, body) {
+module.exports.removeQuitProject = async function(idProject, body) {
     try {
 
         let user = await User.findById(body.id);
@@ -107,16 +107,13 @@ module.exports.removeQuitProject = async function (idProject, body) {
         let project = await Project.findById(idProject);
         console.log(user);
 
-        console.log("je suis la");
+        if (body.id !== project.scrumMaster) {
 
-        if (user._id !== project.scrumMaster) {
+            let index = project.users.indexOf(body.id);
 
-            console.log("ou ici");
-            let index = project.users.indexOf(user._id);
             if (index !== -1) {
                 project.users.splice(index, 1);
-            }
-            else {
+            } else {
                 return { success: false, message: "cannot find user index in project" + err };
             }
 
@@ -126,24 +123,25 @@ module.exports.removeQuitProject = async function (idProject, body) {
             } else {
                 return { success: false, message: "cannot find project in user" + err };
             }
-            project.save().then(doc => { }).catch(err => { });
+            project.save().then(doc => {}).catch(err => {});
+            user.save().then(doc => {}).catch(err => {});
 
         } else {
 
-            console.log("ou encore la");
             for (idUser of project.users) {
                 let projectUser = await User.findById(idUser);
-                let index3 = projectUser.projects.indexOf(project._id);
+                let index3 = projectUser.projects.indexOf(idProject);
                 if (index3 !== -1) {
                     projectUser.projects.splice(index3, 1);
                 }
             }
-            console.log("enfin");
-            await Project.deleteOne({ _id: body.id }).then(doc => { })
-                .catch(err => { });
+
+            await Project.deleteOne({ _id: idProject }).then(doc => {})
+                .catch(err => {});
+
+
         }
 
-        console.log("fini");
 
         return {
             success: true,
@@ -159,7 +157,7 @@ module.exports.removeQuitProject = async function (idProject, body) {
 }
 
 
-module.exports.getProjectParticipant = async function () {
+module.exports.getProjectParticipant = async function() {
 
     try {
 
@@ -183,7 +181,7 @@ module.exports.getProjectParticipant = async function () {
     }
 }
 
-module.exports.getAllProjectUsers = async function (id) {
+module.exports.getAllProjectUsers = async function(id) {
     try {
         let users_id = await Project.findById(id).select('users');
 
@@ -209,7 +207,7 @@ module.exports.getAllProjectUsers = async function (id) {
     }
 }
 
-module.exports.addProjectUser = async function (projectId, body) {
+module.exports.addProjectUser = async function(projectId, body) {
     try {
 
         let user = await User.findOne({ email: body.email });
@@ -227,8 +225,8 @@ module.exports.addProjectUser = async function (projectId, body) {
         project.users.push(user._id);
 
         project.save()
-            .then(doc => { })
-            .catch(err => { });
+            .then(doc => {})
+            .catch(err => {});
 
         return {
             success: true,
@@ -240,7 +238,7 @@ module.exports.addProjectUser = async function (projectId, body) {
     }
 }
 
-module.exports.removeProjectUser = async function (projectId, body) {
+module.exports.removeProjectUser = async function(projectId, body) {
     try {
 
 
@@ -268,14 +266,13 @@ module.exports.removeProjectUser = async function (projectId, body) {
         let index = project.users.indexOf(user._id);
         if (index !== -1) {
             project.users.splice(index, 1);
-        }
-        else {
+        } else {
             return { success: false, message: "cannot find user index in project" + err };
         }
 
         project.save()
-            .then(doc => { })
-            .catch(err => { });
+            .then(doc => {})
+            .catch(err => {});
 
         console.log(project.users);
 
@@ -288,6 +285,3 @@ module.exports.removeProjectUser = async function (projectId, body) {
         return { success: false, message: "cannot find remove user to project" + err };
     }
 }
-
-
-

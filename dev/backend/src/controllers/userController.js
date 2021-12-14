@@ -22,6 +22,23 @@ module.exports.getAllUsers = async function() {
 }
 
 
+module.exports.getUser = async function(id) {
+
+    try {
+        console.log('cououc3');
+        const user = await User.findById(id);
+        console.log(user);
+        return {
+            success: true,
+            data: user,
+        }
+
+    } catch (err) {
+        return { success: false, message: "User not found " + err };
+    }
+}
+
+
 module.exports.addUser = async function(body) {
     try {
 
