@@ -16,39 +16,40 @@ export class RegistrationPageComponent implements OnInit {
   correctPassword: boolean;
 
   private userData = {
-    userName : '',
-    password : '',
-    firstName : '',
-    lastName : '',
-    email : ''
+    userName: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    email: ''
 
-  }; 
+  };
 
-  constructor( private httpClient : HttpClient, private authService : AuthService, private router: Router ) {
+  constructor(private httpClient: HttpClient, private authService: AuthService, private router: Router) {
     this.correctPassword = true;
     this.correctEmail = true;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  onSubmit(form: NgForm){
+  onSubmit(form: NgForm) {
     //for the moment we save just the username & the passeword
-    if(form.value.password == form.value.confirmPassword){
-      this.correctPassword=true;
+    if (form.value.password == form.value.confirmPassword) {
+      this.correctPassword = true;
       this.userData.userName = form.value.firstname;
       this.userData.password = form.value.password;
       this.userData.email = form.value.email;
-    
-    this.authService.signIn(this.userData).then(
-      () => {
-        this.correctEmail = true;
-        this.authService.logIn(this.userData);
-        this.router.navigate(['projects']);
-      },
-      () => {this.correctEmail = false;}
-    )
+
+      this.authService.signIn(this.userData).then(
+        () => {
+          this.correctEmail = true;
+          this.authService.logIn(this.userData).then(
+            () => { this.router.navigate(['projects']); }
+          );
+        },
+        () => { this.correctEmail = false; }
+      )
     }
-    else{
+    else {
       this.correctPassword = false;
     }
   }

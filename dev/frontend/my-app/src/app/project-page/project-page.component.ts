@@ -41,7 +41,7 @@ export class ProjectPageComponent implements OnInit {
         finishedTasks++;
       }
     });
-    return (finishedTasks/this.tasks.length)*100;
+    return Math.floor((finishedTasks/this.tasks.length)*100);
   }
 
   getSprintToShow() {
