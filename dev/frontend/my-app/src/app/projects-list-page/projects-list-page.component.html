@@ -5,7 +5,6 @@
                 <th scope="col">Projet</th>
                 <th scope="col">Date de création</th>
                 <th scope="col">Scrum Master</th>
-                <th scope="col">taux d'avancement</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
@@ -14,7 +13,6 @@
                 <td>{{ project.title }}</td>
                 <td>{{ project.creationDate | date }} </td>
                 <td> {{ project.scrumMaster }}</td>
-                <td>{{ project.progress | percent:'1.2' }}</td>
                 <td>
                     <button (click)="onActualizeCurrentProject(project._id)" type="button" class="btn btn-primary">
                         <i class="fas fa-edit"></i>
