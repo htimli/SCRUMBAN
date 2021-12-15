@@ -51,7 +51,10 @@ export class ProjectsService {
   }
 
   removeProject(b: any, idProject: string, userData: any) {
-
+    
+    console.log(idProject);
+    console.log('ici1');
+    
     return new Promise(
       (resolve, rejected) => {
         this.httpClient

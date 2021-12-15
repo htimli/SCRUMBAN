@@ -101,18 +101,17 @@ module.exports.addProject = async function (body) {
 
 module.exports.removeQuitProject = async function (idProject, body) {
     try {
-
-        /***********rien
-         * 
-         */
-
+        
+        console.log('ici2');
         let user = await User.findOne({
-            email: body.email
+            _id: body.id
         });
-
+        console.log(user);
         let project = await Project.findById(idProject);
+        console.log('ici4');
 
         if (user.email !== project.scrumMaster) {
+            console.log('pas scrum');
             let index = project.users.indexOf(body.id);
             if (index !== -1) {
                 project.users.splice(index, 1);
@@ -129,7 +128,7 @@ module.exports.removeQuitProject = async function (idProject, body) {
             user.save().then(doc => { }).catch(err => { });
 
         } else {
-
+            console.log('scrum');
             for (idUser of project.users) {
                 console.log('rentrer');
                 let projectUser = await User.findById(idUser);
