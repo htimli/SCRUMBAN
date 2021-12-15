@@ -2,9 +2,6 @@
 <select class="form-select" (change)="onChange($event.target.value)" size="4">
     <option *ngFor="let member of members" value="{{member.email}}">
         <p>{{member.userName}} &nbsp;@: {{member.email}}</p>
-        <button class="btn btn-danger">
-            <i class="fas fa-user-minus"></i>
-        </button>
     </option>
 </select>
 

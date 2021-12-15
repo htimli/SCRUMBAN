@@ -102,12 +102,18 @@ module.exports.addProject = async function(body) {
 module.exports.removeQuitProject = async function(idProject, body) {
     try {
 
-        let user = await User.findById(body.id);
+        /***********rien
+         * 
+         */
+
+        let user = await User.findOne({
+            email: body.email
+        });
 
         let project = await Project.findById(idProject);
         console.log(user);
 
-        if (body.id !== project.scrumMaster) {
+        if (body.email !== project.scrumMaster) {
 
             let index = project.users.indexOf(body.id);
 

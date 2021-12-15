@@ -15,21 +15,21 @@
                     <h4>Informations</h4>
                     <div class="card">
                         <div class="card-body">
-                            Scrum master : {{project.scrumMaster}} <br> date de création : {{project.creationDate | date}} <br> Avancement : {{updateAvancement()}}%
+                            Scrum master : {{project.scrumMaster}} <br> date de création : {{project.creationDate | date}} <br> Avancement : {{updateAvancement() | percent }} 
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
+                <div class="col-2">
+                    <app-product-backlog [idProject]=" project._id "></app-product-backlog>
+                </div>
                 <div id='sprints' class="col-2">
                     <h4>Sprints <button class="btn btn-primary" (click)="getSprintToShow()">
                         <i class="fas fa-network-wired"></i>
                     </button></h4>
                     <app-sprints-list [idProject]=" project._id "></app-sprints-list>
-                </div>
-                <div class="col-2">
-                    <app-product-backlog [idProject]=" project._id "></app-product-backlog>
-                </div>
+                </div>             
                 <div class="col-8">
                     <h3><u>Sprint : {{currentSprint.name}}</u></h3>
                     <app-kanban-board></app-kanban-board>
